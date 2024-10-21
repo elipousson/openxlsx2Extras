@@ -14,11 +14,11 @@ Imports:
     openxlsx2,
     purrr,
     rlang,
-    vctrs,
-    withr
+    vctrs
 Suggests: 
     gt,
-    marquee
+    marquee,
+    withr
 Encoding: UTF-8
 Language: en-US
 Roxygen: list(markdown = TRUE)
