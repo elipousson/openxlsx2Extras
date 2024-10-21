@@ -8,6 +8,9 @@ Description: Extends the openxlsx2 package with wrapper and helper
     functions designed to add new features and options when working with
     Excel workbooks.
 License: MIT + file LICENSE
+URL: https://github.com/elipousson/openxlsx2Extras,
+    https://elipousson.github.io/openxlsx2Extras/
+BugReports: https://github.com/elipousson/openxlsx2Extras/issues
 Imports: 
     fs,
     lifecycle,

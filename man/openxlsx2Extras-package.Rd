@@ -8,6 +8,15 @@
 \description{
 Extends the openxlsx2 package with wrapper and helper functions designed to add new features and options when working with Excel workbooks.
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/elipousson/openxlsx2Extras}
+  \item \url{https://elipousson.github.io/openxlsx2Extras/}
+  \item Report bugs at \url{https://github.com/elipousson/openxlsx2Extras/issues}
+}
+
+}
 \author{
 \strong{Maintainer}: Eli Pousson \email{eli.pousson@gmail.com} (\href{https://orcid.org/0000-0001-8280-1706}{ORCID}) [copyright holder]
 
