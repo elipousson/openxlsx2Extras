@@ -4,6 +4,7 @@
 #' [openxlsx2::fmt_txt()] to format Markdown text.
 #'
 #' @inheritParams marquee::marquee_parse
+#' @param ... Ignored at this time. For future use.
 #' @examples
 #'
 #' fmt_marquee_txt(

@@ -8,15 +8,21 @@ openxlsx2}
 set_excel_fmt_class(data, cols, fmt_class = "currency", multiple = TRUE)
 }
 \arguments{
-\item{cols}{description}
+\item{data}{A data frame with columns to format.}
+
+\item{cols}{Column names or numbers to modify.}
 
 \item{fmt_class}{Excel style class, one of: c("currency", "accounting",
-"hyperlink", "percentage", "scientific", "formula").
-\url{https://janmarvin.github.io/openxlsx2/articles/openxlsx2_style_manual.html#numfmts2}}
+"hyperlink", "percentage", "scientific", "formula"). Length is recycled to
+match length of cols using \code{\link[vctrs:vec_recycle]{vctrs::vec_recycle()}}.}
+
+\item{multiple}{Whether \code{arg} may contain zero or several values.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 }
 \details{
-\code{\link[=set_excel_fmt_class]{set_excel_fmt_class()}} applies a style to each specified column.
+\code{\link[=set_excel_fmt_class]{set_excel_fmt_class()}} applies a style to each specified column. See the
+openxlsx2 documentation for more information on this feature:
+\url{https://janmarvin.github.io/openxlsx2/articles/openxlsx2_style_manual.html#numfmts2}
 }

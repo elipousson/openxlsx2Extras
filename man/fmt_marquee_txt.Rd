@@ -15,6 +15,8 @@ fmt_marquee_txt(
 \item{text}{A character string. The core quality of markdown is that any text
 is valid markdown so there is no restrictions on the content}
 
+\item{...}{Ignored at this time. For future use.}
+
 \item{style}{A style set such as \code{\link[marquee:classic_style]{classic_style()}} that defines how the text
 should be rendered}
 
