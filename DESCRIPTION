@@ -1,0 +1,25 @@
+Package: openxlsx2Extras
+Title: Extra Functions for the openxlsx2 package
+Version: 0.0.0.9000
+Authors@R: 
+    person("Eli", "Pousson", , "eli.pousson@gmail.com", role = c("aut", "cre", "cph"),
+           comment = c(ORCID = "0000-0001-8280-1706"))
+Description: Extends the openxlsx2 package with wrapper and helper
+    functions designed to add new features and options when working with
+    Excel workbooks.
+License: MIT + file LICENSE
+Imports: 
+    fs,
+    lifecycle,
+    openxlsx2,
+    purrr,
+    rlang,
+    vctrs,
+    withr
+Suggests: 
+    gt,
+    marquee
+Encoding: UTF-8
+Language: en-US
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2

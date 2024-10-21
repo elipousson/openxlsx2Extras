@@ -1,0 +1,33 @@
+#' Prepare a data frame with Excel style class values for formatting by
+#' openxlsx2
+#'
+#' `r lifecycle::badge("experimental")`
+#'
+#' [set_excel_fmt_class()] applies a style to each specified column.
+#'
+#' @param cols description
+#' @param fmt_class Excel style class, one of: c("currency", "accounting",
+#'   "hyperlink", "percentage", "scientific", "formula").
+#' <https://janmarvin.github.io/openxlsx2/articles/openxlsx2_style_manual.html#numfmts2>
+set_excel_fmt_class <- function(data,
+                                cols,
+                                fmt_class = "currency",
+                                multiple = TRUE) {
+  fmt_class <- arg_match(
+    fmt_class,
+    c(
+      "currency", "accounting", "hyperlink",
+      "percentage", "scientific", "formula"
+    ),
+    multiple = multiple
+  )
+
+  fmt_class <- vctrs::vec_recycle(fmt_class, size = length(cols))
+
+  for (i in seq_along(cols)) {
+    col <- cols[[i]]
+    class(data[[col]]) <- c(fmt_class[[i]], class(data[[col]]))
+  }
+
+  data
+}
