@@ -31,7 +31,7 @@ fmt_marquee_txt <- function(text,
 
   purrr::pmap(
     parsed_text,
-    \(text, type, indentation, indent, size, ol_index, weight, bullets, ...) {
+    \(text, type, indentation, indent, size, ol_index, weight, bullets, color, underline, strikethrough, ...) {
       before <- paste0(rep(" ", indent), collapse = "")
 
       if (type == "li") {
@@ -45,7 +45,10 @@ fmt_marquee_txt <- function(text,
       openxlsx2::fmt_txt(
         x = paste0(before, text),
         bold = weight > 400,
-        size = size
+        underline = underline,
+        strike = strikethrough,
+        size = size,
+        color = color
       )
     }
   )
@@ -78,8 +81,7 @@ fmt_marquee_txt <- function(text,
 #'
 #' Example text.
 #'
-#' 1. Ordered list item 1
-#' 2. Order list item 2
+#' ~~Strikethrough text~~
 #'
 #' ## Heading 2
 #'

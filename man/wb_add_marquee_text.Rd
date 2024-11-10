@@ -59,8 +59,7 @@ wb_workbook() |>
 
 Example text.
 
-1. Ordered list item 1
-2. Order list item 2
+~~Strikethrough text~~
 
 ## Heading 2
 
