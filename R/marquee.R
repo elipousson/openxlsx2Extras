@@ -1,5 +1,8 @@
 #' Use `marquee::marquee_parse()` to format Markdown text
 #'
+#' @description
+#' `r lifecycle::badge("experimental")`
+#'
 #' [fmt_marquee_txt()] uses [marquee::marquee_parse()] and
 #' [openxlsx2::fmt_txt()] to format Markdown text.
 #'
@@ -51,6 +54,9 @@ fmt_marquee_txt <- function(text,
 
 #' Add Markdown formatted text to a Workbook
 #'
+#' @description
+#' `r lifecycle::badge("experimental")`
+#'
 #' [wb_add_marquee_text()] uses [fmt_marquee_txt()] to add Markdown formatted
 #' text to a Workbook. [openxlsx2::wb_set_col_widths()] is applied to the
 #' workbook to adjust widths for the specified columns. Set `widths = NULL` to
@@ -80,7 +86,7 @@ fmt_marquee_txt <- function(text,
 #' - Bulleted list item 1
 #'   - Nested bullet
 #' - Bulleted list item 2"
-#' )
+#'   )
 #'
 #' @export
 wb_add_marquee_text <- function(wb = NULL,
