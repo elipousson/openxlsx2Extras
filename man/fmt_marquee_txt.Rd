@@ -23,6 +23,8 @@ should be rendered}
 \item{ignore_html}{Should HTML code be removed from the output}
 }
 \description{
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
+
 \code{\link[=fmt_marquee_txt]{fmt_marquee_txt()}} uses \code{\link[marquee:marquee_parse]{marquee::marquee_parse()}} and
 \code{\link[openxlsx2:fmt_txt]{openxlsx2::fmt_txt()}} to format Markdown text.
 }

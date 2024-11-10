@@ -40,6 +40,8 @@ sets the default width is 8.43, as this is the standard in some spreadsheet
 software. See \strong{Details} for general information on column widths.}
 }
 \description{
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
+
 \code{\link[=wb_add_marquee_text]{wb_add_marquee_text()}} uses \code{\link[=fmt_marquee_txt]{fmt_marquee_txt()}} to add Markdown formatted
 text to a Workbook. \code{\link[openxlsx2:col_widths-wb]{openxlsx2::wb_set_col_widths()}} is applied to the
 workbook to adjust widths for the specified columns. Set \code{widths = NULL} to
@@ -65,6 +67,6 @@ Example text.
 - Bulleted list item 1
   - Nested bullet
 - Bulleted list item 2"
-)
+  )
 
 }
