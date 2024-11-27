@@ -8,8 +8,7 @@
 #'
 #' @inheritParams openxlsx2::wb_add_data
 #' @inheritDotParams openxlsx2::wb_add_data
-#' @param geometry String, one of "drop" (default), "coords", or "wkt". Both
-#'   "coords" and  "wkt" are not yet supported.
+#' @param geometry String, one of "drop" (default), "coords", or "wkt".
 #' @param labels Method for handling column labels. "drop" (default) or
 #'   "row_before". If "row_before", insert column labels in the row before the
 #'   column names.
@@ -27,15 +26,25 @@ wb_add_data_ext <- function(wb,
   geometry <- rlang::arg_match(geometry, error_call = call)
 
   if (is_sf_obj && geometry == "drop") {
-    x[[attr(x, "sf_column")]] <- NULL
-    x <- as.data.frame(x)
+    check_installed("sf", call = call)
+    x <- sf::st_drop_geometry(x)
   } else if (is_sf_obj && geometry == "coords") {
     check_installed("sf", call = call)
-    # FIXME: Add handling for converting geometry to coordinate columns
+    pts <- suppressWarnings(sf::st_centroid(sf::st_transform(x, 4326)))
+    coords <- sf::st_coordinates(pts)[,c("X", "Y")]
+    coords <- set_names(as.data.frame(coords), c("lon", "lat"))
+    x <- purrr::list_cbind(list(sf::st_drop_geometry(x), coords))
   } else if (is_sf_obj) {
-    cli::cli_abort(
-      '{.code geometry = "wkt"} is not yet supported.',
-      call = call
+    check_installed("sf", call = call)
+
+    wkt <- as.data.frame(sf::st_as_text(sf::st_geometry(x)))
+    wkt <- set_names(wkt, attr(x, "sf_column"))
+
+    x <- purrr::list_cbind(
+      list(
+        sf::st_drop_geometry(x),
+        wkt
+      )
     )
   }
 
@@ -49,9 +58,9 @@ wb_add_data_ext <- function(wb,
       wb <- openxlsx2::wb_add_data(wb, x = labels, start_row = start_row, col_names = FALSE)
       start_row <- start_row + 1
     }
-
-    wb <- openxlsx2::wb_add_data(wb, x = x, ..., start_row = start_row)
   }
+
+  wb <- openxlsx2::wb_add_data(wb, x = x, ..., start_row = start_row)
 
   wb
 }

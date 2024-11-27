@@ -22,8 +22,11 @@ Imports:
 Suggests: 
     gt,
     marquee,
+    sf,
+    testthat (>= 3.0.0),
     withr
 Encoding: UTF-8
 Language: en-US
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
+Config/testthat/edition: 3
