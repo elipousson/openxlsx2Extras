@@ -75,8 +75,7 @@ See \strong{Details} for options.}
 
 \item{overwrite}{If \code{FALSE}, will not overwrite when \code{file} already exists.}
 
-\item{geometry}{String, one of "drop" (default), "coords", or "wkt". Both
-"coords" and  "wkt" are not yet supported.}
+\item{geometry}{String, one of "drop" (default), "coords", or "wkt".}
 
 \item{labels}{Method for handling column labels. "drop" (default) or
 "row_before". If "row_before", insert column labels in the row before the

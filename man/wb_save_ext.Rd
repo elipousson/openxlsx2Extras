@@ -23,9 +23,9 @@ wb_save_ext(wb, file = NULL, overwrite = TRUE, ...)
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 
-\code{\link[=wb_save_ext]{wb_save_ext()}} is a helper function that fills in the file name when saving
-based on the XSLX title. This function is not stable and may change in the
-future.
+\code{\link[=wb_save_ext]{wb_save_ext()}} is a helper function extending \code{\link[openxlsx2:wb_save]{openxlsx2::wb_save()}} by
+filling a missing file name with the workbook title and validating the file
+extension. This function is not stable and may change in the future.
 }
 \examples{
 
