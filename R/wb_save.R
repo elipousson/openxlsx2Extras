@@ -4,9 +4,9 @@
 #' @description
 #' `r lifecycle::badge("experimental")`
 #'
-#' [wb_save_ext()] is a helper function that fills in the file name when saving
-#' based on the XSLX title. This function is not stable and may change in the
-#' future.
+#' [wb_save_ext()] is a helper function extending [openxlsx2::wb_save()] by
+#' filling a missing file name with the workbook title and validating the file
+#' extension. This function is not stable and may change in the future.
 #'
 #' @inheritParams openxlsx2::wb_save
 #' @inheritDotParams openxlsx2::wb_save
@@ -32,10 +32,20 @@ wb_save_ext <- function(wb,
   if (is.null(file)) {
     core_props <- openxlsx2::wb_get_properties(wb)
 
+    if (!is_string(core_props[["title"]])) {
+      cli::cli_abort(
+        "{.arg wb} must have a title property when {.arg file} is `NULL`."
+      )
+    }
+
     file <- fs::path_ext_set(
       core_props[["title"]],
       "xlsx"
     )
+  } else {
+    # Validate file extension
+    fileext <- fs::path_ext(file)
+    fileext <- arg_match0(fileext, "xlsx")
   }
 
   openxlsx2::wb_save(
