@@ -29,6 +29,7 @@
 #' @importFrom openxlsx2 wb_add_data
 wb_add_data_ext <- function(wb,
                             x,
+                            sheet = current_sheet(),
                             ...,
                             start_row = 1,
                             list_columns = c("drop", "concat", "asis"),
@@ -58,9 +59,9 @@ wb_add_data_ext <- function(wb,
   }
 
   if (as_table) {
-    wb$add_data_table(x = x, ..., start_row = start_row)
+    wb$add_data_table(x = x, sheet = sheet, ..., start_row = start_row)
   } else {
-    wb$add_data(x = x, ..., start_row = start_row)
+    wb$add_data(x = x, sheet = sheet, ..., start_row = start_row)
   }
 
   wb
