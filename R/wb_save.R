@@ -95,13 +95,6 @@ write_xlsx_ext <- function(x,
                            call = caller_env()) {
   wb <- x
 
-  # TODO: Implement the as_table argument
-  if (as_table) {
-    cli::cli_warn(
-      "{.code as_table = TRUE} is not yet supported."
-    )
-  }
-
   if (is.data.frame(x)) {
     wb <- wb_new_workbook(
       creator = creator,
@@ -118,6 +111,7 @@ write_xlsx_ext <- function(x,
       wb = wb,
       x = x,
       ...,
+      as_table = as_table,
       start_row = start_row,
       geometry = geometry,
       labels = labels,

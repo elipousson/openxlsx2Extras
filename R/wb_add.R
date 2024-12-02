@@ -7,13 +7,25 @@
 #' workbook with special handling for input data with geometry or list columns
 #' (using [prep_wb_data()]) and labelled data.
 #'
-#' @inheritParams openxlsx2::wb_add_data
-#' @inheritDotParams openxlsx2::wb_add_data
 #' @inheritParams prep_wb_data
+#' @inheritParams openxlsx2::wb_add_data
+#' @param as_table Default `FALSE`. If `TRUE`, use
+#'   [openxlsx2::wb_add_data_table()] to add data to workbook. If `FALSE`, use
+#'   [openxlsx2::wb_add_data()]. Additional parameters in `...` are passed to
+#'   one function or the other depending on this value.
+#' @inheritDotParams openxlsx2::wb_add_data
+#' @inheritDotParams openxlsx2::wb_add_data_table
 #' @param labels Method for handling column labels. "drop" (default) or
 #'   "row_before". If "row_before", insert column labels in the row before the
 #'   column names.
 #' @export
+#' @examples
+#' wb <- wb_new_workbook("mtcars")
+#'
+#' wb_add_data_ext(wb, mtcars)
+#'
+#' wb_add_data_ext(wb, mtcars, as_table = TRUE)
+#'
 #' @importFrom openxlsx2 wb_add_data
 wb_add_data_ext <- function(wb,
                             x,
@@ -22,6 +34,7 @@ wb_add_data_ext <- function(wb,
                             geometry = c("drop", "coords", "wkt"),
                             list_columns = c("drop", "concat", "asis"),
                             labels = c("drop", "row_before"),
+                            as_table = FALSE,
                             call = caller_env()) {
   x <- prep_wb_data(
     x,
@@ -37,12 +50,16 @@ wb_add_data_ext <- function(wb,
 
     if (!is.null(labels)) {
       labels <- as.data.frame(t(as.data.frame(labels)))
-      wb <- openxlsx2::wb_add_data(wb, x = labels, start_row = start_row, col_names = FALSE)
+      wb <- wb$add_data(x = labels, start_row = start_row, col_names = FALSE)
       start_row <- start_row + 1
     }
   }
 
-  wb <- openxlsx2::wb_add_data(wb, x = x, ..., start_row = start_row)
+  if (as_table) {
+    wb$add_data_table(x = x, ..., start_row = start_row)
+  } else {
+    wb$add_data(x = x, ..., start_row = start_row)
+  }
 
   wb
 }
