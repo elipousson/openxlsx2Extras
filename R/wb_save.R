@@ -30,7 +30,7 @@ wb_save_ext <- function(wb,
                         overwrite = TRUE,
                         ...) {
   if (is.null(file)) {
-    core_props <- openxlsx2::wb_get_properties(wb)
+    core_props <- wb$get_properties()
 
     if (!is_string(core_props[["title"]])) {
       cli::cli_abort(
@@ -39,7 +39,7 @@ wb_save_ext <- function(wb,
     }
 
     file <- fs::path_ext_set(
-      core_props[["title"]],
+      fs::path_sanitize(core_props[["title"]]),
       "xlsx"
     )
   } else {
@@ -57,7 +57,6 @@ wb_save_ext <- function(wb,
 }
 
 
-
 #' Write data to an xlsx file with additional features
 #'
 #' @description
@@ -68,11 +67,12 @@ wb_save_ext <- function(wb,
 #' Arguments passed to [openxlsx2::wb_workbook()] are ignored if x is a workbook
 #' instead of a data frame.
 #'
-#' @inheritParams openxlsx2::write_xlsx
-#' @inheritParams openxlsx2::wb_workbook
-#' @param title,subject,category,keywords Additional workbook properties passed
-#'   to [openxlsx2::wb_workbook()]. Ignored (with creator and title) if `x` is a
-#'   workbook instead of a data frame.
+#' @inheritParams wb_new_workbook
+#' @inheritParams wb_add_data_ext
+#' @inheritParams wb_save_ext
+#' @param sheet_names,creator,title,subject,category,datetime_created,theme,keywords
+#'   Additional workbook properties passed to [wb_new_workbook()]. Ignored (with
+#'   creator and title) if `x` is a workbook instead of a data frame.
 #' @inheritParams wb_add_data_ext
 #' @inheritParams wb_save_ext
 #' @export
@@ -80,6 +80,7 @@ write_xlsx_ext <- function(x,
                            file = NULL,
                            as_table = FALSE,
                            ...,
+                           sheet_names = NULL,
                            creator = NULL,
                            title = NULL,
                            subject = NULL,
@@ -102,17 +103,16 @@ write_xlsx_ext <- function(x,
   }
 
   if (is.data.frame(x)) {
-    wb <- openxlsx2::wb_workbook(
+    wb <- wb_new_workbook(
       creator = creator,
       title = title,
       subject = subject,
       category = category,
       datetime_created = datetime_created,
       theme = theme,
-      keywords = keywords
+      keywords = keywords,
+      sheet_names = sheet_names
     )
-
-    wb <- openxlsx2::wb_add_worksheet(wb)
 
     wb <- wb_add_data_ext(
       wb = wb,
