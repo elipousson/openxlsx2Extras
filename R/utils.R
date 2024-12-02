@@ -52,23 +52,25 @@ set_sheet_list_names <- function(x,
 #'
 #' @export
 as_sheet_names <- function(sheet_names = NULL,
-                            n_sheets = 1,
-                            default = "Sheet",
-                            max_length = 31,
-                            excess_length = c("truncate", "error"),
-                            repair = "unique",
-                            quiet = FALSE,
-                            arg = caller_arg(sheet_names),
-                            call = caller_env()) {
+                           n_sheets = 1,
+                           default = "Sheet",
+                           max_length = 31,
+                           excess_length = c("truncate", "error"),
+                           repair = "unique",
+                           quiet = FALSE,
+                           arg = caller_arg(sheet_names),
+                           call = caller_env()) {
   sheet_names <- sheet_names %||% paste(default, seq_len(n_sheets))
 
   sheet_names <- as.character(sheet_names)
 
-  sheet_name_len <- length(sheet_names)
+  sheet_names_len <- length(sheet_names)
 
   # TODO: Add an option to error or allow missing or empty sheet names
-  if (sheet_name_len < n_sheets) {
-    sheet_names <- c(sheet_names, rep("", n_sheets - sheet_name_len))
+  if (sheet_names_len < n_sheets) {
+    sheet_names <- c(sheet_names, rep("", n_sheets - sheet_names_len))
+  } else {
+    n_sheets <- max(n_sheets, sheet_names_len)
   }
 
   empty_sheet_names <- sheet_names %in% c("", " ")
@@ -173,6 +175,10 @@ as_sheet_list <- function(x,
 #' [prep_wb_data()] prepares a data frame for addition to a workbook by handling
 #' list columns and geometry columns (for sf data frames).
 #'
+#' @param x Required. A data frame or an object coercible to a data frame with
+#'   [base::as.data.frame()].
+#' @param list_columns String, one of "drop" (default), "concat", or "asis".
+#'   "concat" and "asis" are not yet implemented.
 #' @param geometry String, one of "drop" (default), "coords", or "wkt". "coords"
 #'   uses [sf::st_centroid()] to convert input to POINT geometry, transforms
 #'   geometry to EPSG:4326, converts geometry to coordinates, and adds new
@@ -181,25 +187,27 @@ as_sheet_list <- function(x,
 #'   existing geometry column (keeping the existing sf column name).
 #' @param coords Length 2 character vector with column names to add if `geometry
 #'   = "coords"`. Must be length 2 in longitude, latitude order.
-#' @param list_columns String, one of "drop" (default), "concat", or "asis".
-#'   "concat" and "asis" are not yet implemented.
 #' @param collapse Character to use in collapsing list columns. Ignored unless
 #'   `list_columns = "concat"`. Not yet implemented.
 #' @inheritParams rlang::args_error_context
 #' @keywords utils
 #' @export
+#' @importFrom purrr map_chr list_cbind
 prep_wb_data <- function(x,
-                         geometry = c("drop", "coords", "wkt"),
                          list_columns = c("drop", "concat", "asis"),
+                         geometry = c("drop", "coords", "wkt"),
                          coords = c("lon", "lat"),
                          collapse = "; ",
                          call = caller_env()) {
-  # TODO: Add coercion for non-data frame objects
+  # TODO: Improve coercion for non-data frame objects
+  if (!inherits(x, "data.frame")) {
+    x <- as.data.frame(x)
+  }
 
   # Check if x has list columns or is a sf class object
+  is_sf_obj <- inherits(x, "sf")
   is_list_col <- purrr::map_chr(x, base::typeof) == "list"
   has_list_cols <- any(is_list_col)
-  is_sf_obj <- inherits(x, "sf")
 
   # Return if neither condition applies
   if (!has_list_cols && !is_sf_obj) {
@@ -216,11 +224,10 @@ prep_wb_data <- function(x,
     } else if (geometry == "coords") {
       check_installed("sf", call = call)
       pts <- suppressWarnings(sf::st_transform(sf::st_centroid(x), 4326))
-      coords <- sf::st_coordinates(pts)[, c("X", "Y")]
-      coords <- set_names(as.data.frame(coords), coords)
+      pts <- sf::st_coordinates(pts)[, c("X", "Y")]
+      coords <- set_names(as.data.frame(pts), coords)
       x <- purrr::list_cbind(list(sf::st_drop_geometry(x), coords))
     } else if (geometry == "wkt") {
-
       wkt <- as.data.frame(sf::st_as_text(sf::st_geometry(x)))
       wkt <- set_names(wkt, attr(x, "sf_column"))
 
@@ -231,6 +238,10 @@ prep_wb_data <- function(x,
         )
       )
     }
+
+    # Check again (since geometry column) is a list column
+    is_list_col <- purrr::map_chr(x, base::typeof) == "list"
+    has_list_cols <- any(is_list_col)
   }
 
   # Modify list columns data frame as specified by `list_columns`
