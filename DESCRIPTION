@@ -20,10 +20,12 @@ Imports:
     rlang,
     vctrs
 Suggests: 
+    dplyr,
     gt,
     marquee,
     sf,
     testthat (>= 3.0.0),
+    tidyselect,
     withr
 Encoding: UTF-8
 Language: en-US

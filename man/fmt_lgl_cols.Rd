@@ -11,6 +11,10 @@ fmt_lgl_cols(
 )
 }
 \arguments{
+\item{.data}{A data frame, data frame extension (e.g. a tibble), or a
+lazy data frame (e.g. from dbplyr or dtplyr). See \emph{Methods}, below, for
+more details.}
+
 \item{.cols}{<\code{\link[dplyr:dplyr_tidy_select]{tidy-select}}> Columns to transform.
 You can't select grouping columns because they are already automatically
 handled by the verb (i.e. \code{\link[dplyr:summarise]{summarise()}} or \code{\link[dplyr:mutate]{mutate()}}).}
