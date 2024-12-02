@@ -6,6 +6,8 @@
 #'
 #' @param sheet_names Optional character vector of worksheet names.
 #' @inheritParams as_sheet_names
+#' @param title,subject,category,keywords Additional arguments passed to
+#'   [openxlsx2::wb_workbook()].
 #' @inheritDotParams openxlsx2::wb_add_worksheet -sheet -wb
 #' @inheritParams openxlsx2::wb_workbook
 #' @examples
@@ -27,8 +29,7 @@ wb_new_workbook <- function(
     category = NULL,
     datetime_created = Sys.time(),
     theme = NULL,
-    keywords = NULL
-) {
+    keywords = NULL) {
   wb <- openxlsx2::wb_workbook(
     creator = creator,
     title = title,

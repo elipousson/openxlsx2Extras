@@ -70,9 +70,9 @@ wb_save_ext <- function(wb,
 #' @inheritParams wb_new_workbook
 #' @inheritParams wb_add_data_ext
 #' @inheritParams wb_save_ext
-#' @param sheet_names,creator,title,subject,category,datetime_created,theme,keywords
-#'   Additional workbook properties passed to [wb_new_workbook()]. Ignored (with
-#'   creator and title) if `x` is a workbook instead of a data frame.
+#' @param title,subject,category,keywords Additional workbook properties passed
+#'   to [wb_new_workbook()]. Ignored (with creator and title) if `x` is a
+#'   workbook instead of a data frame.
 #' @inheritParams wb_add_data_ext
 #' @inheritParams wb_save_ext
 #' @export
