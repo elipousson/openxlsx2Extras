@@ -31,15 +31,17 @@ wb_add_data_ext <- function(wb,
                             x,
                             ...,
                             start_row = 1,
-                            geometry = c("drop", "coords", "wkt"),
                             list_columns = c("drop", "concat", "asis"),
+                            geometry = c("drop", "coords", "wkt"),
+                            coords = c("lon", "lat"),
                             labels = c("drop", "row_before"),
                             as_table = FALSE,
                             call = caller_env()) {
   x <- prep_wb_data(
     x,
-    geometry = geometry,
     list_columns = list_columns,
+    geometry = geometry,
+    coords = coords,
     call = call
   )
 
