@@ -10,6 +10,7 @@ wb_add_data_ext(
   ...,
   start_row = 1,
   geometry = c("drop", "coords", "wkt"),
+  list_columns = c("drop", "concat", "asis"),
   labels = c("drop", "row_before"),
   call = caller_env()
 )
@@ -44,7 +45,15 @@ uses the special \verb{#N/A} value within the workbook.}
 
 \item{start_row}{A vector specifying the starting row to write \code{x} to.}
 
-\item{geometry}{String, one of "drop" (default), "coords", or "wkt".}
+\item{geometry}{String, one of "drop" (default), "coords", or "wkt". "coords"
+uses \code{\link[sf:geos_unary]{sf::st_centroid()}} to convert input to POINT geometry, transforms
+geometry to EPSG:4326, converts geometry to coordinates, and adds new
+columns with names matching \code{coords}. "wkt" converts geometry to a Well
+Known Text (WKT) character vector using \code{\link[sf:st_as_text]{sf::st_as_text()}} and replaces the
+existing geometry column (keeping the existing sf column name).}
+
+\item{list_columns}{String, one of "drop" (default), "concat", or "asis".
+"concat" and "asis" are not yet implemented.}
 
 \item{labels}{Method for handling column labels. "drop" (default) or
 "row_before". If "row_before", insert column labels in the row before the
@@ -59,5 +68,6 @@ mentioned in error messages as the source of the error. See the
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 
 \code{\link[=wb_add_data_ext]{wb_add_data_ext()}} extends \code{\link[openxlsx2:wb_add_data]{openxlsx2::wb_add_data()}} to add data to a
-workbook with special handling for sf input objects and labelled data.
+workbook with special handling for input data with geometry or list columns
+(using \code{\link[=prep_wb_data]{prep_wb_data()}}) and labelled data.
 }
