@@ -51,6 +51,7 @@ workbook with special handling for input data with geometry or list columns
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">wb_add_data_ext</span><span class="op">(</span></span>
 <span>  <span class="va">wb</span>,</span>
 <span>  <span class="va">x</span>,</span>
+<span>  sheet <span class="op">=</span> <span class="fu"><a href="https://janmarvin.github.io/openxlsx2/reference/waivers.html" class="external-link">current_sheet</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  <span class="va">...</span>,</span>
 <span>  start_row <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  list_columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"drop"</span>, <span class="st">"concat"</span>, <span class="st">"asis"</span><span class="op">)</span>,</span>
@@ -75,11 +76,12 @@ workbook with special handling for input data with geometry or list columns
 <code><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">base::as.data.frame()</a></code>.</p></dd>
 
 
-<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>Arguments passed on to <code><a href="https://janmarvin.github.io/openxlsx2/reference/wb_add_data.html" class="external-link">openxlsx2::wb_add_data</a></code>, <code><a href="https://janmarvin.github.io/openxlsx2/reference/wb_add_data_table.html" class="external-link">openxlsx2::wb_add_data_table</a></code></p><dl><dt><code>sheet</code></dt>
+<dt id="arg-sheet">sheet<a class="anchor" aria-label="anchor" href="#arg-sheet"></a></dt>
 <dd><p>The worksheet to write to. Can be the worksheet index or name.</p></dd>
 
-    <dt><code>dims</code></dt>
+
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>Arguments passed on to <code><a href="https://janmarvin.github.io/openxlsx2/reference/wb_add_data.html" class="external-link">openxlsx2::wb_add_data</a></code>, <code><a href="https://janmarvin.github.io/openxlsx2/reference/wb_add_data_table.html" class="external-link">openxlsx2::wb_add_data_table</a></code></p><dl><dt><code>dims</code></dt>
 <dd><p>Spreadsheet cell range that will determine <code>start_col</code> and <code>start_row</code>: "A1", "A1:B2", "A:B"</p></dd>
 
     <dt><code>start_col</code></dt>
