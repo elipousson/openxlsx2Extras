@@ -12,14 +12,13 @@
 #' @inheritDotParams openxlsx2::wb_save
 #' @examples
 #'
-#' library(openxlsx2)
-#'
 #' withr::with_tempdir({
-#'   wb_workbook(
-#'     title = "Title used for output file"
-#'   ) |>
-#'     wb_add_worksheet() |>
-#'     wb_save_ext()
+#'   wb <- wb_new_workbook(
+#'     title = "Title used for output file",
+#'     sheet_name = "Sheet 1"
+#'   )
+#'
+#'   wb_save_ext(wb)
 #'
 #'   fs::dir_ls()
 #' })
@@ -30,21 +29,24 @@ wb_save_ext <- function(wb,
                         overwrite = TRUE,
                         ...) {
   if (is.null(file)) {
+    # Get properties
     core_props <- wb$get_properties()
 
+    # Check for title
     if (!is_string(core_props[["title"]])) {
       cli::cli_abort(
         "{.arg wb} must have a title property when {.arg file} is `NULL`."
       )
     }
 
+    # Build file path from title
     file <- fs::path_ext_set(
       fs::path_sanitize(core_props[["title"]]),
       "xlsx"
     )
   } else {
-    # Validate file extension
-    fileext <- fs::path_ext(file)
+    # Validate file extension if not set by title
+    fileext <- tolower(fs::path_ext(file))
     fileext <- arg_match0(fileext, "xlsx")
   }
 
@@ -63,22 +65,44 @@ wb_save_ext <- function(wb,
 #' `r lifecycle::badge("experimental")`
 #'
 #' [write_xlsx_ext()] wraps [wb_add_data_ext()] to provide an equivalent to
-#' [openxlsx2::write_xlsx()] with better support for sf and labelled data.
-#' Arguments passed to [openxlsx2::wb_workbook()] are ignored if x is a workbook
-#' instead of a data frame.
+#' [openxlsx2::write_xlsx()] with additional features. Arguments passed to
+#' [openxlsx2::wb_workbook()] are ignored if x is a workbook instead of a data
+#' frame.
 #'
+#' @param x Required. A `wbWorkbook` object, a data frame, or a bare list of
+#'   data frames. x can also be any object coercible to a data frame (other than
+#'   a bare list) by [base::as.data.frame()]. If x is a named list and
+#'   `sheet_names` is supplied, the existing names for x are ignored.
 #' @inheritParams wb_new_workbook
 #' @inheritParams wb_add_data_ext
-#' @inheritParams wb_save_ext
 #' @param title,subject,category,keywords Additional workbook properties passed
 #'   to [wb_new_workbook()]. Ignored (with creator and title) if `x` is a
 #'   workbook instead of a data frame.
 #' @inheritParams wb_add_data_ext
 #' @inheritParams wb_save_ext
+#' @inheritParams openxlsx2::wb_save
+#' @examples
+#' withr::with_tempdir({
+#'
+#'   # Write data frame to XLSX file
+#'   write_xlsx_ext(mtcars, "mtcars.xlsx")
+#'
+#'   # Write data frame to XLSX file with workbook title
+#'   write_xlsx_ext(mtcars, title = "mtcars data")
+#'
+#'   # Write list of data frames to XLSX file with named sheets
+#'   write_xlsx_ext(
+#'     list(mtcars = mtcars, anscombe = anscombe),
+#'     "datasets-list.xlsx"
+#'   )
+#'
+#'   # List output files
+#'   fs::dir_ls()
+#' })
+#'
 #' @export
 write_xlsx_ext <- function(x,
                            file = NULL,
-                           as_table = FALSE,
                            ...,
                            sheet_names = NULL,
                            creator = NULL,
@@ -88,28 +112,57 @@ write_xlsx_ext <- function(x,
                            datetime_created = Sys.time(),
                            theme = NULL,
                            keywords = NULL,
+                           as_table = FALSE,
                            start_row = 1,
-                           overwrite = TRUE,
                            geometry = c("drop", "coords", "wkt"),
                            labels = c("drop", "row_before"),
+                           path = NULL,
+                           overwrite = TRUE,
                            call = caller_env()) {
-  wb <- x
+  # If x is a wbWorkbook object, use wb_save_ext to save to file
+  # All other arguments except file, path, and overwrite are ignored
+  if (inherits(x, "wbWorkbook")) {
+    return(wb_save_ext(x, file = file, path = path, overwrite = overwrite))
+  }
 
-  if (is.data.frame(x)) {
-    wb <- wb_new_workbook(
-      creator = creator,
-      title = title,
-      subject = subject,
-      category = category,
-      datetime_created = datetime_created,
-      theme = theme,
-      keywords = keywords,
-      sheet_names = sheet_names
-    )
+  bare_list_input <- is_bare_list(x)
 
+  # Put data frame or other non-list object in a bare list
+  # Allows non-data frame objects to be coerced by wb_add_data_ext
+  if (!bare_list_input) {
+    x <- list(x)
+  }
+
+  # Set names for list (set_sheet_list_names warns if x is named and sheet_naems
+  # is supplied)
+  sheet_data <- set_sheet_list_names(
+    x = x,
+    sheet_names = sheet_names,
+    .prep_fn = NULL,
+    call = call
+  )
+
+  sheet_names <- names(sheet_data)
+
+  # Create new workbook
+  wb <- wb_new_workbook(
+    creator = creator,
+    title = title,
+    subject = subject,
+    category = category,
+    datetime_created = datetime_created,
+    theme = theme,
+    keywords = keywords,
+    sheet_names = sheet_names
+  )
+
+  # Add data for each named sheet
+  for (nm in sheet_names) {
+    # TODO: Add support for recycling parameters
     wb <- wb_add_data_ext(
       wb = wb,
-      x = x,
+      x = sheet_data[[nm]],
+      sheet = nm,
       ...,
       as_table = as_table,
       start_row = start_row,
@@ -119,5 +172,13 @@ write_xlsx_ext <- function(x,
     )
   }
 
-  wb_save_ext(wb, file = file, overwrite = overwrite)
+  # Save workbook to file
+  wb_save_ext(wb, file = file, path = path, overwrite = overwrite)
+
+  # Invisibly return x w/o modification
+  if (bare_list_input) {
+    return(invisible(x))
+  }
+
+  invisible(x[[1]])
 }

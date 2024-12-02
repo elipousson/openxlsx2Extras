@@ -29,14 +29,13 @@ extension. This function is not stable and may change in the future.
 }
 \examples{
 
-library(openxlsx2)
-
 withr::with_tempdir({
-  wb_workbook(
-    title = "Title used for output file"
-  ) |>
-    wb_add_worksheet() |>
-    wb_save_ext()
+  wb <- wb_new_workbook(
+    title = "Title used for output file",
+    sheet_name = "Sheet 1"
+  )
+
+  wb_save_ext(wb)
 
   fs::dir_ls()
 })

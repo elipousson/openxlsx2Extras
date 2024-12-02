@@ -7,7 +7,6 @@
 write_xlsx_ext(
   x,
   file = NULL,
-  as_table = FALSE,
   ...,
   sheet_names = NULL,
   creator = NULL,
@@ -17,23 +16,22 @@ write_xlsx_ext(
   datetime_created = Sys.time(),
   theme = NULL,
   keywords = NULL,
+  as_table = FALSE,
   start_row = 1,
-  overwrite = TRUE,
   geometry = c("drop", "coords", "wkt"),
   labels = c("drop", "row_before"),
+  path = NULL,
+  overwrite = TRUE,
   call = caller_env()
 )
 }
 \arguments{
-\item{x}{Required. A data frame or an object coercible to a data frame with
-\code{\link[base:as.data.frame]{base::as.data.frame()}}.}
+\item{x}{Required. A \code{wbWorkbook} object, a data frame, or a bare list of
+data frames. x can also be any object coercible to a data frame (other than
+a bare list) by \code{\link[base:as.data.frame]{base::as.data.frame()}}. If x is a named list and
+\code{sheet_names} is supplied, the existing names for x are ignored.}
 
 \item{file}{A path to save the workbook to}
-
-\item{as_table}{Default \code{FALSE}. If \code{TRUE}, use
-\code{\link[openxlsx2:wb_add_data_table]{openxlsx2::wb_add_data_table()}} to add data to workbook. If \code{FALSE}, use
-\code{\link[openxlsx2:wb_add_data]{openxlsx2::wb_add_data()}}. Additional parameters in \code{...} are passed to
-one function or the other depending on this value.}
 
 \item{...}{additional arguments}
 
@@ -50,9 +48,12 @@ workbook instead of a data frame.}
 \item{theme}{Optional theme identified by string or number.
 See \strong{Details} for options.}
 
-\item{start_row}{A vector specifying the starting row to write \code{x} to.}
+\item{as_table}{Default \code{FALSE}. If \code{TRUE}, use
+\code{\link[openxlsx2:wb_add_data_table]{openxlsx2::wb_add_data_table()}} to add data to workbook. If \code{FALSE}, use
+\code{\link[openxlsx2:wb_add_data]{openxlsx2::wb_add_data()}}. Additional parameters in \code{...} are passed to
+one function or the other depending on this value.}
 
-\item{overwrite}{If \code{FALSE}, will not overwrite when \code{file} already exists.}
+\item{start_row}{A vector specifying the starting row to write \code{x} to.}
 
 \item{geometry}{String, one of "drop" (default), "coords", or "wkt". "coords"
 uses \code{\link[sf:geos_unary]{sf::st_centroid()}} to convert input to POINT geometry, transforms
@@ -65,6 +66,10 @@ existing geometry column (keeping the existing sf column name).}
 "row_before". If "row_before", insert column labels in the row before the
 column names.}
 
+\item{path}{Deprecated argument. Please use \code{file} in new code.}
+
+\item{overwrite}{If \code{FALSE}, will not overwrite when \code{file} already exists.}
+
 \item{call}{The execution environment of a currently
 running function, e.g. \code{caller_env()}. The function will be
 mentioned in error messages as the source of the error. See the
@@ -74,7 +79,27 @@ mentioned in error messages as the source of the error. See the
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 
 \code{\link[=write_xlsx_ext]{write_xlsx_ext()}} wraps \code{\link[=wb_add_data_ext]{wb_add_data_ext()}} to provide an equivalent to
-\code{\link[openxlsx2:write_xlsx]{openxlsx2::write_xlsx()}} with better support for sf and labelled data.
-Arguments passed to \code{\link[openxlsx2:wb_workbook]{openxlsx2::wb_workbook()}} are ignored if x is a workbook
-instead of a data frame.
+\code{\link[openxlsx2:write_xlsx]{openxlsx2::write_xlsx()}} with additional features. Arguments passed to
+\code{\link[openxlsx2:wb_workbook]{openxlsx2::wb_workbook()}} are ignored if x is a workbook instead of a data
+frame.
+}
+\examples{
+withr::with_tempdir({
+
+  # Write data frame to XLSX file
+  write_xlsx_ext(mtcars, "mtcars.xlsx")
+
+  # Write data frame to XLSX file with workbook title
+  write_xlsx_ext(mtcars, title = "mtcars data")
+
+  # Write list of data frames to XLSX file with named sheets
+  write_xlsx_ext(
+    list(mtcars = mtcars, anscombe = anscombe),
+    "datasets-list.xlsx"
+  )
+
+  # List output files
+  fs::dir_ls()
+})
+
 }

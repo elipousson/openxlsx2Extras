@@ -7,6 +7,7 @@
 wb_add_data_ext(
   wb,
   x,
+  sheet = current_sheet(),
   ...,
   start_row = 1,
   list_columns = c("drop", "concat", "asis"),
@@ -23,10 +24,11 @@ wb_add_data_ext(
 \item{x}{Required. A data frame or an object coercible to a data frame with
 \code{\link[base:as.data.frame]{base::as.data.frame()}}.}
 
+\item{sheet}{The worksheet to write to. Can be the worksheet index or name.}
+
 \item{...}{
   Arguments passed on to \code{\link[openxlsx2:wb_add_data]{openxlsx2::wb_add_data}}, \code{\link[openxlsx2:wb_add_data_table]{openxlsx2::wb_add_data_table}}
   \describe{
-    \item{\code{sheet}}{The worksheet to write to. Can be the worksheet index or name.}
     \item{\code{dims}}{Spreadsheet cell range that will determine \code{start_col} and \code{start_row}: "A1", "A1:B2", "A:B"}
     \item{\code{start_col}}{A vector specifying the starting column to write \code{x} to.}
     \item{\code{array}}{A bool if the function written is of type array}
