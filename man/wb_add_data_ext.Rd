@@ -9,19 +9,22 @@ wb_add_data_ext(
   x,
   ...,
   start_row = 1,
-  geometry = c("drop", "coords", "wkt"),
   list_columns = c("drop", "concat", "asis"),
+  geometry = c("drop", "coords", "wkt"),
+  coords = c("lon", "lat"),
   labels = c("drop", "row_before"),
+  as_table = FALSE,
   call = caller_env()
 )
 }
 \arguments{
 \item{wb}{A Workbook object containing a worksheet.}
 
-\item{x}{Object to be written. For classes supported look at the examples.}
+\item{x}{Required. A data frame or an object coercible to a data frame with
+\code{\link[base:as.data.frame]{base::as.data.frame()}}.}
 
 \item{...}{
-  Arguments passed on to \code{\link[openxlsx2:wb_add_data]{openxlsx2::wb_add_data}}
+  Arguments passed on to \code{\link[openxlsx2:wb_add_data]{openxlsx2::wb_add_data}}, \code{\link[openxlsx2:wb_add_data_table]{openxlsx2::wb_add_data_table}}
   \describe{
     \item{\code{sheet}}{The worksheet to write to. Can be the worksheet index or name.}
     \item{\code{dims}}{Spreadsheet cell range that will determine \code{start_col} and \code{start_row}: "A1", "A1:B2", "A:B"}
@@ -41,9 +44,19 @@ looks if \code{options(openxlsx2.na.strings)} is set. Otherwise \code{\link[open
 uses the special \verb{#N/A} value within the workbook.}
     \item{\code{inline_strings}}{write characters as inline strings}
     \item{\code{enforce}}{enforce that selected dims is filled. For this to work, \code{dims} must match \code{x}}
+    \item{\code{table_style}}{Any table style name or "none" (see \code{vignette("openxlsx2_style_manual")})}
+    \item{\code{table_name}}{Name of table in workbook. The table name must be unique.}
+    \item{\code{first_column}}{logical. If \code{TRUE}, the first column is bold.}
+    \item{\code{last_column}}{logical. If \code{TRUE}, the last column is bold.}
+    \item{\code{banded_rows}}{logical. If \code{TRUE}, rows are color banded.}
+    \item{\code{banded_cols}}{logical. If \code{TRUE}, the columns are color banded.}
+    \item{\code{total_row}}{logical. With the default \code{FALSE} no total row is added.}
   }}
 
 \item{start_row}{A vector specifying the starting row to write \code{x} to.}
+
+\item{list_columns}{String, one of "drop" (default), "concat", or "asis".
+"concat" and "asis" are not yet implemented.}
 
 \item{geometry}{String, one of "drop" (default), "coords", or "wkt". "coords"
 uses \code{\link[sf:geos_unary]{sf::st_centroid()}} to convert input to POINT geometry, transforms
@@ -52,12 +65,16 @@ columns with names matching \code{coords}. "wkt" converts geometry to a Well
 Known Text (WKT) character vector using \code{\link[sf:st_as_text]{sf::st_as_text()}} and replaces the
 existing geometry column (keeping the existing sf column name).}
 
-\item{list_columns}{String, one of "drop" (default), "concat", or "asis".
-"concat" and "asis" are not yet implemented.}
+\item{coords}{Length 2 character vector with column names to add if \code{geometry = "coords"}. Must be length 2 in longitude, latitude order.}
 
 \item{labels}{Method for handling column labels. "drop" (default) or
 "row_before". If "row_before", insert column labels in the row before the
 column names.}
+
+\item{as_table}{Default \code{FALSE}. If \code{TRUE}, use
+\code{\link[openxlsx2:wb_add_data_table]{openxlsx2::wb_add_data_table()}} to add data to workbook. If \code{FALSE}, use
+\code{\link[openxlsx2:wb_add_data]{openxlsx2::wb_add_data()}}. Additional parameters in \code{...} are passed to
+one function or the other depending on this value.}
 
 \item{call}{The execution environment of a currently
 running function, e.g. \code{caller_env()}. The function will be
@@ -70,4 +87,12 @@ mentioned in error messages as the source of the error. See the
 \code{\link[=wb_add_data_ext]{wb_add_data_ext()}} extends \code{\link[openxlsx2:wb_add_data]{openxlsx2::wb_add_data()}} to add data to a
 workbook with special handling for input data with geometry or list columns
 (using \code{\link[=prep_wb_data]{prep_wb_data()}}) and labelled data.
+}
+\examples{
+wb <- wb_new_workbook("mtcars")
+
+wb_add_data_ext(wb, mtcars)
+
+wb_add_data_ext(wb, mtcars, as_table = TRUE)
+
 }

@@ -9,6 +9,7 @@ write_xlsx_ext(
   file = NULL,
   as_table = FALSE,
   ...,
+  sheet_names = NULL,
   creator = NULL,
   title = NULL,
   subject = NULL,
@@ -24,46 +25,24 @@ write_xlsx_ext(
 )
 }
 \arguments{
-\item{x}{An object or a list of objects that can be handled by \code{\link[openxlsx2:wb_add_data]{wb_add_data()}} to write to file.}
+\item{x}{Required. A data frame or an object coercible to a data frame with
+\code{\link[base:as.data.frame]{base::as.data.frame()}}.}
 
-\item{file}{An optional xlsx file name. If no file is passed, the object is not written to disk and only a workbook object is returned.}
+\item{file}{A path to save the workbook to}
 
-\item{as_table}{If \code{TRUE}, will write as a data table, instead of data.}
+\item{as_table}{Default \code{FALSE}. If \code{TRUE}, use
+\code{\link[openxlsx2:wb_add_data_table]{openxlsx2::wb_add_data_table()}} to add data to workbook. If \code{FALSE}, use
+\code{\link[openxlsx2:wb_add_data]{openxlsx2::wb_add_data()}}. Additional parameters in \code{...} are passed to
+one function or the other depending on this value.}
 
-\item{...}{
-  Arguments passed on to \code{\link[openxlsx2:wb_workbook]{wb_workbook}}, \code{\link[openxlsx2:wb_add_worksheet]{wb_add_worksheet}}, \code{\link[openxlsx2:wb_add_data_table]{wb_add_data_table}}, \code{\link[openxlsx2:wb_add_data]{wb_add_data}}, \code{\link[openxlsx2:wb_freeze_pane]{wb_freeze_pane}}, \code{\link[openxlsx2:wb_set_col_widths]{wb_set_col_widths}}, \code{\link[openxlsx2:wb_save]{wb_save}}
-  \describe{
-    \item{\code{creator}}{Creator of the workbook (your name). Defaults to login username or \code{options("openxlsx2.creator")} if set.}
-    \item{\code{sheet}}{A name for the new worksheet}
-    \item{\code{grid_lines}}{A logical. If \code{FALSE}, the worksheet grid lines will be
-hidden.}
-    \item{\code{tab_color}}{Color of the sheet tab. A  \code{\link[openxlsx2:wb_color]{wb_color()}},  a valid color (belonging to
-\code{grDevices::colors()}) or a valid hex color beginning with "#".}
-    \item{\code{zoom}}{The sheet zoom level, a numeric between 10 and 400 as a
-percentage. (A zoom value smaller than 10 will default to 10.)}
-    \item{\code{total_row}}{logical. With the default \code{FALSE} no total row is added.}
-    \item{\code{start_col}}{A vector specifying the starting column to write \code{x} to.}
-    \item{\code{start_row}}{A vector specifying the starting row to write \code{x} to.}
-    \item{\code{col_names}}{If \code{TRUE}, column names of \code{x} are written.}
-    \item{\code{row_names}}{If \code{TRUE}, the row names of \code{x} are written.}
-    \item{\code{na.strings}}{Value used for replacing \code{NA} values from \code{x}. Default
-looks if \code{options(openxlsx2.na.strings)} is set. Otherwise \code{\link[openxlsx2:na_strings]{na_strings()}}
-uses the special \verb{#N/A} value within the workbook.}
-    \item{\code{first_active_row}}{Top row of active region}
-    \item{\code{first_active_col}}{Furthest left column of active region}
-    \item{\code{first_row}}{If \code{TRUE}, freezes the first row (equivalent to \code{first_active_row = 2})}
-    \item{\code{first_col}}{If \code{TRUE}, freezes the first column (equivalent to \code{first_active_col = 2})}
-    \item{\code{widths}}{Width to set \code{cols} to specified column width or \code{"auto"} for
-automatic sizing. \code{widths} is recycled to the length of \code{cols}. openxlsx2
-sets the default width is 8.43, as this is the standard in some spreadsheet
-software. See \strong{Details} for general information on column widths.}
-    \item{\code{overwrite}}{If \code{FALSE}, will not overwrite when \code{file} already exists.}
-  }}
+\item{...}{additional arguments}
+
+\item{sheet_names}{Optional character vector of worksheet names.}
 
 \item{creator}{Creator of the workbook (your name). Defaults to login username or \code{options("openxlsx2.creator")} if set.}
 
 \item{title, subject, category, keywords}{Additional workbook properties passed
-to \code{\link[openxlsx2:wb_workbook]{openxlsx2::wb_workbook()}}. Ignored (with creator and title) if \code{x} is a
+to \code{\link[=wb_new_workbook]{wb_new_workbook()}}. Ignored (with creator and title) if \code{x} is a
 workbook instead of a data frame.}
 
 \item{datetime_created}{The time of the workbook is created}

@@ -6,23 +6,26 @@
 \usage{
 prep_wb_data(
   x,
-  geometry = c("drop", "coords", "wkt"),
   list_columns = c("drop", "concat", "asis"),
+  geometry = c("drop", "coords", "wkt"),
   coords = c("lon", "lat"),
   collapse = "; ",
   call = caller_env()
 )
 }
 \arguments{
+\item{x}{Required. A data frame or an object coercible to a data frame with
+\code{\link[base:as.data.frame]{base::as.data.frame()}}.}
+
+\item{list_columns}{String, one of "drop" (default), "concat", or "asis".
+"concat" and "asis" are not yet implemented.}
+
 \item{geometry}{String, one of "drop" (default), "coords", or "wkt". "coords"
 uses \code{\link[sf:geos_unary]{sf::st_centroid()}} to convert input to POINT geometry, transforms
 geometry to EPSG:4326, converts geometry to coordinates, and adds new
 columns with names matching \code{coords}. "wkt" converts geometry to a Well
 Known Text (WKT) character vector using \code{\link[sf:st_as_text]{sf::st_as_text()}} and replaces the
 existing geometry column (keeping the existing sf column name).}
-
-\item{list_columns}{String, one of "drop" (default), "concat", or "asis".
-"concat" and "asis" are not yet implemented.}
 
 \item{coords}{Length 2 character vector with column names to add if \code{geometry = "coords"}. Must be length 2 in longitude, latitude order.}
 
