@@ -25,6 +25,12 @@ set_sheet_list_names <- function(x,
                                  repair = "unique",
                                  default = "Sheet",
                                  call = caller_env()) {
+  if (is_named(x) && !is.null(sheet_names)) {
+    cli::cli_warn(
+      "{.arg x} names are ignored when {.arg sheet_names} is supplied."
+    )
+  }
+
   sheet_names <- as_sheet_names(
     sheet_names = sheet_names %||% names(x),
     n_sheets = length(x),
@@ -200,7 +206,8 @@ prep_wb_data <- function(x,
                          collapse = "; ",
                          call = caller_env()) {
   # TODO: Improve coercion for non-data frame objects
-  if (!inherits(x, "data.frame")) {
+  # See https://github.com/elipousson/openxlsx2Extras/issues/4
+  if (!is.data.frame(x)) {
     x <- as.data.frame(x)
   }
 
