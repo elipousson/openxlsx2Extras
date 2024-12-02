@@ -62,7 +62,15 @@ vector.</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>Arguments passed on to <code><a href="prep_wb_data.html">prep_wb_data</a></code></p><dl><dt><code>geometry</code></dt>
+<dd><p>Arguments passed on to <code><a href="prep_wb_data.html">prep_wb_data</a></code></p><dl><dt><code>x</code></dt>
+<dd><p>Required. A data frame or an object coercible to a data frame with
+<code><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">base::as.data.frame()</a></code>.</p></dd>
+
+    <dt><code>list_columns</code></dt>
+<dd><p>String, one of "drop" (default), "concat", or "asis".
+"concat" and "asis" are not yet implemented.</p></dd>
+
+    <dt><code>geometry</code></dt>
 <dd><p>String, one of "drop" (default), "coords", or "wkt". "coords"
 uses <code><a href="https://r-spatial.github.io/sf/reference/geos_unary.html" class="external-link">sf::st_centroid()</a></code> to convert input to POINT geometry, transforms
 geometry to EPSG:4326, converts geometry to coordinates, and adds new
@@ -72,10 +80,6 @@ existing geometry column (keeping the existing sf column name).</p></dd>
 
     <dt><code>coords</code></dt>
 <dd><p>Length 2 character vector with column names to add if <code>geometry = "coords"</code>. Must be length 2 in longitude, latitude order.</p></dd>
-
-    <dt><code>list_columns</code></dt>
-<dd><p>String, one of "drop" (default), "concat", or "asis".
-"concat" and "asis" are not yet implemented.</p></dd>
 
     <dt><code>collapse</code></dt>
 <dd><p>Character to use in collapsing list columns. Ignored unless

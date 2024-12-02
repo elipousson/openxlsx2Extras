@@ -56,6 +56,7 @@ instead of a data frame.</p>
 <span>  file <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  as_table <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  <span class="va">...</span>,</span>
+<span>  sheet_names <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  creator <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  title <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  subject <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -76,79 +77,27 @@ instead of a data frame.</p>
 
 
 <dl><dt id="arg-x">x<a class="anchor" aria-label="anchor" href="#arg-x"></a></dt>
-<dd><p>An object or a list of objects that can be handled by <code><a href="https://janmarvin.github.io/openxlsx2/reference/wb_add_data.html" class="external-link">wb_add_data()</a></code> to write to file.</p></dd>
+<dd><p>Required. A data frame or an object coercible to a data frame with
+<code><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">base::as.data.frame()</a></code>.</p></dd>
 
 
 <dt id="arg-file">file<a class="anchor" aria-label="anchor" href="#arg-file"></a></dt>
-<dd><p>An optional xlsx file name. If no file is passed, the object is not written to disk and only a workbook object is returned.</p></dd>
+<dd><p>A path to save the workbook to</p></dd>
 
 
 <dt id="arg-as-table">as_table<a class="anchor" aria-label="anchor" href="#arg-as-table"></a></dt>
-<dd><p>If <code>TRUE</code>, will write as a data table, instead of data.</p></dd>
+<dd><p>Default <code>FALSE</code>. If <code>TRUE</code>, use
+<code><a href="https://janmarvin.github.io/openxlsx2/reference/wb_add_data_table.html" class="external-link">openxlsx2::wb_add_data_table()</a></code> to add data to workbook. If <code>FALSE</code>, use
+<code><a href="https://janmarvin.github.io/openxlsx2/reference/wb_add_data.html" class="external-link">openxlsx2::wb_add_data()</a></code>. Additional parameters in <code>...</code> are passed to
+one function or the other depending on this value.</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>Arguments passed on to <code><a href="https://janmarvin.github.io/openxlsx2/reference/wb_workbook.html" class="external-link">wb_workbook</a></code>, <code><a href="https://janmarvin.github.io/openxlsx2/reference/wb_add_worksheet.html" class="external-link">wb_add_worksheet</a></code>, <code><a href="https://janmarvin.github.io/openxlsx2/reference/wb_add_data_table.html" class="external-link">wb_add_data_table</a></code>, <code><a href="https://janmarvin.github.io/openxlsx2/reference/wb_add_data.html" class="external-link">wb_add_data</a></code>, <code><a href="https://janmarvin.github.io/openxlsx2/reference/wb_freeze_pane.html" class="external-link">wb_freeze_pane</a></code>, <code><a href="https://janmarvin.github.io/openxlsx2/reference/col_widths-wb.html" class="external-link">wb_set_col_widths</a></code>, <code><a href="https://janmarvin.github.io/openxlsx2/reference/wb_save.html" class="external-link">wb_save</a></code></p><dl><dt><code>creator</code></dt>
-<dd><p>Creator of the workbook (your name). Defaults to login username or <code>options("openxlsx2.creator")</code> if set.</p></dd>
-
-    <dt><code>sheet</code></dt>
-<dd><p>A name for the new worksheet</p></dd>
-
-    <dt><code>grid_lines</code></dt>
-<dd><p>A logical. If <code>FALSE</code>, the worksheet grid lines will be
-hidden.</p></dd>
-
-    <dt><code>tab_color</code></dt>
-<dd><p>Color of the sheet tab. A  <code><a href="https://janmarvin.github.io/openxlsx2/reference/wb_color.html" class="external-link">wb_color()</a></code>,  a valid color (belonging to
-<code><a href="https://rdrr.io/r/grDevices/colors.html" class="external-link">grDevices::colors()</a></code>) or a valid hex color beginning with "#".</p></dd>
-
-    <dt><code>zoom</code></dt>
-<dd><p>The sheet zoom level, a numeric between 10 and 400 as a
-percentage. (A zoom value smaller than 10 will default to 10.)</p></dd>
-
-    <dt><code>total_row</code></dt>
-<dd><p>logical. With the default <code>FALSE</code> no total row is added.</p></dd>
-
-    <dt><code>start_col</code></dt>
-<dd><p>A vector specifying the starting column to write <code>x</code> to.</p></dd>
-
-    <dt><code>start_row</code></dt>
-<dd><p>A vector specifying the starting row to write <code>x</code> to.</p></dd>
-
-    <dt><code>col_names</code></dt>
-<dd><p>If <code>TRUE</code>, column names of <code>x</code> are written.</p></dd>
-
-    <dt><code>row_names</code></dt>
-<dd><p>If <code>TRUE</code>, the row names of <code>x</code> are written.</p></dd>
-
-    <dt><code>na.strings</code></dt>
-<dd><p>Value used for replacing <code>NA</code> values from <code>x</code>. Default
-looks if <code>options(openxlsx2.na.strings)</code> is set. Otherwise <code><a href="https://janmarvin.github.io/openxlsx2/reference/waivers.html" class="external-link">na_strings()</a></code>
-uses the special <code>#N/A</code> value within the workbook.</p></dd>
-
-    <dt><code>first_active_row</code></dt>
-<dd><p>Top row of active region</p></dd>
-
-    <dt><code>first_active_col</code></dt>
-<dd><p>Furthest left column of active region</p></dd>
-
-    <dt><code>first_row</code></dt>
-<dd><p>If <code>TRUE</code>, freezes the first row (equivalent to <code>first_active_row = 2</code>)</p></dd>
-
-    <dt><code>first_col</code></dt>
-<dd><p>If <code>TRUE</code>, freezes the first column (equivalent to <code>first_active_col = 2</code>)</p></dd>
-
-    <dt><code>widths</code></dt>
-<dd><p>Width to set <code>cols</code> to specified column width or <code>"auto"</code> for
-automatic sizing. <code>widths</code> is recycled to the length of <code>cols</code>. openxlsx2
-sets the default width is 8.43, as this is the standard in some spreadsheet
-software. See <strong>Details</strong> for general information on column widths.</p></dd>
-
-    <dt><code>overwrite</code></dt>
-<dd><p>If <code>FALSE</code>, will not overwrite when <code>file</code> already exists.</p></dd>
+<dd><p>additional arguments</p></dd>
 
 
-</dl></dd>
+<dt id="arg-sheet-names">sheet_names<a class="anchor" aria-label="anchor" href="#arg-sheet-names"></a></dt>
+<dd><p>Optional character vector of worksheet names.</p></dd>
 
 
 <dt id="arg-creator">creator<a class="anchor" aria-label="anchor" href="#arg-creator"></a></dt>
@@ -157,7 +106,7 @@ software. See <strong>Details</strong> for general information on column widths.
 
 <dt id="arg-title-subject-category-keywords">title, subject, category, keywords<a class="anchor" aria-label="anchor" href="#arg-title-subject-category-keywords"></a></dt>
 <dd><p>Additional workbook properties passed
-to <code><a href="https://janmarvin.github.io/openxlsx2/reference/wb_workbook.html" class="external-link">openxlsx2::wb_workbook()</a></code>. Ignored (with creator and title) if <code>x</code> is a
+to <code><a href="wb_new_workbook.html">wb_new_workbook()</a></code>. Ignored (with creator and title) if <code>x</code> is a
 workbook instead of a data frame.</p></dd>
 
 
