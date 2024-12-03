@@ -54,7 +54,8 @@ workbook with special handling for input data with geometry or list columns
 <span>  sheet <span class="op">=</span> <span class="fu"><a href="https://janmarvin.github.io/openxlsx2/reference/waivers.html" class="external-link">current_sheet</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  <span class="va">...</span>,</span>
 <span>  start_row <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>  list_columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"drop"</span>, <span class="st">"concat"</span>, <span class="st">"asis"</span><span class="op">)</span>,</span>
+<span>  list_columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"collapse"</span>, <span class="st">"drop"</span>, <span class="st">"asis"</span><span class="op">)</span>,</span>
+<span>  sep <span class="op">=</span> <span class="st">"; "</span>,</span>
 <span>  geometry <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"drop"</span>, <span class="st">"coords"</span>, <span class="st">"wkt"</span><span class="op">)</span>,</span>
 <span>  coords <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"lon"</span>, <span class="st">"lat"</span><span class="op">)</span>,</span>
 <span>  labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"drop"</span>, <span class="st">"row_before"</span><span class="op">)</span>,</span>
@@ -103,10 +104,6 @@ NOTE: can only have one filter per worksheet.</p></dd>
     <dt><code>name</code></dt>
 <dd><p>The name of a named region if specified.</p></dd>
 
-    <dt><code>sep</code></dt>
-<dd><p>Only applies to list columns. The separator used to collapse list
-columns to a character vector e.g. <code>sapply(x$list_column, paste, collapse = sep)</code>.</p></dd>
-
     <dt><code>apply_cell_style</code></dt>
 <dd><p>Should we write cell styles to the workbook</p></dd>
 
@@ -154,8 +151,12 @@ uses the special <code>#N/A</code> value within the workbook.</p></dd>
 
 
 <dt id="arg-list-columns">list_columns<a class="anchor" aria-label="anchor" href="#arg-list-columns"></a></dt>
-<dd><p>String, one of "drop" (default), "concat", or "asis".
-"concat" and "asis" are not yet implemented.</p></dd>
+<dd><p>String, one of "collapse" (default), "drop", or "asis"</p></dd>
+
+
+<dt id="arg-sep">sep<a class="anchor" aria-label="anchor" href="#arg-sep"></a></dt>
+<dd><p>String to use in collapsing list columns. Ignored unless
+<code>list_columns = "collapse"</code>. Defaults to <code>"; "</code>.</p></dd>
 
 
 <dt id="arg-geometry">geometry<a class="anchor" aria-label="anchor" href="#arg-geometry"></a></dt>

@@ -67,8 +67,11 @@ vector.</p></dd>
 <code><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">base::as.data.frame()</a></code>.</p></dd>
 
     <dt><code>list_columns</code></dt>
-<dd><p>String, one of "drop" (default), "concat", or "asis".
-"concat" and "asis" are not yet implemented.</p></dd>
+<dd><p>String, one of "collapse" (default), "drop", or "asis"</p></dd>
+
+    <dt><code>sep</code></dt>
+<dd><p>String to use in collapsing list columns. Ignored unless
+<code>list_columns = "collapse"</code>. Defaults to <code>"; "</code>.</p></dd>
 
     <dt><code>geometry</code></dt>
 <dd><p>String, one of "drop" (default), "coords", or "wkt". "coords"
@@ -80,10 +83,6 @@ existing geometry column (keeping the existing sf column name).</p></dd>
 
     <dt><code>coords</code></dt>
 <dd><p>Length 2 character vector with column names to add if <code>geometry = "coords"</code>. Must be length 2 in longitude, latitude order.</p></dd>
-
-    <dt><code>collapse</code></dt>
-<dd><p>Character to use in collapsing list columns. Ignored unless
-<code>list_columns = "concat"</code>. Not yet implemented.</p></dd>
 
     <dt><code>call</code></dt>
 <dd><p>The execution environment of a currently
