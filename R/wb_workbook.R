@@ -51,11 +51,29 @@ wb_new_workbook <- function(
 
   # TODO: Add support for .params argument to pass list of options for each
   # sheet
+  params <- vctrs::vec_recycle_common(
+    ...,
+    .size = length(sheet_names),
+    .call = call
+  )
 
-  for (nm in sheet_names) {
-    wb$add_worksheet(
-      sheet = nm,
-      ...
+  # FIXME: There must be a more performant way to handle this
+  for (i in seq_along(sheet_names)) {
+    sheet_params <- purrr::map(
+      params,
+      \(x) {
+        vctrs::vec_slice(
+          x,
+          i = i
+        )
+      }
+    )
+
+    wb <- rlang::exec(
+      openxlsx2::wb_add_worksheet,
+      wb = wb,
+      sheet = sheet_names[[i]],
+      !!!sheet_params
     )
   }
 
