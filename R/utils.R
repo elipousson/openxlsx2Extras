@@ -183,8 +183,9 @@ as_sheet_list <- function(x,
 #'
 #' @param x Required. A data frame or an object coercible to a data frame with
 #'   [base::as.data.frame()].
-#' @param list_columns String, one of "drop" (default), "concat", or "asis".
-#'   "concat" and "asis" are not yet implemented.
+#' @param list_columns String, one of "collapse" (default), "drop", or "asis"
+#' @param sep String to use in collapsing list columns. Ignored unless
+#'   `list_columns = "collapse"`. Defaults to `"; "`.
 #' @param geometry String, one of "drop" (default), "coords", or "wkt". "coords"
 #'   uses [sf::st_centroid()] to convert input to POINT geometry, transforms
 #'   geometry to EPSG:4326, converts geometry to coordinates, and adds new
@@ -193,17 +194,15 @@ as_sheet_list <- function(x,
 #'   existing geometry column (keeping the existing sf column name).
 #' @param coords Length 2 character vector with column names to add if `geometry
 #'   = "coords"`. Must be length 2 in longitude, latitude order.
-#' @param collapse Character to use in collapsing list columns. Ignored unless
-#'   `list_columns = "concat"`. Not yet implemented.
 #' @inheritParams rlang::args_error_context
 #' @keywords utils
 #' @export
 #' @importFrom purrr map_chr list_cbind
 prep_wb_data <- function(x,
-                         list_columns = c("drop", "concat", "asis"),
+                         list_columns = c("collapse", "drop", "asis"),
+                         sep = "; ",
                          geometry = c("drop", "coords", "wkt"),
                          coords = c("lon", "lat"),
-                         collapse = "; ",
                          call = caller_env()) {
   # TODO: Improve coercion for non-data frame objects
   # See https://github.com/elipousson/openxlsx2Extras/issues/4
@@ -254,20 +253,22 @@ prep_wb_data <- function(x,
   # Modify list columns data frame as specified by `list_columns`
   if (has_list_cols) {
     list_columns <- arg_match(list_columns, error_call = call)
-    if (list_columns == "drop") {
+    if (list_columns == "collapse") {
+      for (nm in names(x)[is_list_col]) {
+        x[[nm]] <- purrr::map_chr(
+          x[[nm]],
+          \(x) {
+            paste(x, collapse = sep)
+          }
+        )
+      }
+    } else if (list_columns == "drop") {
       x[is_list_col] <- NULL
-    } else if (list_columns == "asis") {
-      # TODO: Implement asis
-      # for (nm in names(x)[is_list_col]) {
-      #   x[[nm]] <- purrr::map_chr(
-      #     x[[nm]],
-      #     \(i) {
-      #       paste0(i)
-      #     }
-      #   )
-      # }
-    } else if (list_columns == "concat") {
-      # TODO: Implement concat
+    } else {
+      for (nm in names(x)[is_list_col]) {
+        x[[nm]] <- paste0(x[[nm]])
+    }
+
     }
   }
 

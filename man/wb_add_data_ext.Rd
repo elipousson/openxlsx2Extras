@@ -10,7 +10,8 @@ wb_add_data_ext(
   sheet = current_sheet(),
   ...,
   start_row = 1,
-  list_columns = c("drop", "concat", "asis"),
+  list_columns = c("collapse", "drop", "asis"),
+  sep = "; ",
   geometry = c("drop", "coords", "wkt"),
   coords = c("lon", "lat"),
   labels = c("drop", "row_before"),
@@ -37,8 +38,6 @@ wb_add_data_ext(
     \item{\code{with_filter}}{If \code{TRUE}, add filters to the column name row.
 NOTE: can only have one filter per worksheet.}
     \item{\code{name}}{The name of a named region if specified.}
-    \item{\code{sep}}{Only applies to list columns. The separator used to collapse list
-columns to a character vector e.g. \code{sapply(x$list_column, paste, collapse = sep)}.}
     \item{\code{apply_cell_style}}{Should we write cell styles to the workbook}
     \item{\code{remove_cell_style}}{keep the cell style?}
     \item{\code{na.strings}}{Value used for replacing \code{NA} values from \code{x}. Default
@@ -57,8 +56,10 @@ uses the special \verb{#N/A} value within the workbook.}
 
 \item{start_row}{A vector specifying the starting row to write \code{x} to.}
 
-\item{list_columns}{String, one of "drop" (default), "concat", or "asis".
-"concat" and "asis" are not yet implemented.}
+\item{list_columns}{String, one of "collapse" (default), "drop", or "asis"}
+
+\item{sep}{String to use in collapsing list columns. Ignored unless
+\code{list_columns = "collapse"}. Defaults to \code{"; "}.}
 
 \item{geometry}{String, one of "drop" (default), "coords", or "wkt". "coords"
 uses \code{\link[sf:geos_unary]{sf::st_centroid()}} to convert input to POINT geometry, transforms

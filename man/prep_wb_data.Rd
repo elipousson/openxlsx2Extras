@@ -6,10 +6,10 @@
 \usage{
 prep_wb_data(
   x,
-  list_columns = c("drop", "concat", "asis"),
+  list_columns = c("collapse", "drop", "asis"),
+  sep = "; ",
   geometry = c("drop", "coords", "wkt"),
   coords = c("lon", "lat"),
-  collapse = "; ",
   call = caller_env()
 )
 }
@@ -17,8 +17,10 @@ prep_wb_data(
 \item{x}{Required. A data frame or an object coercible to a data frame with
 \code{\link[base:as.data.frame]{base::as.data.frame()}}.}
 
-\item{list_columns}{String, one of "drop" (default), "concat", or "asis".
-"concat" and "asis" are not yet implemented.}
+\item{list_columns}{String, one of "collapse" (default), "drop", or "asis"}
+
+\item{sep}{String to use in collapsing list columns. Ignored unless
+\code{list_columns = "collapse"}. Defaults to \code{"; "}.}
 
 \item{geometry}{String, one of "drop" (default), "coords", or "wkt". "coords"
 uses \code{\link[sf:geos_unary]{sf::st_centroid()}} to convert input to POINT geometry, transforms
@@ -28,9 +30,6 @@ Known Text (WKT) character vector using \code{\link[sf:st_as_text]{sf::st_as_tex
 existing geometry column (keeping the existing sf column name).}
 
 \item{coords}{Length 2 character vector with column names to add if \code{geometry = "coords"}. Must be length 2 in longitude, latitude order.}
-
-\item{collapse}{Character to use in collapsing list columns. Ignored unless
-\code{list_columns = "concat"}. Not yet implemented.}
 
 \item{call}{The execution environment of a currently
 running function, e.g. \code{caller_env()}. The function will be
