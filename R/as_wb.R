@@ -1,0 +1,98 @@
+#' Coerce a data frame or list of data frames to a workbook
+#'
+#' [df_to_wb()] converts a data frame or list of data frames to a wbWorkbook
+#' object.
+#'
+#' @param x A data frame or list of data frames. Objects that can be coerced to
+#'   a data frame are not supported.
+#' @param type Type of objects to allow. "df-list" allows data frames and lists
+#'   of data frames. "df" allows data frames only. "any" allows any input
+#'   (allowing the option for [wb_add_data_ext()] to coerce objects to data
+#'   frames).
+#' @inheritDotParams wb_add_data_ext -x
+#' @inheritParams wb_new_workbook
+#' @inheritParams rlang::args_error_context
+#' @seealso [write_excel_ext()]
+#' @examples
+#' df_to_wb(mtcars)
+#'
+#' df_to_wb(list(mtcars, mtcars))
+#'
+#' @export
+as_wb <- function(x,
+                  ...,
+                  sheet_names = NULL,
+                  creator = NULL,
+                  title = NULL,
+                  subject = NULL,
+                  category = NULL,
+                  datetime_created = Sys.time(),
+                  theme = NULL,
+                  keywords = NULL,
+                  type = c("df-list", "df", "any"),
+                  call = caller_env()) {
+  # If x is a wbWorkbook object, use wb_save_ext to save to file
+  # All other arguments except file, path, and overwrite are ignored
+  if (inherits(x, "wbWorkbook")) {
+    cli::cli_abort(
+      "{.arg x} must be a data frame or a list of data frames, not a workbook.",
+      call = call
+    )
+  }
+
+  if (!is.data.frame(x) && (type == "df")) {
+    cli::cli_abort(
+      "{.arg x} must be a data frame when {.code type = df}.",
+      call = call
+    )
+  }
+
+  bare_list_input <- is_bare_list(x)
+
+  # Put data frame or other non-list object in a bare list
+  if (bare_list_input && type != "any") {
+    stopifnot(
+      all(purrr::map_lgl(x, is.data.frame))
+    )
+  } else {
+    x <- list(x)
+  }
+
+  # Set names for list (set_sheet_list_names warns if x is named and sheet_names
+  # is supplied)
+  sheet_data <- set_sheet_list_names(
+    x = x,
+    sheet_names = sheet_names,
+    .prep_fn = NULL,
+    call = call
+  )
+
+  sheet_names <- names(sheet_data)
+
+  # Create new workbook
+  wb <- wb_new_workbook(
+    creator = creator,
+    title = title,
+    subject = subject,
+    category = category,
+    datetime_created = datetime_created,
+    theme = theme,
+    keywords = keywords,
+    sheet_names = sheet_names
+  )
+
+  # Add data for each named sheet
+  for (nm in sheet_names) {
+    # TODO: Add support for recycling parameters
+    # See wb_new_workbook for an example of how to do this
+    wb <- wb_add_data_ext(
+      wb = wb,
+      x = sheet_data[[nm]],
+      sheet = nm,
+      ...,
+      call = call
+    )
+  }
+
+  wb
+}

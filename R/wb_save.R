@@ -83,7 +83,6 @@ wb_save_ext <- function(wb,
 #' @inheritParams openxlsx2::wb_save
 #' @examples
 #' withr::with_tempdir({
-#'
 #'   # Write data frame to XLSX file
 #'   write_xlsx_ext(mtcars, "mtcars.xlsx")
 #'
@@ -127,25 +126,8 @@ write_xlsx_ext <- function(x,
 
   bare_list_input <- is_bare_list(x)
 
-  # Put data frame or other non-list object in a bare list
-  # Allows non-data frame objects to be coerced by wb_add_data_ext
-  if (!bare_list_input) {
-    x <- list(x)
-  }
-
-  # Set names for list (set_sheet_list_names warns if x is named and sheet_naems
-  # is supplied)
-  sheet_data <- set_sheet_list_names(
+  wb <- as_wb(
     x = x,
-    sheet_names = sheet_names,
-    .prep_fn = NULL,
-    call = call
-  )
-
-  sheet_names <- names(sheet_data)
-
-  # Create new workbook
-  wb <- wb_new_workbook(
     creator = creator,
     title = title,
     subject = subject,
@@ -153,24 +135,15 @@ write_xlsx_ext <- function(x,
     datetime_created = datetime_created,
     theme = theme,
     keywords = keywords,
-    sheet_names = sheet_names
+    sheet_names = sheet_names,
+    ...,
+    as_table = as_table,
+    start_row = start_row,
+    geometry = geometry,
+    labels = labels,
+    call = call,
+    type = "any"
   )
-
-  # Add data for each named sheet
-  for (nm in sheet_names) {
-    # TODO: Add support for recycling parameters
-    wb <- wb_add_data_ext(
-      wb = wb,
-      x = sheet_data[[nm]],
-      sheet = nm,
-      ...,
-      as_table = as_table,
-      start_row = start_row,
-      geometry = geometry,
-      labels = labels,
-      call = call
-    )
-  }
 
   # Save workbook to file
   wb_save_ext(wb, file = file, path = path, overwrite = overwrite)

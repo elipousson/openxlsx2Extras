@@ -2,6 +2,7 @@
 
 export(as_sheet_list)
 export(as_sheet_names)
+export(as_wb)
 export(fmt_lgl_cols)
 export(fmt_marquee_txt)
 export(prep_wb_data)

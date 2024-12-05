@@ -85,7 +85,6 @@ frame.
 }
 \examples{
 withr::with_tempdir({
-
   # Write data frame to XLSX file
   write_xlsx_ext(mtcars, "mtcars.xlsx")
 
