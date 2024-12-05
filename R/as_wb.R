@@ -1,6 +1,6 @@
 #' Coerce a data frame or list of data frames to a workbook
 #'
-#' [df_to_wb()] converts a data frame or list of data frames to a wbWorkbook
+#' [as_wb()] converts a data frame or list of data frames to a wbWorkbook
 #' object.
 #'
 #' @param x A data frame or list of data frames. Objects that can be coerced to
@@ -12,11 +12,11 @@
 #' @inheritDotParams wb_add_data_ext -x
 #' @inheritParams wb_new_workbook
 #' @inheritParams rlang::args_error_context
-#' @seealso [write_excel_ext()]
+#' @seealso [write_xlsx_ext()]
 #' @examples
-#' df_to_wb(mtcars)
+#' as_wb(mtcars)
 #'
-#' df_to_wb(list(mtcars, mtcars))
+#' as_wb(list(mtcars, mtcars))
 #'
 #' @export
 as_wb <- function(x,
@@ -40,6 +40,8 @@ as_wb <- function(x,
     )
   }
 
+  type <- arg_match(type, error_call = call)
+
   if (!is.data.frame(x) && (type == "df")) {
     cli::cli_abort(
       "{.arg x} must be a data frame when {.code type = df}.",
@@ -54,7 +56,7 @@ as_wb <- function(x,
     stopifnot(
       all(purrr::map_lgl(x, is.data.frame))
     )
-  } else {
+  } else if (!bare_list_input) {
     x <- list(x)
   }
 

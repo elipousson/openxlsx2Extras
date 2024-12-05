@@ -71,15 +71,15 @@ mentioned in error messages as the source of the error. See the
 \code{call} argument of \code{\link[rlang:abort]{abort()}} for more information.}
 }
 \description{
-\code{\link[=df_to_wb]{df_to_wb()}} converts a data frame or list of data frames to a wbWorkbook
+\code{\link[=as_wb]{as_wb()}} converts a data frame or list of data frames to a wbWorkbook
 object.
 }
 \examples{
-df_to_wb(mtcars)
+as_wb(mtcars)
 
-df_to_wb(list(mtcars, mtcars))
+as_wb(list(mtcars, mtcars))
 
 }
 \seealso{
-\code{\link[=write_excel_ext]{write_excel_ext()}}
+\code{\link[=write_xlsx_ext]{write_xlsx_ext()}}
 }
