@@ -8,6 +8,10 @@
 #' @inheritParams as_sheet_names
 #' @param title,subject,category,keywords Additional arguments passed to
 #'   [openxlsx2::wb_workbook()].
+#' @param properties A named list (typically from
+#'   [openxlsx2::wb_get_properties()]) used to set new workbook properties for
+#'   any values set to `NULL`. `datetime_created` defaults to [Sys.time()] so
+#'   must be set to `NULL` to inherit value from `properties`.
 #' @inheritDotParams openxlsx2::wb_add_worksheet -sheet -wb
 #' @inheritParams openxlsx2::wb_workbook
 #' @examples
@@ -29,15 +33,15 @@ wb_new_workbook <- function(
     category = NULL,
     datetime_created = Sys.time(),
     theme = NULL,
-    keywords = NULL) {
+    keywords = NULL,
+    properties = NULL) {
   wb <- openxlsx2::wb_workbook(
-    creator = creator,
-    title = title,
-    subject = subject,
-    category = category,
-    datetime_created = datetime_created,
-    theme = theme,
-    keywords = keywords
+    title = title %||% properties[["subject"]],
+    subject = subject %||% properties[["subject"]],
+    category = category %||% properties[["category"]],
+    datetime_created = datetime_created %||% properties[["datetime_created"]],
+    theme = theme %||% properties[["theme"]],
+    keywords = keywords %||% properties[["keywords"]]
   )
 
   if (is.null(sheet_names)) {

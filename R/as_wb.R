@@ -3,8 +3,9 @@
 #' [as_wb()] converts a data frame or list of data frames to a wbWorkbook
 #' object.
 #'
-#' @param x A data frame or list of data frames. Objects that can be coerced to
-#'   a data frame are not supported.
+#' @param x Typically, a data frame or list of data frames. A wbWorkbook is
+#'   returned as-is ignoring all other parameters. If `type = "any"`, x can also
+#'   be an object that is coercible to a data frame.
 #' @param type Type of objects to allow. "df-list" allows data frames and lists
 #'   of data frames. "df" allows data frames only. "any" allows any input
 #'   (allowing the option for [wb_add_data_ext()] to coerce objects to data
@@ -29,15 +30,18 @@ as_wb <- function(x,
                   datetime_created = Sys.time(),
                   theme = NULL,
                   keywords = NULL,
+                  properties = NULL,
                   type = c("df-list", "df", "any"),
                   call = caller_env()) {
   # If x is a wbWorkbook object, use wb_save_ext to save to file
   # All other arguments except file, path, and overwrite are ignored
   if (inherits(x, "wbWorkbook")) {
-    cli::cli_abort(
-      "{.arg x} must be a data frame or a list of data frames, not a workbook.",
-      call = call
-    )
+    return(x)
+    # cli::cli_abort(
+    #   "{.arg x} must be a data frame or a list of data frames,
+    #   not a workbook.",
+    #   call = call
+    # )
   }
 
   type <- arg_match(type, error_call = call)
@@ -80,7 +84,8 @@ as_wb <- function(x,
     datetime_created = datetime_created,
     theme = theme,
     keywords = keywords,
-    sheet_names = sheet_names
+    sheet_names = sheet_names,
+    properties = properties
   )
 
   # Add data for each named sheet
@@ -97,4 +102,22 @@ as_wb <- function(x,
   }
 
   wb
+}
+
+#' Convert an object to a list of workbooks
+#'
+#' [map_wb()] takes a list and returns a list of wbWorkbook objects.
+#'
+#' @inheritParams as_wb
+#' @inheritDotParams as_wb
+#' @keywords internal
+#' @returns A list of wbWorkbook objects.
+#' @export
+map_wb <- function(x, ...) {
+  purrr::map(
+    x,
+    \(x) {
+      as_wb(x, ...)
+    }
+  )
 }

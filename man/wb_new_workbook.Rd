@@ -14,7 +14,8 @@ wb_new_workbook(
   category = NULL,
   datetime_created = Sys.time(),
   theme = NULL,
-  keywords = NULL
+  keywords = NULL,
+  properties = NULL
 )
 }
 \arguments{
@@ -57,6 +58,11 @@ used if \code{sheet_names = NULL} or if \code{n_sheets} is greater than the leng
 
 \item{theme}{Optional theme identified by string or number.
 See \strong{Details} for options.}
+
+\item{properties}{A named list (typically from
+\code{\link[openxlsx2:properties-wb]{openxlsx2::wb_get_properties()}}) used to set new workbook properties for
+any values set to \code{NULL}. \code{datetime_created} defaults to \code{\link[=Sys.time]{Sys.time()}} so
+must be set to \code{NULL} to inherit value from \code{properties}.}
 }
 \value{
 A \code{wbWorkbook} object.

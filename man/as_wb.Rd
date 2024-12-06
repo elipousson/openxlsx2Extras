@@ -15,13 +15,15 @@ as_wb(
   datetime_created = Sys.time(),
   theme = NULL,
   keywords = NULL,
+  properties = NULL,
   type = c("df-list", "df", "any"),
   call = caller_env()
 )
 }
 \arguments{
-\item{x}{A data frame or list of data frames. Objects that can be coerced to
-a data frame are not supported.}
+\item{x}{Typically, a data frame or list of data frames. A wbWorkbook is
+returned as-is ignoring all other parameters. If \code{type = "any"}, x can also
+be an object that is coercible to a data frame.}
 
 \item{...}{
   Arguments passed on to \code{\link[=wb_add_data_ext]{wb_add_data_ext}}
@@ -59,6 +61,11 @@ existing geometry column (keeping the existing sf column name).}
 
 \item{theme}{Optional theme identified by string or number.
 See \strong{Details} for options.}
+
+\item{properties}{A named list (typically from
+\code{\link[openxlsx2:properties-wb]{openxlsx2::wb_get_properties()}}) used to set new workbook properties for
+any values set to \code{NULL}. \code{datetime_created} defaults to \code{\link[=Sys.time]{Sys.time()}} so
+must be set to \code{NULL} to inherit value from \code{properties}.}
 
 \item{type}{Type of objects to allow. "df-list" allows data frames and lists
 of data frames. "df" allows data frames only. "any" allows any input
