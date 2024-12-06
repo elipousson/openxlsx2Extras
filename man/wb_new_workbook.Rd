@@ -80,3 +80,6 @@ wb_new_workbook("Sheet 1")
 wb_new_workbook(c("Data", "Analysis"))
 
 }
+\seealso{
+\code{\link[=as_wb]{as_wb()}}
+}

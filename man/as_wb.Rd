@@ -22,8 +22,8 @@ as_wb(
 }
 \arguments{
 \item{x}{Typically, a data frame or list of data frames. A wbWorkbook is
-returned as-is ignoring all other parameters. If \code{type = "any"}, x can also
-be an object that is coercible to a data frame.}
+returned "as is" ignoring all other parameters. If \code{type = "any"}, x can
+also be an object that is coercible to a data frame.}
 
 \item{...}{
   Arguments passed on to \code{\link[=wb_add_data_ext]{wb_add_data_ext}}
@@ -82,11 +82,14 @@ mentioned in error messages as the source of the error. See the
 object.
 }
 \examples{
-as_wb(mtcars)
+as_wb(mtcars[1:3,])
 
-as_wb(list(mtcars, mtcars))
+as_wb(list(mtcars[1:3,], mtcars[4:6,]))
 
 }
 \seealso{
-\code{\link[=write_xlsx_ext]{write_xlsx_ext()}}
+\itemize{
+\item \code{\link[=write_xlsx_ext]{write_xlsx_ext()}}
+\item \code{\link[=map_wb]{map_wb()}}
+}
 }

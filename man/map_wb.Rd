@@ -4,12 +4,12 @@
 \alias{map_wb}
 \title{Convert an object to a list of workbooks}
 \usage{
-map_wb(x, ...)
+map_wb(x, ..., .progress = FALSE)
 }
 \arguments{
 \item{x}{Typically, a data frame or list of data frames. A wbWorkbook is
-returned as-is ignoring all other parameters. If \code{type = "any"}, x can also
-be an object that is coercible to a data frame.}
+returned "as is" ignoring all other parameters. If \code{type = "any"}, x can
+also be an object that is coercible to a data frame.}
 
 \item{...}{
   Arguments passed on to \code{\link[=as_wb]{as_wb}}
@@ -34,11 +34,19 @@ running function, e.g. \code{caller_env()}. The function will be
 mentioned in error messages as the source of the error. See the
 \code{call} argument of \code{\link[rlang:abort]{abort()}} for more information.}
   }}
+
+\item{.progress}{Whether to show a progress bar. Use \code{TRUE} to turn on
+a basic progress bar, use a string to give it a name, or see
+\link[purrr]{progress_bars} for more details.}
 }
 \value{
 A list of wbWorkbook objects.
 }
 \description{
-\code{\link[=map_wb]{map_wb()}} takes a list and returns a list of wbWorkbook objects.
+\code{\link[=map_wb]{map_wb()}} takes a list and returns a list of \code{wbWorkbook} objects.
+}
+\examples{
+map_wb(list(mtcars[1:3,], mtcars[4:6,]))
+
 }
 \keyword{internal}
