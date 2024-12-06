@@ -67,6 +67,7 @@ wb_to_df_list <- function(file, sheet_names = NULL, ...) {
 #' sheet of a workbook and then split the data frames by a `.key` argument then
 #' convert each new list of data frames back into a wbWorkbook object.
 #'
+#' @inheritParams wb_to_df_list
 #' @param .key Passed to [dplyr::group_split()].
 #' @inheritDotParams wb_to_df_list
 #' @returns A list of wbWorkbook objects.

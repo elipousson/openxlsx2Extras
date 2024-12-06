@@ -209,7 +209,7 @@ as_sheet_list <- function(x,
 #'
 #' prep_wb_data(list_df, list_columns = "asis")
 #'
-#' if (is_installed("sf")) {
+#' if (rlang::is_installed("sf")) {
 #'   nc <- sf::read_sf(system.file("shape/nc.shp", package = "sf"))
 #'
 #'   prep_wb_data(nc, geometry = "coords")
