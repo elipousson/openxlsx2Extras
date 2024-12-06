@@ -35,7 +35,7 @@ wb_to_df_list <- function(wb, sheet_names = NULL, ...) {
     # frame
     df_list[[nm]] <- suppressMessages(exec(
       .fn = openxlsx2::wb_to_df,
-      wb = wb,
+      file = wb,
       sheet = nm,
       !!!params
     )) %||% data.frame()
