@@ -53,6 +53,7 @@ object.</p>
 <span>  datetime_created <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  theme <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  keywords <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  properties <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"df-list"</span>, <span class="st">"df"</span>, <span class="st">"any"</span><span class="op">)</span>,</span>
 <span>  call <span class="op">=</span> <span class="fu">caller_env</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -63,8 +64,9 @@ object.</p>
 
 
 <dl><dt id="arg-x">x<a class="anchor" aria-label="anchor" href="#arg-x"></a></dt>
-<dd><p>A data frame or list of data frames. Objects that can be coerced to
-a data frame are not supported.</p></dd>
+<dd><p>Typically, a data frame or list of data frames. A wbWorkbook is
+returned as-is ignoring all other parameters. If <code>type = "any"</code>, x can also
+be an object that is coercible to a data frame.</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
@@ -130,6 +132,13 @@ existing geometry column (keeping the existing sf column name).</p></dd>
 <dt id="arg-theme">theme<a class="anchor" aria-label="anchor" href="#arg-theme"></a></dt>
 <dd><p>Optional theme identified by string or number.
 See <strong>Details</strong> for options.</p></dd>
+
+
+<dt id="arg-properties">properties<a class="anchor" aria-label="anchor" href="#arg-properties"></a></dt>
+<dd><p>A named list (typically from
+<code><a href="https://janmarvin.github.io/openxlsx2/reference/properties-wb.html" class="external-link">openxlsx2::wb_get_properties()</a></code>) used to set new workbook properties for
+any values set to <code>NULL</code>. <code>datetime_created</code> defaults to <code><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time()</a></code> so
+must be set to <code>NULL</code> to inherit value from <code>properties</code>.</p></dd>
 
 
 <dt id="arg-type">type<a class="anchor" aria-label="anchor" href="#arg-type"></a></dt>

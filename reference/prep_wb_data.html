@@ -91,6 +91,37 @@ mentioned in error messages as the source of the error. See the
 
 </dl></div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">list_df</span> <span class="op">&lt;-</span> <span class="fu">vctrs</span><span class="fu">::</span><span class="fu"><a href="https://vctrs.r-lib.org/reference/data_frame.html" class="external-link">data_frame</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  num <span class="op">=</span> <span class="fl">1</span>,</span></span>
+<span class="r-in"><span>  alpha <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">prep_wb_data</span><span class="op">(</span><span class="va">list_df</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   num   alpha</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1   1 A; B; C</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">prep_wb_data</span><span class="op">(</span><span class="va">list_df</span>, list_columns <span class="op">=</span> <span class="st">"drop"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   num</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1   1</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">prep_wb_data</span><span class="op">(</span><span class="va">list_df</span>, list_columns <span class="op">=</span> <span class="st">"asis"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   num               alpha</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1   1 list("A", "B", "C")</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu">is_installed</span><span class="op">(</span><span class="st">"sf"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">nc</span> <span class="op">&lt;-</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html" class="external-link">read_sf</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"shape/nc.shp"</span>, package <span class="op">=</span> <span class="st">"sf"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="fu">prep_wb_data</span><span class="op">(</span><span class="va">nc</span>, geometry <span class="op">=</span> <span class="st">"coords"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="fu">prep_wb_data</span><span class="op">(</span><span class="va">nc</span>, geometry <span class="op">=</span> <span class="st">"wkt"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in is_installed("sf"):</span> could not find function "is_installed"</span>
+<span class="r-in"><span></span></span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
 

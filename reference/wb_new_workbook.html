@@ -55,7 +55,8 @@ and easy setup for new workbooks.</p>
 <span>  category <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  datetime_created <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  theme <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  keywords <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  keywords <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  properties <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -133,6 +134,13 @@ used if <code>sheet_names = NULL</code> or if <code>n_sheets</code> is greater t
 <dt id="arg-theme">theme<a class="anchor" aria-label="anchor" href="#arg-theme"></a></dt>
 <dd><p>Optional theme identified by string or number.
 See <strong>Details</strong> for options.</p></dd>
+
+
+<dt id="arg-properties">properties<a class="anchor" aria-label="anchor" href="#arg-properties"></a></dt>
+<dd><p>A named list (typically from
+<code><a href="https://janmarvin.github.io/openxlsx2/reference/properties-wb.html" class="external-link">openxlsx2::wb_get_properties()</a></code>) used to set new workbook properties for
+any values set to <code>NULL</code>. <code>datetime_created</code> defaults to <code><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time()</a></code> so
+must be set to <code>NULL</code> to inherit value from <code>properties</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
