@@ -4,8 +4,8 @@
 #' object.
 #'
 #' @param x Typically, a data frame or list of data frames. A wbWorkbook is
-#'   returned as-is ignoring all other parameters. If `type = "any"`, x can also
-#'   be an object that is coercible to a data frame.
+#'   returned "as is" ignoring all other parameters. If `type = "any"`, x can
+#'   also be an object that is coercible to a data frame.
 #' @param type Type of objects to allow. "df-list" allows data frames and lists
 #'   of data frames. "df" allows data frames only. "any" allows any input
 #'   (allowing the option for [wb_add_data_ext()] to coerce objects to data
@@ -13,11 +13,14 @@
 #' @inheritDotParams wb_add_data_ext -x
 #' @inheritParams wb_new_workbook
 #' @inheritParams rlang::args_error_context
-#' @seealso [write_xlsx_ext()]
-#' @examples
-#' as_wb(mtcars)
+#' @seealso
+#' - [write_xlsx_ext()]
+#' - [map_wb()]
 #'
-#' as_wb(list(mtcars, mtcars))
+#' @examples
+#' as_wb(mtcars[1:3,])
+#'
+#' as_wb(list(mtcars[1:3,], mtcars[4:6,]))
 #'
 #' @export
 as_wb <- function(x,
@@ -35,7 +38,7 @@ as_wb <- function(x,
                   call = caller_env()) {
   # If x is a wbWorkbook object, use wb_save_ext to save to file
   # All other arguments except file, path, and overwrite are ignored
-  if (inherits(x, "wbWorkbook")) {
+  if (is_wb(x)) {
     return(x)
     # cli::cli_abort(
     #   "{.arg x} must be a data frame or a list of data frames,
@@ -46,6 +49,7 @@ as_wb <- function(x,
 
   type <- arg_match(type, error_call = call)
 
+  # Validate data frame inputs
   if (!is.data.frame(x) && (type == "df")) {
     cli::cli_abort(
       "{.arg x} must be a data frame when {.code type = df}.",
@@ -55,17 +59,16 @@ as_wb <- function(x,
 
   bare_list_input <- is_bare_list(x)
 
-  # Put data frame or other non-list object in a bare list
   if (bare_list_input && type != "any") {
     stopifnot(
       all(purrr::map_lgl(x, is.data.frame))
     )
   } else if (!bare_list_input) {
+    # Wrap data frame or other non-list object in a bare list
     x <- list(x)
   }
 
-  # Set names for list (set_sheet_list_names warns if x is named and sheet_names
-  # is supplied)
+  # Set names for list (warns if x is named and sheet_names is supplied)
   sheet_data <- set_sheet_list_names(
     x = x,
     sheet_names = sheet_names,
@@ -106,18 +109,26 @@ as_wb <- function(x,
 
 #' Convert an object to a list of workbooks
 #'
-#' [map_wb()] takes a list and returns a list of wbWorkbook objects.
+#' [map_wb()] takes a list and returns a list of `wbWorkbook` objects.
 #'
 #' @inheritParams as_wb
 #' @inheritDotParams as_wb
+#' @inheritParams purrr::map
 #' @keywords internal
 #' @returns A list of wbWorkbook objects.
+#' @examples
+#' map_wb(list(mtcars[1:3,], mtcars[4:6,]))
+#'
 #' @export
-map_wb <- function(x, ...) {
-  purrr::map(
+map_wb <- function(x, ..., .progress = FALSE) {
+  wb_list <- purrr::map(
     x,
     \(x) {
       as_wb(x, ...)
-    }
+    },
+    .progress = .progress
   )
+
+  wb_list
 }
+

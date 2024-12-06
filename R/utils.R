@@ -295,3 +295,9 @@ prep_wb_data <- function(x,
 
   x
 }
+
+#' Test if object is a wbWorkbook class object
+#' @noRd
+is_wb <- function(x) {
+  inherits(x, "wbWorkbook")
+}
