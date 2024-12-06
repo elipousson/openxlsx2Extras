@@ -120,7 +120,7 @@ write_xlsx_ext <- function(x,
                            call = caller_env()) {
   # If x is a wbWorkbook object, use wb_save_ext to save to file
   # All other arguments except file, path, and overwrite are ignored
-  if (inherits(x, "wbWorkbook")) {
+  if (is_wb(x)) {
     return(wb_save_ext(x, file = file, path = path, overwrite = overwrite))
   }
 
