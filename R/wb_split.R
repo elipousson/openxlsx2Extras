@@ -1,7 +1,8 @@
 #' Convert a workbook to a list of data frames
 #'
 #' [wb_to_df_list()] uses [openxlsx2::wb_to_df()] to extract each sheet of a
-#' workbook object into a data frame.
+#' workbook object into a data frame. Additional parameters `...` are recycled
+#' to match the length of sheet names.
 #'
 #' @inheritParams openxlsx2::wb_to_df
 #' @param sheet_names Character vector of sheet names. If not supplied, all
@@ -9,10 +10,16 @@
 #' @inheritDotParams openxlsx2::wb_to_df
 #' @returns A list of data frame lists.
 #' @export
-wb_to_df_list <- function(wb, ..., sheet_names = NULL) {
-  sheet_names <- sheet_names %||% openxlsx2::wb_get_sheet_names(wb)
-  df_list <- vctrs::vec_init_along(list(), sheet_names)
-  df_list <- set_names(df_list, sheet_names)
+wb_to_df_list <- function(wb, sheet_names = NULL, ...) {
+  # Get sheet names
+  sheet_names <- sheet_names %||%
+    openxlsx2::wb_get_sheet_names(wb)
+
+  # Initialize data frame list
+  df_list <- set_names(
+    vctrs::vec_init_along(list(), sheet_names),
+    sheet_names
+  )
 
   # Recycle parameters to match length of sheet_names
   params <- vctrs::vec_recycle_common(
@@ -21,8 +28,11 @@ wb_to_df_list <- function(wb, ..., sheet_names = NULL) {
     .call = call
   )
 
+  # Use `openxlsx2::wb_to_df` to extract data frames from workbook
   # FIXME: Replace with map
   for (nm in sheet_names) {
+    # TODO: Consider submitting a GH issue for wb_to_df to return an empty data
+    # frame
     df_list[[nm]] <- suppressMessages(exec(
       .fn = openxlsx2::wb_to_df,
       wb = wb,
@@ -74,7 +84,11 @@ wb_split <- function(wb, ..., .key = NULL) {
 
 #' Write a data frame list to a series of Excel files
 #' @noRd
-write_xlsx_split <- function(x, file = NULL, ..., path = getwd(), ext = "xlsx") {
+write_xlsx_split <- function(x,
+                             file = NULL,
+                             ...,
+                             path = getwd(),
+                             ext = "xlsx") {
   # FIXME: Allow workbook and workbook list inputs
   wb_list <- map_wb(x, ...)
 
