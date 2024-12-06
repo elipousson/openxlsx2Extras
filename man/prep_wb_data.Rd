@@ -40,4 +40,26 @@ mentioned in error messages as the source of the error. See the
 \code{\link[=prep_wb_data]{prep_wb_data()}} prepares a data frame for addition to a workbook by handling
 list columns and geometry columns (for sf data frames).
 }
+\examples{
+
+list_df <- vctrs::data_frame(
+  num = 1,
+  alpha = list(list("A", "B", "C"))
+)
+
+prep_wb_data(list_df)
+
+prep_wb_data(list_df, list_columns = "drop")
+
+prep_wb_data(list_df, list_columns = "asis")
+
+if (is_installed("sf")) {
+  nc <- sf::read_sf(system.file("shape/nc.shp", package = "sf"))
+
+  prep_wb_data(nc, geometry = "coords")
+
+  prep_wb_data(nc, geometry = "wkt")
+}
+
+}
 \keyword{utils}

@@ -153,7 +153,7 @@ as_sheet_list <- function(x,
                           repair = "unique",
                           default = "Sheet",
                           call = caller_env()) {
-  if (!inherits(x, "list")) {
+  if (!is_bare_list(x)) {
     x <- list(x)
   }
 
@@ -196,6 +196,27 @@ as_sheet_list <- function(x,
 #'   = "coords"`. Must be length 2 in longitude, latitude order.
 #' @inheritParams rlang::args_error_context
 #' @keywords utils
+#' @examples
+#'
+#' list_df <- vctrs::data_frame(
+#'   num = 1,
+#'   alpha = list(list("A", "B", "C"))
+#' )
+#'
+#' prep_wb_data(list_df)
+#'
+#' prep_wb_data(list_df, list_columns = "drop")
+#'
+#' prep_wb_data(list_df, list_columns = "asis")
+#'
+#' if (is_installed("sf")) {
+#'   nc <- sf::read_sf(system.file("shape/nc.shp", package = "sf"))
+#'
+#'   prep_wb_data(nc, geometry = "coords")
+#'
+#'   prep_wb_data(nc, geometry = "wkt")
+#' }
+#'
 #' @export
 #' @importFrom purrr map_chr list_cbind
 prep_wb_data <- function(x,
@@ -225,24 +246,24 @@ prep_wb_data <- function(x,
     geometry <- arg_match(geometry, error_call = call)
     check_installed("sf", call = call)
     if (geometry == "drop") {
+      # Drop geometry
       # FIXME: Dropping geometry does not require the sf package
       x <- sf::st_drop_geometry(x)
     } else if (geometry == "coords") {
-      check_installed("sf", call = call)
+      # Get centroid coordinates
       pts <- suppressWarnings(sf::st_transform(sf::st_centroid(x), 4326))
       pts <- sf::st_coordinates(pts)[, c("X", "Y")]
       coords <- set_names(as.data.frame(pts), coords)
+
+      # Bind coordinate columns to feature data
       x <- purrr::list_cbind(list(sf::st_drop_geometry(x), coords))
     } else if (geometry == "wkt") {
+      # Get well-known text for geometry
       wkt <- as.data.frame(sf::st_as_text(sf::st_geometry(x)))
       wkt <- set_names(wkt, attr(x, "sf_column"))
 
-      x <- purrr::list_cbind(
-        list(
-          sf::st_drop_geometry(x),
-          wkt
-        )
-      )
+      # Bind wkt text column to feature data
+      x <- purrr::list_cbind(list(sf::st_drop_geometry(x), wkt))
     }
 
     # Check again (since geometry column) is a list column
@@ -263,12 +284,12 @@ prep_wb_data <- function(x,
         )
       }
     } else if (list_columns == "drop") {
+      # Remove list columns
       x[is_list_col] <- NULL
     } else {
       for (nm in names(x)[is_list_col]) {
         x[[nm]] <- paste0(x[[nm]])
-    }
-
+      }
     }
   }
 
