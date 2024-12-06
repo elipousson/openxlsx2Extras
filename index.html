@@ -51,7 +51,9 @@
 </h1></div>
 <!-- badges: start -->
 
-<p>The goal of openxlsx2Extras is to extend the functionality of the {openxlsx2} R package.</p>
+<!-- badges: end -->
+<p>The goal of openxlsx2Extras is to extend the functionality of the <a href="https://github.com/JanMarvin/openxlsx2" class="external-link">{openxlsx2} R package</a>.</p>
+<p>This package is <em>very</em> early stages so expect things to change and break as I learn more about {openxlsx2} and figure out the appropriate design for this package.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
@@ -62,21 +64,69 @@
 <div class="section level2">
 <h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
 </h2>
-<p>This is a basic example which shows how to use <code><a href="reference/wb_save_ext.html">wb_save_ext()</a></code> to set a filename based on the workbook title:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://janmarvin.github.io/openxlsx2/" class="external-link">openxlsx2</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/elipousson/openxlsx2Extras" class="external-link">openxlsx2Extras</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/elipousson/openxlsx2Extras" class="external-link">openxlsx2Extras</a></span><span class="op">)</span></span></code></pre></div>
+<p>As of December 2024, the main types of functions in <a href="https://github.com/elipousson/openxlsx2Extras" class="external-link">openxlsx2Extras</a> include:</p>
+<ul>
+<li>Wrapper functions for existing <a href="https://janmarvin.github.io/openxlsx2/" class="external-link">openxlsx2</a> functions that add some extra features, e.g. <code><a href="reference/wb_save_ext.html">wb_save_ext()</a></code> wraps <code><a href="https://janmarvin.github.io/openxlsx2/reference/wb_save.html" class="external-link">openxlsx2::wb_save()</a></code>
+</li>
+<li>Convenience functions for multiple <a href="https://janmarvin.github.io/openxlsx2/" class="external-link">openxlsx2</a> for convenience and more concise code, e.g. <code><a href="reference/wb_new_workbook.html">openxlsx2Extras::wb_new_workbook()</a></code> combines <code><a href="https://janmarvin.github.io/openxlsx2/reference/wb_workbook.html" class="external-link">openxlsx2::wb_workbook()</a></code> and <code><a href="https://janmarvin.github.io/openxlsx2/reference/wb_add_worksheet.html" class="external-link">openxlsx2::wb_add_worksheet()</a></code>
+</li>
+<li>Other functions that support Markdown formatted text (<code><a href="reference/wb_add_marquee_text.html">wb_add_marquee_text()</a></code>), lists of workbooks (<code><a href="reference/map_wb.html">map_wb()</a></code>), lists of data frames (<code>wb_as_df_list()</code>), and coercion of more kinds of objects into spreadsheet-friendly formats (<code><a href="reference/prep_wb_data.html">prep_wb_data()</a></code>)</li>
+</ul>
+<p>For example, <code><a href="reference/wb_save_ext.html">wb_save_ext()</a></code> allows users to set a filename based on the workbook title:</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">wb</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://janmarvin.github.io/openxlsx2/reference/wb_workbook.html" class="external-link">wb_workbook</a></span><span class="op">(</span></span>
+<span>    title <span class="op">=</span> <span class="st">"Title used for output file"</span></span>
+<span>  <span class="op">)</span></span>
+<span></span>
+<span><span class="va">wb</span> <span class="op">&lt;-</span> <span class="va">wb</span><span class="op">$</span><span class="fu">add_worksheet</span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">withr</span><span class="fu">::</span><span class="fu"><a href="https://withr.r-lib.org/reference/with_tempfile.html" class="external-link">with_tempdir</a></span><span class="op">(</span><span class="op">{</span></span>
-<span>  <span class="fu"><a href="https://janmarvin.github.io/openxlsx2/reference/wb_workbook.html" class="external-link">wb_workbook</a></span><span class="op">(</span></span>
-<span>    title <span class="op">=</span> <span class="st">"Title used for output file"</span></span>
-<span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>    <span class="fu"><a href="https://janmarvin.github.io/openxlsx2/reference/wb_add_worksheet.html" class="external-link">wb_add_worksheet</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>    <span class="fu"><a href="reference/wb_save_ext.html">wb_save_ext</a></span><span class="op">(</span><span class="op">)</span></span>
-<span></span>
+<span>  <span class="fu"><a href="reference/wb_save_ext.html">wb_save_ext</a></span><span class="op">(</span><span class="va">wb</span><span class="op">)</span></span>
 <span>  <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/dir_ls.html" class="external-link">dir_ls</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Title used for output file.xlsx</span></span></code></pre></div>
+<p><code><a href="reference/wb_new_workbook.html">wb_new_workbook()</a></code> supports creating multiple worksheets in a single function call (recycling additional arguments like <code>tab_color</code> to match the length of <code>sheet_names</code>):</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/wb_new_workbook.html">wb_new_workbook</a></span><span class="op">(</span></span>
+<span>  title <span class="op">=</span> <span class="st">"Workbook created with wb_new_workbook"</span>,</span>
+<span>  sheet_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"First sheet"</span>, <span class="st">"Second sheet"</span><span class="op">)</span>,</span>
+<span>  tab_color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://janmarvin.github.io/openxlsx2/reference/wb_color.html" class="external-link">wb_color</a></span><span class="op">(</span><span class="st">"orange"</span><span class="op">)</span>, <span class="fu"><a href="https://janmarvin.github.io/openxlsx2/reference/wb_color.html" class="external-link">wb_color</a></span><span class="op">(</span><span class="st">"yellow"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; A Workbook object.</span></span>
+<span><span class="co">#&gt;  </span></span>
+<span><span class="co">#&gt; Worksheets:</span></span>
+<span><span class="co">#&gt;  Sheets: First sheet, Second sheet </span></span>
+<span><span class="co">#&gt;  Write order: 1, 2</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="related-projects">Related Projects<a class="anchor" aria-label="anchor" href="#related-projects"></a>
+</h2>
+<p>Packages extending <a href="https://github.com/ycphs/openxlsx" class="external-link">openxlsx</a></p>
+<ul>
+<li><p><code>tablexlsx</code> <a href="https://github.com/ddotta/tablexlsx" class="external-link">ddotta/tablexlsx</a></p></li>
+<li><p><code>a11ytables</code> <a href="https://github.com/co-analysis/a11ytables" class="external-link uri">co-analysis/a11ytables</a>: generate best-practice stats spreadsheets for publication</p></li>
+<li><p><code>gtopenxlsx</code> <a href="https://github.com/yannsay/gtopenxlsx" class="external-link">yannsay/gtopenxlsx</a>: tables to xlsx format through openxlsx</p></li>
+</ul>
+<p>Packages extending <a href="https://github.com/JanMarvin/openxlsx2" class="external-link">openxlsx2</a></p>
+<ul>
+<li><p><code>flexlsx</code>: <a href="https://github.com/pteridin/flexlsx" class="external-link">pteridin/flexlsx</a> add flextables to Excel files</p></li>
+<li><p><code>a11ytables2</code>: <a href="https://github.com/matt-dray/a11ytables2" class="external-link">matt-dray/a11ytables2</a>: generate best-practice stats spreadsheets for publication</p></li>
+</ul>
+<p>Packages extending <a href="https://readxl.tidyverse.org" class="external-link">readxl</a></p>
+<ul>
+<li>
+<code>forgts</code> <a href="https://github.com/luisDVA/forgts" class="external-link uri">luisDVA/forgts</a>: reads a spreadsheet and its formatting information to produce gt tables with the same cell and text formatting as the input file.</li>
+</ul>
+<p>Packages for working with Microsoft Office files</p>
+<ul>
+<li>
+<code>officer</code> <a href="https://github.com/davidgohel/officer/" class="external-link uri">davidgohel/officer</a>: office documents from R</li>
+<li>
+<code>officerExtras</code> <a href="https://github.com/elipousson/officerExtras" class="external-link uri">elipousson/officerExtras</a>: A R package with {officer} helper functions.</li>
+</ul>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">
