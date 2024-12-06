@@ -72,7 +72,7 @@ wb_to_df_list <- function(file, sheet_names = NULL, ...) {
 #' @returns A list of wbWorkbook objects.
 #' @examples
 #'
-#' wb <- as_wb(list(mtcars, mtcars))
+#' wb <- as_wb(list(mtcars[1:3,], mtcars[4:6,]))
 #'
 #' wb_split(wb, .key = carb)
 #'

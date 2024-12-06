@@ -14,6 +14,7 @@
 #'   must be set to `NULL` to inherit value from `properties`.
 #' @inheritDotParams openxlsx2::wb_add_worksheet -sheet -wb
 #' @inheritParams openxlsx2::wb_workbook
+#' @seealso [as_wb()]
 #' @examples
 #' wb_new_workbook()
 #'
