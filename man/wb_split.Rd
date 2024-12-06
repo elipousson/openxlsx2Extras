@@ -4,7 +4,7 @@
 \alias{wb_split}
 \title{Use \code{dplyr::group_split} to split a workbook into a list of workbooks}
 \usage{
-wb_split(wb, ..., .key = NULL)
+wb_split(file, ..., .key = NULL)
 }
 \arguments{
 \item{...}{
@@ -12,6 +12,7 @@ wb_split(wb, ..., .key = NULL)
   \describe{
     \item{\code{sheet_names}}{Character vector of sheet names. If not supplied, all
 sheet names from the supplied workbook are used.}
+    \item{\code{file}}{An xlsx file, \link[openxlsx2]{wbWorkbook} object or URL to xlsx file.}
   }}
 
 \item{.key}{Passed to \code{\link[dplyr:group_split]{dplyr::group_split()}}.}
@@ -21,7 +22,8 @@ A list of wbWorkbook objects.
 }
 \description{
 \code{\link[=wb_split]{wb_split()}} uses \code{\link[=wb_to_df_list]{wb_to_df_list()}} to extract the data frames from each
-sheet of a workbook and then split the
+sheet of a workbook and then split the data frames by a \code{.key} argument then
+convert each new list of data frames back into a wbWorkbook object.
 }
 \examples{
 
@@ -30,4 +32,3 @@ wb <- as_wb(list(mtcars, mtcars))
 wb_split(wb, .key = carb)
 
 }
-\keyword{internal}

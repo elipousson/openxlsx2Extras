@@ -4,16 +4,17 @@
 \alias{wb_to_df_list}
 \title{Convert a workbook to a list of data frames}
 \usage{
-wb_to_df_list(wb, sheet_names = NULL, ...)
+wb_to_df_list(file, sheet_names = NULL, ...)
 }
 \arguments{
+\item{file}{An xlsx file, \link[openxlsx2]{wbWorkbook} object or URL to xlsx file.}
+
 \item{sheet_names}{Character vector of sheet names. If not supplied, all
 sheet names from the supplied workbook are used.}
 
 \item{...}{
   Arguments passed on to \code{\link[openxlsx2:wb_to_df]{openxlsx2::wb_to_df}}
   \describe{
-    \item{\code{file}}{An xlsx file, \link[openxlsx2]{wbWorkbook} object or URL to xlsx file.}
     \item{\code{sheet}}{Either sheet name or index. When missing the first sheet in the workbook is selected.}
     \item{\code{start_row}}{first row to begin looking for data.}
     \item{\code{start_col}}{first column to begin looking for data.}
@@ -53,4 +54,12 @@ A list of data frame lists.
 \code{\link[=wb_to_df_list]{wb_to_df_list()}} uses \code{\link[openxlsx2:wb_to_df]{openxlsx2::wb_to_df()}} to extract each sheet of a
 workbook object into a data frame. Additional parameters \code{...} are recycled
 to match the length of sheet names.
+}
+\examples{
+wb <- as_wb(list(mtcars[1:3,], mtcars[4:6,]))
+
+wb_to_df_list(wb)
+
+wb_to_df_list(wb, "Sheet 1")
+
 }

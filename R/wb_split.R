@@ -9,8 +9,22 @@
 #'   sheet names from the supplied workbook are used.
 #' @inheritDotParams openxlsx2::wb_to_df
 #' @returns A list of data frame lists.
+#' @examples
+#' wb <- as_wb(list(mtcars[1:3,], mtcars[4:6,]))
+#'
+#' wb_to_df_list(wb)
+#'
+#' wb_to_df_list(wb, "Sheet 1")
+#'
 #' @export
-wb_to_df_list <- function(wb, sheet_names = NULL, ...) {
+wb_to_df_list <- function(file, sheet_names = NULL, ...) {
+
+  # Allow file inputs for consistency w/ `openxlsx2::wb_to_df`
+  wb <- file
+  if (!is_wb(wb)) {
+    wb <- openxlsx2::wb_load(wb)
+  }
+
   # Get sheet names
   sheet_names <- sheet_names %||%
     openxlsx2::wb_get_sheet_names(wb)
@@ -30,14 +44,17 @@ wb_to_df_list <- function(wb, sheet_names = NULL, ...) {
 
   # Use `openxlsx2::wb_to_df` to extract data frames from workbook
   # FIXME: Replace with map
-  for (nm in sheet_names) {
+  for (i in seq_along(sheet_names)) {
     # TODO: Consider submitting a GH issue for wb_to_df to return an empty data
     # frame
-    df_list[[nm]] <- suppressMessages(exec(
+    sheet_name <- sheet_names[[i]]
+    df_params <- purrr::map(params, \(x) {x[i]})
+
+    df_list[[sheet_name]] <- suppressMessages(exec(
       .fn = openxlsx2::wb_to_df,
       file = wb,
-      sheet = nm,
-      !!!params
+      sheet = sheet_name,
+      !!!df_params
     )) %||% data.frame()
   }
 
@@ -47,7 +64,8 @@ wb_to_df_list <- function(wb, sheet_names = NULL, ...) {
 #' Use `dplyr::group_split` to split a workbook into a list of workbooks
 #'
 #' [wb_split()] uses [wb_to_df_list()] to extract the data frames from each
-#' sheet of a workbook and then split the
+#' sheet of a workbook and then split the data frames by a `.key` argument then
+#' convert each new list of data frames back into a wbWorkbook object.
 #'
 #' @param .key Passed to [dplyr::group_split()].
 #' @inheritDotParams wb_to_df_list
@@ -58,13 +76,12 @@ wb_to_df_list <- function(wb, sheet_names = NULL, ...) {
 #'
 #' wb_split(wb, .key = carb)
 #'
-#' @keywords internal
 #' @export
-wb_split <- function(wb, ..., .key = NULL) {
+wb_split <- function(file, ..., .key = NULL) {
   # TODO: Implement w/ vctrs to avoid dplyr dependency
   check_installed("dplyr")
 
-  df_list <- wb_to_df_list(wb, ...)
+  df_list <- wb_to_df_list(file, ...)
 
   df_list <- purrr::map(
     df_list,
