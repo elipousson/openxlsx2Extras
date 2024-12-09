@@ -10,7 +10,7 @@
 #' @inheritDotParams openxlsx2::wb_to_df
 #' @returns A list of data frame lists.
 #' @examples
-#' wb <- as_wb(list(mtcars[1:3,], mtcars[4:6,]))
+#' wb <- as_wb(list(mtcars[1:3, ], mtcars[4:6, ]))
 #'
 #' wb_to_df_list(wb)
 #'
@@ -18,7 +18,6 @@
 #'
 #' @export
 wb_to_df_list <- function(file, sheet_names = NULL, ...) {
-
   # Allow file inputs for consistency w/ `openxlsx2::wb_to_df`
   wb <- file
   if (!is_wb(wb)) {
@@ -48,7 +47,9 @@ wb_to_df_list <- function(file, sheet_names = NULL, ...) {
     # TODO: Consider submitting a GH issue for wb_to_df to return an empty data
     # frame
     sheet_name <- sheet_names[[i]]
-    df_params <- purrr::map(params, \(x) {x[i]})
+    df_params <- purrr::map(params, \(x) {
+      x[i]
+    })
 
     df_list[[sheet_name]] <- suppressMessages(exec(
       .fn = openxlsx2::wb_to_df,
@@ -73,7 +74,7 @@ wb_to_df_list <- function(file, sheet_names = NULL, ...) {
 #' @returns A list of wbWorkbook objects.
 #' @examples
 #'
-#' wb <- as_wb(list(mtcars[1:3,], mtcars[4:6,]))
+#' wb <- as_wb(list(mtcars[1:3, ], mtcars[4:6, ]))
 #'
 #' wb_split(wb, .key = carb)
 #'
