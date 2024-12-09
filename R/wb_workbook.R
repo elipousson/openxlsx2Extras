@@ -14,6 +14,7 @@
 #'   must be set to `NULL` to inherit value from `properties`.
 #' @inheritDotParams openxlsx2::wb_add_worksheet -sheet -wb
 #' @inheritParams openxlsx2::wb_workbook
+#' @inheritParams rlang::args_error_context
 #' @seealso [as_wb()]
 #' @examples
 #' wb_new_workbook()
@@ -35,7 +36,8 @@ wb_new_workbook <- function(
     datetime_created = Sys.time(),
     theme = NULL,
     keywords = NULL,
-    properties = NULL) {
+    properties = NULL,
+    call = caller_env()) {
   wb <- openxlsx2::wb_workbook(
     title = title %||% properties[["subject"]],
     subject = subject %||% properties[["subject"]],
