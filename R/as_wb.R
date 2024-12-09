@@ -38,21 +38,6 @@ as_wb <- function(x,
   # All other arguments except file, path, and overwrite are ignored
   if (is_wb(x)) {
     return(x)
-    # cli::cli_abort(
-    #   "{.arg x} must be a data frame or a list of data frames,
-    #   not a workbook.",
-    #   call = call
-    # )
-  }
-
-  type <- arg_match(type, error_call = call)
-
-  # Validate data frame inputs
-  if (!is.data.frame(x) && (type == "df")) {
-    cli::cli_abort(
-      "{.arg x} must be a data frame when {.code type = df}.",
-      call = call
-    )
   }
 
   if (is.character(x) && has_length(x, 1) && fs::file_exists(x)) {
@@ -60,14 +45,19 @@ as_wb <- function(x,
   }
 
   if (!is_bare_list(x)) {
+    warn_coercion <- !is.data.frame(x)
+    message <- c("!" = "{.arg x} is not a data frame.")
+
     # Wrap data frame or other non-list object in a bare list
     x <- list(x)
+  } else {
+    warn_coercion <- !all(purrr::map_lgl(x, is.data.frame))
+    message <- c("!" = "{.arg x} is a list containing non-data frame elements.")
   }
 
-  # TODO: Check for data frames or coercibility to data frame
-  # stopifnot(
-  #   all(purrr::map_lgl(x, is.data.frame))
-  # )
+  if (warn_coercion) {
+    cli::cli_bullets(message)
+  }
 
   # Set names for list (warns if x is named and sheet_names is supplied)
   sheet_data <- set_sheet_list_names(
@@ -89,18 +79,37 @@ as_wb <- function(x,
     theme = theme,
     keywords = keywords,
     sheet_names = sheet_names,
-    properties = properties
+    properties = properties,
+    call = call
+  )
+
+  # TODO: Add support for .params argument to pass list of options for each
+  # sheet
+  params <- vctrs::vec_recycle_common(
+    ...,
+    .size = length(sheet_names),
+    .call = call
   )
 
   # Add data for each named sheet
-  for (nm in sheet_names) {
-    # TODO: Add support for recycling parameters
-    # See wb_new_workbook for an example of how to do this
-    wb <- wb_add_data_ext(
+  # FIXME: There must be a more performant way to handle this
+  for (i in seq_along(sheet_names)) {
+    sheet_params <- purrr::map(
+      params,
+      \(x) {
+        vctrs::vec_slice(
+          x,
+          i = i
+        )
+      }
+    )
+
+    wb <- rlang::exec(
+      wb_add_data_ext,
       wb = wb,
-      x = sheet_data[[nm]],
-      sheet = nm,
-      ...,
+      x = sheet_data[[i]],
+      sheet = sheet_names[[i]],
+      !!!sheet_params,
       call = call
     )
   }

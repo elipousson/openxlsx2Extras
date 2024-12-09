@@ -18,8 +18,8 @@ write_xlsx_ext(
   keywords = NULL,
   as_table = FALSE,
   start_row = 1,
-  geometry = c("drop", "coords", "wkt"),
-  labels = c("drop", "row_before"),
+  geometry = "drop",
+  labels = "drop",
   path = NULL,
   overwrite = TRUE,
   call = caller_env()
