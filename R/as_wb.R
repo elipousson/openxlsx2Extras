@@ -1,15 +1,12 @@
 #' Coerce a data frame or list of data frames to a workbook
 #'
-#' [as_wb()] converts a data frame or list of data frames to a wbWorkbook
-#' object.
+#' [as_wb()] converts a data frame, a list of data frames, or an Excel file path
+#' to a wbWorkbook object.
 #'
-#' @param x Typically, a data frame or list of data frames. A wbWorkbook is
-#'   returned "as is" ignoring all other parameters. If `type = "any"`, x can
-#'   also be an object that is coercible to a data frame.
-#' @param type Type of objects to allow. "df-list" allows data frames and lists
-#'   of data frames. "df" allows data frames only. "any" allows any input
-#'   (allowing the option for [wb_add_data_ext()] to coerce objects to data
-#'   frames).
+#' @param x A data frame, a list of data frames, a file path for an Excel file,
+#'   or a `wbWorkbook` object. A `wbWorkbook` is returned "as is" ignoring all
+#'   other parameters. A file path is loaded to a data frame using
+#'   [openxlsx2::wb_to_df()].
 #' @inheritDotParams wb_add_data_ext -x
 #' @inheritParams wb_new_workbook
 #' @inheritParams rlang::args_error_context
@@ -18,11 +15,13 @@
 #' - [map_wb()]
 #'
 #' @examples
-#' as_wb(mtcars[1:3,])
+#' as_wb(mtcars[1:3, ])
 #'
-#' as_wb(list(mtcars[1:3,], mtcars[4:6,]))
+#' as_wb(list(mtcars[1:3, ], mtcars[4:6, ]))
 #'
 #' @export
+#' @importFrom fs file_exists
+#' @importFrom openxlsx2 wb_to_df
 as_wb <- function(x,
                   ...,
                   sheet_names = NULL,
@@ -34,7 +33,6 @@ as_wb <- function(x,
                   theme = NULL,
                   keywords = NULL,
                   properties = NULL,
-                  type = c("df-list", "df", "any"),
                   call = caller_env()) {
   # If x is a wbWorkbook object, use wb_save_ext to save to file
   # All other arguments except file, path, and overwrite are ignored
@@ -57,16 +55,19 @@ as_wb <- function(x,
     )
   }
 
-  bare_list_input <- is_bare_list(x)
+  if (is.character(x) && has_length(x, 1) && fs::file_exists(x)) {
+    x <- openxlsx2::wb_to_df(x)
+  }
 
-  if (bare_list_input && type != "any") {
-    stopifnot(
-      all(purrr::map_lgl(x, is.data.frame))
-    )
-  } else if (!bare_list_input) {
+  if (!is_bare_list(x)) {
     # Wrap data frame or other non-list object in a bare list
     x <- list(x)
   }
+
+  # TODO: Check for data frames or coercibility to data frame
+  # stopifnot(
+  #   all(purrr::map_lgl(x, is.data.frame))
+  # )
 
   # Set names for list (warns if x is named and sheet_names is supplied)
   sheet_data <- set_sheet_list_names(
@@ -117,7 +118,7 @@ as_wb <- function(x,
 #' @keywords internal
 #' @returns A list of wbWorkbook objects.
 #' @examples
-#' map_wb(list(mtcars[1:3,], mtcars[4:6,]))
+#' map_wb(list(mtcars[1:3, ], mtcars[4:6, ]))
 #'
 #' @export
 map_wb <- function(x, ..., .progress = FALSE) {
@@ -131,4 +132,3 @@ map_wb <- function(x, ..., .progress = FALSE) {
 
   wb_list
 }
-

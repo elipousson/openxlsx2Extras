@@ -141,8 +141,7 @@ write_xlsx_ext <- function(x,
     start_row = start_row,
     geometry = geometry,
     labels = labels,
-    call = call,
-    type = "any"
+    call = call
   )
 
   # Save workbook to file
