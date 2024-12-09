@@ -47,19 +47,14 @@
 
 
 <dl><dt id="arg-x">x<a class="anchor" aria-label="anchor" href="#arg-x"></a></dt>
-<dd><p>Typically, a data frame or list of data frames. A wbWorkbook is
-returned "as is" ignoring all other parameters. If <code>type = "any"</code>, x can
-also be an object that is coercible to a data frame.</p></dd>
+<dd><p>A data frame, a list of data frames, a file path for an Excel file,
+or a <code>wbWorkbook</code> object. A <code>wbWorkbook</code> is returned "as is" ignoring all
+other parameters. A file path is loaded to a data frame using
+<code><a href="https://janmarvin.github.io/openxlsx2/reference/wb_to_df.html" class="external-link">openxlsx2::wb_to_df()</a></code>.</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>Arguments passed on to <code><a href="as_wb.html">as_wb</a></code></p><dl><dt><code>type</code></dt>
-<dd><p>Type of objects to allow. "df-list" allows data frames and lists
-of data frames. "df" allows data frames only. "any" allows any input
-(allowing the option for <code><a href="wb_add_data_ext.html">wb_add_data_ext()</a></code> to coerce objects to data
-frames).</p></dd>
-
-    <dt><code>sheet_names</code></dt>
+<dd><p>Arguments passed on to <code><a href="as_wb.html">as_wb</a></code></p><dl><dt><code>sheet_names</code></dt>
 <dd><p>Optional character vector of worksheet names.</p></dd>
 
     <dt><code>title,subject,category,keywords</code></dt>
@@ -105,7 +100,7 @@ a basic progress bar, use a string to give it a name, or see
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">map_wb</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>,<span class="op">]</span>, <span class="va">mtcars</span><span class="op">[</span><span class="fl">4</span><span class="op">:</span><span class="fl">6</span>,<span class="op">]</span><span class="op">)</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">map_wb</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, <span class="op">]</span>, <span class="va">mtcars</span><span class="op">[</span><span class="fl">4</span><span class="op">:</span><span class="fl">6</span>, <span class="op">]</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> A Workbook object.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  </span>
