@@ -52,8 +52,8 @@ workbook title:
 
 ``` r
 wb <- wb_workbook(
-    title = "Title used for output file"
-  )
+  title = "Title used for output file"
+)
 
 wb <- wb$add_worksheet()
 
@@ -85,36 +85,33 @@ wb_new_workbook(
 
 Packages extending [openxlsx](https://github.com/ycphs/openxlsx)
 
-- `tablexlsx` [ddotta/tablexlsx](https://github.com/ddotta/tablexlsx)
-
-- `a11ytables` <a href="https://github.com/co-analysis/a11ytables"
+- `{tablexlsx}` [ddotta/tablexlsx](https://github.com/ddotta/tablexlsx)
+- `{a11ytables}` <a href="https://github.com/co-analysis/a11ytables"
   class="uri">co-analysis/a11ytables</a>: generate best-practice stats
   spreadsheets for publication
-
-- `gtopenxlsx`
+- `{gtopenxlsx}`
   [yannsay/gtopenxlsx](https://github.com/yannsay/gtopenxlsx): tables to
   xlsx format through openxlsx
 
 Packages extending [openxlsx2](https://github.com/JanMarvin/openxlsx2)
 
-- `flexlsx`: [pteridin/flexlsx](https://github.com/pteridin/flexlsx) add
-  flextables to Excel files
-
-- `a11ytables2`:
+- `{flexlsx}`: [pteridin/flexlsx](https://github.com/pteridin/flexlsx)
+  add flextables to Excel files
+- `{a11ytables2}`:
   [matt-dray/a11ytables2](https://github.com/matt-dray/a11ytables2):
   generate best-practice stats spreadsheets for publication
 
 Packages extending [readxl](https://readxl.tidyverse.org)
 
-- `forgts` <a href="https://github.com/luisDVA/forgts"
-  class="uri">luisDVA/forgts</a>: reads a spreadsheet and its formatting
-  information to produce gt tables with the same cell and text
-  formatting as the input file.
+- `{forgts}` [luisDVA/forgts](https://github.com/luisDVA/forgts)}: reads
+  a spreadsheet and its formatting information to produce gt tables with
+  the same cell and text formatting as the input file.
 
 Packages for working with Microsoft Office files
 
-- `officer` <a href="https://github.com/davidgohel/officer/"
-  class="uri">davidgohel/officer</a>: office documents from R
-- `officerExtras` <a href="https://github.com/elipousson/officerExtras"
-  class="uri">elipousson/officerExtras</a>: A R package with {officer}
-  helper functions.
+- `{officer}`
+  [davidgohel/officer](https://github.com/davidgohel/officer/): office
+  documents from R
+- `{officerExtras}`
+  [elipousson/officerExtras](https://github.com/elipousson/officerExtras):
+  A R package with {officer} helper functions.

@@ -50,8 +50,8 @@ For example, `wb_save_ext()` allows users to set a filename based on the workboo
 
 ```{r}
 wb <- wb_workbook(
-    title = "Title used for output file"
-  )
+  title = "Title used for output file"
+)
 
 wb <- wb$add_worksheet()
 
@@ -75,23 +75,20 @@ wb_new_workbook(
 
 Packages extending [openxlsx](https://github.com/ycphs/openxlsx)
 
--   `tablexlsx` [ddotta/tablexlsx](https://github.com/ddotta/tablexlsx)
-
--   `a11ytables` [co-analysis/a11ytables](https://github.com/co-analysis/a11ytables){.uri}: generate best-practice stats spreadsheets for publication
-
--   `gtopenxlsx` [yannsay/gtopenxlsx](https://github.com/yannsay/gtopenxlsx): tables to xlsx format through openxlsx
+-   `{tablexlsx}` [ddotta/tablexlsx](https://github.com/ddotta/tablexlsx)
+-   `{a11ytables}` [co-analysis/a11ytables](https://github.com/co-analysis/a11ytables){.uri}: generate best-practice stats spreadsheets for publication
+-   `{gtopenxlsx}` [yannsay/gtopenxlsx](https://github.com/yannsay/gtopenxlsx): tables to xlsx format through openxlsx
 
 Packages extending [openxlsx2](https://github.com/JanMarvin/openxlsx2)
 
--   `flexlsx`: [pteridin/flexlsx](https://github.com/pteridin/flexlsx) add flextables to Excel files
-
--   `a11ytables2`: [matt-dray/a11ytables2](https://github.com/matt-dray/a11ytables2): generate best-practice stats spreadsheets for publication
+-   `{flexlsx}`: [pteridin/flexlsx](https://github.com/pteridin/flexlsx) add flextables to Excel files
+-   `{a11ytables2}`: [matt-dray/a11ytables2](https://github.com/matt-dray/a11ytables2): generate best-practice stats spreadsheets for publication
 
 Packages extending [readxl](https://readxl.tidyverse.org)
 
--   `forgts` [luisDVA/forgts](https://github.com/luisDVA/forgts){.uri}: reads a spreadsheet and its formatting information to produce gt tables with the same cell and text formatting as the input file.
+-   `{forgts}` [luisDVA/forgts](https://github.com/luisDVA/forgts)}: reads a spreadsheet and its formatting information to produce gt tables with the same cell and text formatting as the input file.
 
 Packages for working with Microsoft Office files
 
--   `officer` [davidgohel/officer](https://github.com/davidgohel/officer/){.uri}: office documents from R
--   `officerExtras` [elipousson/officerExtras](https://github.com/elipousson/officerExtras){.uri}: A R package with {officer} helper functions.
+-   `{officer}` [davidgohel/officer](https://github.com/davidgohel/officer/): office documents from R
+-   `{officerExtras}` [elipousson/officerExtras](https://github.com/elipousson/officerExtras): A R package with {officer} helper functions.
