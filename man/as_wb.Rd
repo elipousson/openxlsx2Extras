@@ -16,14 +16,14 @@ as_wb(
   theme = NULL,
   keywords = NULL,
   properties = NULL,
-  type = c("df-list", "df", "any"),
   call = caller_env()
 )
 }
 \arguments{
-\item{x}{Typically, a data frame or list of data frames. A wbWorkbook is
-returned "as is" ignoring all other parameters. If \code{type = "any"}, x can
-also be an object that is coercible to a data frame.}
+\item{x}{A data frame, a list of data frames, a file path for an Excel file,
+or a \code{wbWorkbook} object. A \code{wbWorkbook} is returned "as is" ignoring all
+other parameters. A file path is loaded to a data frame using
+\code{\link[openxlsx2:wb_to_df]{openxlsx2::wb_to_df()}}.}
 
 \item{...}{
   Arguments passed on to \code{\link[=wb_add_data_ext]{wb_add_data_ext}}
@@ -67,24 +67,19 @@ See \strong{Details} for options.}
 any values set to \code{NULL}. \code{datetime_created} defaults to \code{\link[=Sys.time]{Sys.time()}} so
 must be set to \code{NULL} to inherit value from \code{properties}.}
 
-\item{type}{Type of objects to allow. "df-list" allows data frames and lists
-of data frames. "df" allows data frames only. "any" allows any input
-(allowing the option for \code{\link[=wb_add_data_ext]{wb_add_data_ext()}} to coerce objects to data
-frames).}
-
 \item{call}{The execution environment of a currently
 running function, e.g. \code{caller_env()}. The function will be
 mentioned in error messages as the source of the error. See the
 \code{call} argument of \code{\link[rlang:abort]{abort()}} for more information.}
 }
 \description{
-\code{\link[=as_wb]{as_wb()}} converts a data frame or list of data frames to a wbWorkbook
-object.
+\code{\link[=as_wb]{as_wb()}} converts a data frame, a list of data frames, or an Excel file path
+to a wbWorkbook object.
 }
 \examples{
-as_wb(mtcars[1:3,])
+as_wb(mtcars[1:3, ])
 
-as_wb(list(mtcars[1:3,], mtcars[4:6,]))
+as_wb(list(mtcars[1:3, ], mtcars[4:6, ]))
 
 }
 \seealso{

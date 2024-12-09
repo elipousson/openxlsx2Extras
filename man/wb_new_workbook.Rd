@@ -15,7 +15,8 @@ wb_new_workbook(
   datetime_created = Sys.time(),
   theme = NULL,
   keywords = NULL,
-  properties = NULL
+  properties = NULL,
+  call = caller_env()
 )
 }
 \arguments{

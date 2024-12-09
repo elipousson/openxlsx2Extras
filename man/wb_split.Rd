@@ -28,7 +28,7 @@ convert each new list of data frames back into a wbWorkbook object.
 }
 \examples{
 
-wb <- as_wb(list(mtcars[1:3,], mtcars[4:6,]))
+wb <- as_wb(list(mtcars[1:3, ], mtcars[4:6, ]))
 
 wb_split(wb, .key = carb)
 

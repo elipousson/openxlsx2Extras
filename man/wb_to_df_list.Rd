@@ -56,7 +56,7 @@ workbook object into a data frame. Additional parameters \code{...} are recycled
 to match the length of sheet names.
 }
 \examples{
-wb <- as_wb(list(mtcars[1:3,], mtcars[4:6,]))
+wb <- as_wb(list(mtcars[1:3, ], mtcars[4:6, ]))
 
 wb_to_df_list(wb)
 

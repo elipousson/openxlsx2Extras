@@ -7,17 +7,14 @@
 map_wb(x, ..., .progress = FALSE)
 }
 \arguments{
-\item{x}{Typically, a data frame or list of data frames. A wbWorkbook is
-returned "as is" ignoring all other parameters. If \code{type = "any"}, x can
-also be an object that is coercible to a data frame.}
+\item{x}{A data frame, a list of data frames, a file path for an Excel file,
+or a \code{wbWorkbook} object. A \code{wbWorkbook} is returned "as is" ignoring all
+other parameters. A file path is loaded to a data frame using
+\code{\link[openxlsx2:wb_to_df]{openxlsx2::wb_to_df()}}.}
 
 \item{...}{
   Arguments passed on to \code{\link[=as_wb]{as_wb}}
   \describe{
-    \item{\code{type}}{Type of objects to allow. "df-list" allows data frames and lists
-of data frames. "df" allows data frames only. "any" allows any input
-(allowing the option for \code{\link[=wb_add_data_ext]{wb_add_data_ext()}} to coerce objects to data
-frames).}
     \item{\code{sheet_names}}{Optional character vector of worksheet names.}
     \item{\code{title,subject,category,keywords}}{Additional arguments passed to
 \code{\link[openxlsx2:wb_workbook]{openxlsx2::wb_workbook()}}.}
@@ -46,7 +43,7 @@ A list of wbWorkbook objects.
 \code{\link[=map_wb]{map_wb()}} takes a list and returns a list of \code{wbWorkbook} objects.
 }
 \examples{
-map_wb(list(mtcars[1:3,], mtcars[4:6,]))
+map_wb(list(mtcars[1:3, ], mtcars[4:6, ]))
 
 }
 \keyword{internal}
