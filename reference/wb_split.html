@@ -75,7 +75,10 @@ sheet names from the supplied workbook are used.</p></dd>
 
 <dt id="arg-properties">properties<a class="anchor" aria-label="anchor" href="#arg-properties"></a></dt>
 <dd><p>If "inherit" (default) and <code>file</code> is a workbook, inherit
-the workbook list element properties from the existing workbook.</p></dd>
+the workbook list element properties from the existing workbook. properties
+can also be <code>NULL</code> or a named character vector, a named list, or a bare
+list of the same length as the number of groups defined using the <code>.by</code>
+argument.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -89,7 +92,19 @@ the workbook list element properties from the existing workbook.</p></dd>
 <span class="r-in"><span><span class="va">wb</span> <span class="op">&lt;-</span> <span class="fu"><a href="as_wb.html">as_wb</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, <span class="op">]</span>, <span class="va">mtcars</span><span class="op">[</span><span class="fl">4</span><span class="op">:</span><span class="fl">6</span>, <span class="op">]</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">wb_split</span><span class="op">(</span><span class="va">wb</span>, .by <span class="op">=</span> <span class="va">carb</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in wb_split(wb, .by = carb):</span> object 'wb_props' not found</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> `x` is a list containing non-data frame elements.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $`1`</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> A Workbook object.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Worksheets:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Sheets: Sheet 1, Sheet 2 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Write order: 1, 2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $`4`</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> A Workbook object.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Worksheets:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Sheets: Sheet 1, Sheet 2 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Write order: 1, 2</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
