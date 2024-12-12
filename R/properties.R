@@ -5,6 +5,7 @@
 #' existing properties.
 #'
 #' @inheritParams openxlsx2::wb_set_properties
+#' @param ... Must be empty.
 #' @param properties A named character vector or named list of properties used
 #'   as default values for any other parameter that is not explicitly set.
 #' @returns A workbook with modified properties.
@@ -18,6 +19,7 @@ wb_set_properties_ext <- function(wb,
                                   datetime_created = NULL,
                                   datetime_modified = NULL,
                                   modifier = NULL,
+                                  theme = NULL,
                                   keywords = NULL,
                                   comments = NULL,
                                   manager = NULL,

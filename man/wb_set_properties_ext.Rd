@@ -14,6 +14,7 @@ wb_set_properties_ext(
   datetime_created = NULL,
   datetime_modified = NULL,
   modifier = NULL,
+  theme = NULL,
   keywords = NULL,
   comments = NULL,
   manager = NULL,
@@ -24,6 +25,8 @@ wb_set_properties_ext(
 }
 \arguments{
 \item{wb}{A Workbook object}
+
+\item{...}{Must be empty.}
 
 \item{creator}{Creator of the workbook (your name). Defaults to login username or \code{options("openxlsx2.creator")} if set.}
 
