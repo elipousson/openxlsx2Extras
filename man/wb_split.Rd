@@ -4,10 +4,12 @@
 \alias{wb_split}
 \title{Use \code{dplyr::group_split} to split a workbook into a list of workbooks}
 \usage{
-wb_split(file, ..., .key = NULL)
+wb_split(file, .by, ..., .keep = TRUE, properties = "inherit")
 }
 \arguments{
 \item{file}{An xlsx file, \link[openxlsx2]{wbWorkbook} object or URL to xlsx file.}
+
+\item{.by}{Passed to \code{\link[dplyr:group_split]{dplyr::group_split()}}.}
 
 \item{...}{
   Arguments passed on to \code{\link[=wb_to_df_list]{wb_to_df_list}}
@@ -16,7 +18,10 @@ wb_split(file, ..., .key = NULL)
 sheet names from the supplied workbook are used.}
   }}
 
-\item{.key}{Passed to \code{\link[dplyr:group_split]{dplyr::group_split()}}.}
+\item{.keep}{Should the grouping columns be kept?}
+
+\item{properties}{If "inherit" (default) and \code{file} is a workbook, inherit
+the workbook list element properties from the existing workbook.}
 }
 \value{
 A list of wbWorkbook objects.
@@ -30,6 +35,6 @@ convert each new list of data frames back into a wbWorkbook object.
 
 wb <- as_wb(list(mtcars[1:3, ], mtcars[4:6, ]))
 
-wb_split(wb, .key = carb)
+wb_split(wb, .by = carb)
 
 }

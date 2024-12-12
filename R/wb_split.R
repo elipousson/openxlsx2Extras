@@ -69,37 +69,58 @@ wb_to_df_list <- function(file, sheet_names = NULL, ...) {
 #' convert each new list of data frames back into a wbWorkbook object.
 #'
 #' @inheritParams wb_to_df_list
-#' @param .key Passed to [dplyr::group_split()].
+#' @param .by Passed to [dplyr::group_split()].
+#' @param properties If "inherit" (default) and `file` is a workbook, inherit
+#'   the workbook list element properties from the existing workbook.
+#' @inheritParams dplyr::group_split
 #' @inheritDotParams wb_to_df_list
 #' @returns A list of wbWorkbook objects.
 #' @examples
 #'
 #' wb <- as_wb(list(mtcars[1:3, ], mtcars[4:6, ]))
 #'
-#' wb_split(wb, .key = carb)
+#' wb_split(wb, .by = carb)
 #'
 #' @export
-wb_split <- function(file, ..., .key = NULL) {
-  # TODO: Implement w/ vctrs to avoid dplyr dependency
-  check_installed("dplyr")
+wb_split <- function(file, .by, ..., .keep = TRUE, properties = "inherit") {
+  if (is_wb(file) && (properties == "inherit")) {
+    properties <- as.list(openxlsx2::wb_get_properties(file))
+  }
 
   df_list <- wb_to_df_list(file, ...)
+
+  # TODO: Implement w/ vctrs to avoid dplyr dependency
+  check_installed("dplyr")
 
   df_list <- purrr::map(
     df_list,
     \(x) {
+      x_grouped <- dplyr::group_by( x, {{.by}})
+
+      keys <- dplyr::group_keys(x_grouped)
+
       # FIXME: Avoid dependency on experimental function
-      dplyr::group_split(
-        x,
-        {{ .key }}
-      )
-    }
-  )
+      x_split <- dplyr::group_split(x_grouped, .keep = .keep)
+
+      if (ncol(keys) > 1) {
+        return(x_split)
+      }
+
+      set_names(x_split, keys[[1]])
+    })
+
+  if (!is_named(df_list[1])) {
+    cli::cli_warn(
+      "Output list is only named when a single grouping variable is supplied."
+    )
+  }
 
   df_list <- purrr::list_transpose(df_list, simplify = FALSE)
 
-  map_wb(df_list)
+  # df_list <- vctrs::list_drop_empty(df_list)
+  map_wb(df_list, properties = wb_props)
 }
+
 
 #' Write a data frame list to a series of Excel files
 #' @noRd
