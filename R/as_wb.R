@@ -120,6 +120,7 @@ as_wb <- function(x,
 #' Convert an object to a list of workbooks
 #'
 #' [map_wb()] takes a list and returns a list of `wbWorkbook` objects.
+#' `properties` is recycled to match the length of the input x.
 #'
 #' @inheritParams as_wb
 #' @inheritDotParams as_wb
@@ -130,14 +131,30 @@ as_wb <- function(x,
 #' map_wb(list(mtcars[1:3, ], mtcars[4:6, ]))
 #'
 #' @export
-map_wb <- function(x, ..., .progress = FALSE) {
-  wb_list <- purrr::map(
+map_wb <- function(x, ..., properties = NULL, .progress = FALSE) {
+
+  if (is_named(properties)) {
+    properties <- vctrs::vec_recycle(
+      list(properties),
+      size = length(x)
+    )
+  }
+
+  if (!is.null(properties)) {
+    # TODO: Improve validation messages
+    vctrs::obj_check_list(properties)
+    vctrs::vec_check_size(properties, size = length(x))
+
+    if (is_named(x)) {
+      properties <- set_names(properties, names(x))
+    }
+  }
+
+  purrr::imap(
     x,
-    \(x) {
-      as_wb(x, ...)
+    \(x, i) {
+      as_wb(x, ..., properties = properties[[i]])
     },
     .progress = .progress
   )
-
-  wb_list
 }

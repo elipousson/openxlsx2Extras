@@ -4,7 +4,7 @@
 \alias{map_wb}
 \title{Convert an object to a list of workbooks}
 \usage{
-map_wb(x, ..., .progress = FALSE)
+map_wb(x, ..., properties = NULL, .progress = FALSE)
 }
 \arguments{
 \item{x}{A data frame, a list of data frames, a file path for an Excel file,
@@ -18,10 +18,6 @@ other parameters. A file path is loaded to a data frame using
     \item{\code{sheet_names}}{Optional character vector of worksheet names.}
     \item{\code{title,subject,category,keywords}}{Additional arguments passed to
 \code{\link[openxlsx2:wb_workbook]{openxlsx2::wb_workbook()}}.}
-    \item{\code{properties}}{A named list (typically from
-\code{\link[openxlsx2:properties-wb]{openxlsx2::wb_get_properties()}}) used to set new workbook properties for
-any values set to \code{NULL}. \code{datetime_created} defaults to \code{\link[=Sys.time]{Sys.time()}} so
-must be set to \code{NULL} to inherit value from \code{properties}.}
     \item{\code{creator}}{Creator of the workbook (your name). Defaults to login username or \code{options("openxlsx2.creator")} if set.}
     \item{\code{datetime_created}}{The time of the workbook is created}
     \item{\code{theme}}{Optional theme identified by string or number.
@@ -32,6 +28,11 @@ mentioned in error messages as the source of the error. See the
 \code{call} argument of \code{\link[rlang:abort]{abort()}} for more information.}
   }}
 
+\item{properties}{A named list (typically from
+\code{\link[openxlsx2:properties-wb]{openxlsx2::wb_get_properties()}}) used to set new workbook properties for
+any values set to \code{NULL}. \code{datetime_created} defaults to \code{\link[=Sys.time]{Sys.time()}} so
+must be set to \code{NULL} to inherit value from \code{properties}.}
+
 \item{.progress}{Whether to show a progress bar. Use \code{TRUE} to turn on
 a basic progress bar, use a string to give it a name, or see
 \link[purrr]{progress_bars} for more details.}
@@ -41,6 +42,7 @@ A list of wbWorkbook objects.
 }
 \description{
 \code{\link[=map_wb]{map_wb()}} takes a list and returns a list of \code{wbWorkbook} objects.
+\code{properties} is recycled to match the length of the input x.
 }
 \examples{
 map_wb(list(mtcars[1:3, ], mtcars[4:6, ]))

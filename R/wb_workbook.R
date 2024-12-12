@@ -38,8 +38,12 @@ wb_new_workbook <- function(
     keywords = NULL,
     properties = NULL,
     call = caller_env()) {
+  if (is.character(properties)) {
+    properties <- as.list(properties)
+  }
+
   wb <- openxlsx2::wb_workbook(
-    title = title %||% properties[["subject"]],
+    title = title %||% properties[["title"]],
     subject = subject %||% properties[["subject"]],
     category = category %||% properties[["category"]],
     datetime_created = datetime_created %||% properties[["datetime_created"]],
