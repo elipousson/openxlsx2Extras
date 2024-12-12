@@ -47,7 +47,7 @@ wb_new_workbook <- function(
     subject = subject %||% properties[["subject"]],
     category = category %||% properties[["category"]],
     datetime_created = datetime_created %||% properties[["datetime_created"]],
-    theme = theme %||% properties[["theme"]],
+    theme = theme,
     keywords = keywords %||% properties[["keywords"]]
   )
 

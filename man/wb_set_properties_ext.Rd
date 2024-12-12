@@ -14,7 +14,6 @@ wb_set_properties_ext(
   datetime_created = NULL,
   datetime_modified = NULL,
   modifier = NULL,
-  theme = NULL,
   keywords = NULL,
   comments = NULL,
   manager = NULL,
