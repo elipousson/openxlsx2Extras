@@ -21,7 +21,10 @@ sheet names from the supplied workbook are used.}
 \item{.keep}{Should the grouping columns be kept?}
 
 \item{properties}{If "inherit" (default) and \code{file} is a workbook, inherit
-the workbook list element properties from the existing workbook.}
+the workbook list element properties from the existing workbook. properties
+can also be \code{NULL} or a named character vector, a named list, or a bare
+list of the same length as the number of groups defined using the \code{.by}
+argument.}
 }
 \value{
 A list of wbWorkbook objects.

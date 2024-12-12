@@ -71,7 +71,10 @@ wb_to_df_list <- function(file, sheet_names = NULL, ...) {
 #' @inheritParams wb_to_df_list
 #' @param .by Passed to [dplyr::group_split()].
 #' @param properties If "inherit" (default) and `file` is a workbook, inherit
-#'   the workbook list element properties from the existing workbook.
+#'   the workbook list element properties from the existing workbook. properties
+#'   can also be `NULL` or a named character vector, a named list, or a bare
+#'   list of the same length as the number of groups defined using the `.by`
+#'   argument.
 #' @inheritParams dplyr::group_split
 #' @inheritDotParams wb_to_df_list
 #' @returns A list of wbWorkbook objects.
@@ -118,7 +121,7 @@ wb_split <- function(file, .by, ..., .keep = TRUE, properties = "inherit") {
   df_list <- purrr::list_transpose(df_list, simplify = FALSE)
 
   # df_list <- vctrs::list_drop_empty(df_list)
-  map_wb(df_list, properties = wb_props)
+  map_wb(df_list, properties = properties)
 }
 
 
