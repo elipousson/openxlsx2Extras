@@ -120,7 +120,7 @@ write_xlsx_ext <- function(x,
   # If x is a wbWorkbook object, use wb_save_ext to save to file
   # All other arguments except file, path, and overwrite are ignored
   if (is_wb(x)) {
-    return(wb_save_ext(x, file = file, path = path, overwrite = overwrite))
+    return(wb_save_ext(x, file = file, overwrite = overwrite))
   }
 
   bare_list_input <- is_bare_list(x)
