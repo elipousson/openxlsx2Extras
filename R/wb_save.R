@@ -115,7 +115,6 @@ write_xlsx_ext <- function(x,
                            start_row = 1,
                            geometry = "drop",
                            labels = "drop",
-                           path = NULL,
                            overwrite = TRUE,
                            call = caller_env()) {
   # If x is a wbWorkbook object, use wb_save_ext to save to file
@@ -145,7 +144,7 @@ write_xlsx_ext <- function(x,
   )
 
   # Save workbook to file
-  wb_save_ext(wb, file = file, path = path, overwrite = overwrite)
+  wb_save_ext(wb, file = file, overwrite = overwrite)
 
   # Invisibly return x w/o modification
   if (bare_list_input) {

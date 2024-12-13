@@ -20,7 +20,6 @@ write_xlsx_ext(
   start_row = 1,
   geometry = "drop",
   labels = "drop",
-  path = NULL,
   overwrite = TRUE,
   call = caller_env()
 )
@@ -65,8 +64,6 @@ existing geometry column (keeping the existing sf column name).}
 \item{labels}{Method for handling column labels. "drop" (default) or
 "row_before". If "row_before", insert column labels in the row before the
 column names.}
-
-\item{path}{Deprecated argument. Please use \code{file} in new code.}
 
 \item{overwrite}{If \code{FALSE}, will not overwrite when \code{file} already exists.}
 
