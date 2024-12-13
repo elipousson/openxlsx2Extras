@@ -51,7 +51,10 @@ as_wb <- function(x,
     # Wrap data frame or other non-list object in a bare list
     x <- list(x)
   } else {
-    warn_coercion <- !all(purrr::map_lgl(x, is.data.frame))
+    # TODO: Decide if NULL elements should be dropped
+    warn_coercion <- !all(purrr::map_lgl(x, \(x) {
+      is.null(x) || is.data.frame(x)
+    }))
     message <- c("!" = "{.arg x} is a list containing non-data frame elements.")
   }
 
@@ -132,7 +135,6 @@ as_wb <- function(x,
 #'
 #' @export
 map_wb <- function(x, ..., properties = NULL, .progress = FALSE) {
-
   if (is_named(properties)) {
     properties <- vctrs::vec_recycle(
       list(properties),
