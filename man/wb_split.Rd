@@ -4,7 +4,14 @@
 \alias{wb_split}
 \title{Use \code{dplyr::group_split} to split a workbook into a list of workbooks}
 \usage{
-wb_split(file, .by, ..., .keep = TRUE, properties = "inherit")
+wb_split(
+  file,
+  .by,
+  ...,
+  .keep = TRUE,
+  properties = "inherit",
+  wb_params = list()
+)
 }
 \arguments{
 \item{file}{An xlsx file, \link[openxlsx2]{wbWorkbook} object or URL to xlsx file.}
@@ -25,6 +32,9 @@ the workbook list element properties from the existing workbook. properties
 can also be \code{NULL} or a named character vector, a named list, or a bare
 list of the same length as the number of groups defined using the \code{.by}
 argument.}
+
+\item{wb_params}{List of additional parameters to pass to \code{\link[=map_wb]{map_wb()}} and
+\code{\link[=as_wb]{as_wb()}}.}
 }
 \value{
 A list of wbWorkbook objects.

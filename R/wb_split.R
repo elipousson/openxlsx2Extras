@@ -77,6 +77,8 @@ wb_to_df_list <- function(file, sheet_names = NULL, ...) {
 #'   argument.
 #' @inheritParams dplyr::group_split
 #' @inheritDotParams wb_to_df_list
+#' @param wb_params List of additional parameters to pass to [map_wb()] and
+#'   [as_wb()].
 #' @returns A list of wbWorkbook objects.
 #' @examples
 #'
@@ -85,7 +87,7 @@ wb_to_df_list <- function(file, sheet_names = NULL, ...) {
 #' wb_split(wb, .by = carb)
 #'
 #' @export
-wb_split <- function(file, .by, ..., .keep = TRUE, properties = "inherit") {
+wb_split <- function(file, .by, ..., .keep = TRUE, properties = "inherit", wb_params = list()) {
   if (is_wb(file) && (properties == "inherit")) {
     properties <- as.list(openxlsx2::wb_get_properties(file))
   }
@@ -122,7 +124,13 @@ wb_split <- function(file, .by, ..., .keep = TRUE, properties = "inherit") {
   df_list <- purrr::list_transpose(df_list, simplify = FALSE)
 
   # df_list <- vctrs::list_drop_empty(df_list)
-  map_wb(df_list, properties = properties)
+
+  exec(
+    map_wb,
+    x = df_list,
+    properties = properties,
+    !!!wb_params
+  )
 }
 
 
