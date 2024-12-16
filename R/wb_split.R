@@ -98,7 +98,7 @@ wb_split <- function(file, .by, ..., .keep = TRUE, properties = "inherit") {
   df_list <- purrr::map(
     df_list,
     \(x) {
-      x_grouped <- dplyr::group_by( x, {{.by}})
+      x_grouped <- dplyr::group_by(x, {{ .by }})
 
       keys <- dplyr::group_keys(x_grouped)
 
@@ -110,7 +110,8 @@ wb_split <- function(file, .by, ..., .keep = TRUE, properties = "inherit") {
       }
 
       set_names(x_split, keys[[1]])
-    })
+    }
+  )
 
   if (!is_named(df_list[1])) {
     cli::cli_warn(
