@@ -134,7 +134,10 @@ as_wb <- function(x,
 #' map_wb(list(mtcars[1:3, ], mtcars[4:6, ]))
 #'
 #' @export
-map_wb <- function(x, ..., properties = NULL, .progress = FALSE) {
+map_wb <- function(x,
+                   ...,
+                   properties = NULL,
+                   .progress = FALSE) {
   if (is_named(properties)) {
     properties <- vctrs::vec_recycle(
       list(properties),
