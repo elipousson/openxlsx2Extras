@@ -45,7 +45,14 @@ convert each new list of data frames back into a wbWorkbook object.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">wb_split</span><span class="op">(</span><span class="va">file</span>, <span class="va">.by</span>, <span class="va">...</span>, .keep <span class="op">=</span> <span class="cn">TRUE</span>, properties <span class="op">=</span> <span class="st">"inherit"</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">wb_split</span><span class="op">(</span></span>
+<span>  <span class="va">file</span>,</span>
+<span>  <span class="va">.by</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  .keep <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  properties <span class="op">=</span> <span class="st">"inherit"</span>,</span>
+<span>  wb_params <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -79,6 +86,11 @@ the workbook list element properties from the existing workbook. properties
 can also be <code>NULL</code> or a named character vector, a named list, or a bare
 list of the same length as the number of groups defined using the <code>.by</code>
 argument.</p></dd>
+
+
+<dt id="arg-wb-params">wb_params<a class="anchor" aria-label="anchor" href="#arg-wb-params"></a></dt>
+<dd><p>List of additional parameters to pass to <code><a href="map_wb.html">map_wb()</a></code> and
+<code><a href="as_wb.html">as_wb()</a></code>.</p></dd>
 
 </dl></div>
     <div class="section level2">

@@ -2,7 +2,7 @@ pandoc: 3.1.11
 pkgdown: 2.1.1
 pkgdown_sha: ~
 articles: {}
-last_built: 2024-12-16T18:17Z
+last_built: 2024-12-16T18:28Z
 urls:
   reference: https://elipousson.github.io/openxlsx2Extras/reference
   article: https://elipousson.github.io/openxlsx2Extras/articles
