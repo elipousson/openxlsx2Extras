@@ -26,7 +26,7 @@ software. See \strong{Details} for general information on column widths.}
 \description{
 \code{\link[=wb_set_col_widths_ext]{wb_set_col_widths_ext()}} extends \code{\link[openxlsx2:col_widths-wb]{openxlsx2::wb_set_col_widths()}} by making
 \code{cols} optional (defaults to all columns) and allows setting columns based on
-column names.
+column names (rather than index position alone).
 }
 \examples{
 wb <- as_wb(mtcars)
