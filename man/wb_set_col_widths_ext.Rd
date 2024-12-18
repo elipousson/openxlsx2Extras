@@ -28,6 +28,15 @@ software. See \strong{Details} for general information on column widths.}
 \code{cols} optional (defaults to all columns) and allows setting columns based on
 column names.
 }
+\examples{
+wb <- as_wb(mtcars)
+
+wb_set_col_widths_ext(wb, cols = "drat")
+
+# `cols` is optional
+wb_set_col_widths_ext(wb)
+
+}
 \seealso{
 \code{\link[openxlsx2:wb_data]{openxlsx2::wb_data()}}, \code{\link[openxlsx2:col_widths-wb]{openxlsx2::col_widths-wb()}}
 }
