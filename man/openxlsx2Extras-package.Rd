@@ -20,5 +20,10 @@ Useful links:
 \author{
 \strong{Maintainer}: Eli Pousson \email{eli.pousson@gmail.com} (\href{https://orcid.org/0000-0001-8280-1706}{ORCID}) [copyright holder]
 
+Other contributors:
+\itemize{
+  \item Jan Marvin Garbuszus \email{jan.garbuszus@ruhr-uni-bochum.de} [contributor]
+}
+
 }
 \keyword{internal}
