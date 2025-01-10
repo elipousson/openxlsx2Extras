@@ -12,6 +12,9 @@
 #' - `xlsx_to_csv`: Converts an XLSX file to a CSV file.
 #'
 #' @name convert_to
+#' @author Jordan Mark Barbone \email{jmbarbone@gmail.com}
+#' @author Jan Marvin Garbuszus \email{jan.garbuszus@ruhr-uni-bochum.de}
+#' @author Eli Pousson \email{eli.pousson@gmail.com}
 #'
 #' @importFrom utils read.csv write.csv
 #' @importFrom openxlsx2 write_xlsx wb_to_df

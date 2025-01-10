@@ -70,3 +70,10 @@ csv_to_xlsx(csv = csv, xlsx = xlsx)
 # Convert XLSX back to CSV
 xlsx_to_csv(x = xlsx, csv = csv)
 }
+\author{
+Jordan Mark Barbone \email{jmbarbone@gmail.com}
+
+Jan Marvin Garbuszus \email{jan.garbuszus@ruhr-uni-bochum.de}
+
+Eli Pousson \email{eli.pousson@gmail.com}
+}
