@@ -5,4 +5,6 @@
 * Add `read_xlsx_ext()`, `write_xlsx_ext()` (#3), and `wb_add_data_ext()` functions (2024-11-10).
 * Add `set_excel_fmt_class()` function.
 * Add `wb_add_marquee_text()` and `fmt_marquee_txt()` functions.
+* Add `wb_add_styles()` function for passing multiple styles in a list. Provide `common_dxfs_styles` as a prepared named list of styles. (2025-01-25)
+* Add `as_data_validation_value()` helper function. (2025-01-25)
 * Publish package to GitHub (2024-10-21).
