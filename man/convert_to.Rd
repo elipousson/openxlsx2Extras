@@ -61,14 +61,14 @@ csv <- tempfile(fileext = ".csv")
 utils::write.csv(x = mtcars, file = csv)
 
 # Convert CSV to Workbook
-wb <- csv_to_wb(csv = csv)
+wb <- csv_to_wb(file = csv)
 
 # Convert CSV to XLSX
 xlsx <- openxlsx2::temp_xlsx()
-csv_to_xlsx(csv = csv, xlsx = xlsx)
+csv_to_xlsx(file = csv, new_file = xlsx)
 
 # Convert XLSX back to CSV
-xlsx_to_csv(x = xlsx, csv = csv)
+xlsx_to_csv(file = xlsx, new_file = csv)
 }
 \author{
 Jordan Mark Barbone \email{jmbarbone@gmail.com}
