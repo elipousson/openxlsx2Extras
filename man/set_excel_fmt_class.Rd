@@ -5,7 +5,13 @@
 \title{Prepare a data frame with Excel style class values for formatting by
 openxlsx2}
 \usage{
-set_excel_fmt_class(data, cols, fmt_class = "currency", multiple = TRUE)
+set_excel_fmt_class(
+  data,
+  cols,
+  fmt_class = "currency",
+  multiple = TRUE,
+  strict = FALSE
+)
 }
 \arguments{
 \item{data}{A data frame with columns to format.}
@@ -17,6 +23,9 @@ set_excel_fmt_class(data, cols, fmt_class = "currency", multiple = TRUE)
 match length of cols using \code{\link[vctrs:vec_recycle]{vctrs::vec_recycle()}}.}
 
 \item{multiple}{Whether \code{arg} may contain zero or several values.}
+
+\item{strict}{If \code{TRUE}, error if any character values in cols are not
+included in the names of \code{data}. Default \code{FALSE}.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
