@@ -73,10 +73,12 @@ fmt_marquee_txt <- function(text,
 #'
 #' library(openxlsx2)
 #'
-#' wb_workbook() |>
-#'   wb_add_worksheet() |>
-#'   wb_add_marquee_text(
-#'     text = "
+#' wb <- wb_workbook()
+#' wb <- wb_add_worksheet(wb)
+#'
+#' wb <- wb_add_marquee_text(
+#'   wb,
+#'   text = "
 #' # Heading 1
 #'
 #' Example text.
@@ -88,7 +90,7 @@ fmt_marquee_txt <- function(text,
 #' - Bulleted list item 1
 #'   - Nested bullet
 #' - Bulleted list item 2"
-#'   )
+#' )
 #'
 #' @export
 wb_add_marquee_text <- function(wb = NULL,
@@ -105,12 +107,12 @@ wb_add_marquee_text <- function(wb = NULL,
     wb <- purrr::reduce(
       seq_along(text),
       \(x, y) {
-        x |>
-          openxlsx2::wb_add_data(
-            x = text[y],
-            sheet = sheet,
-            dims = paste0("A", y)
-          )
+        openxlsx2::wb_add_data(
+          wb = x,
+          x = text[y],
+          sheet = sheet,
+          dims = paste0("A", y)
+        )
       },
       .init = wb
     )

@@ -37,13 +37,13 @@ fmt_lgl_cols <- function(.data,
                          .cols = tidyselect::where(is.logical),
                          values = c("Y", "N")) {
   check_installed("dplyr")
-  .data |>
-    dplyr::mutate(
-      dplyr::across(
-        .cols = {{ .cols }},
-        \(x) {
-          vec_fmt_lgl(x, values = values)
-        }
-      )
+  dplyr::mutate(
+    .data = .data,
+    dplyr::across(
+      .cols = {{ .cols }},
+      \(x) {
+        vec_fmt_lgl(x, values = values)
+      }
     )
+  )
 }

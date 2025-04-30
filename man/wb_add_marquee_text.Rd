@@ -51,9 +51,11 @@ disable this functionality.
 
 library(openxlsx2)
 
-wb_workbook() |>
-  wb_add_worksheet() |>
-  wb_add_marquee_text(
+wb <- wb_workbook()
+wb <- wb_add_worksheet(wb)
+
+wb <- wb_add_marquee_text(
+    wb,
     text = "
 # Heading 1
 
