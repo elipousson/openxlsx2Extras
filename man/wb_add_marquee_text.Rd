@@ -55,8 +55,8 @@ wb <- wb_workbook()
 wb <- wb_add_worksheet(wb)
 
 wb <- wb_add_marquee_text(
-    wb,
-    text = "
+  wb,
+  text = "
 # Heading 1
 
 Example text.
@@ -68,6 +68,6 @@ Example text.
 - Bulleted list item 1
   - Nested bullet
 - Bulleted list item 2"
-  )
+)
 
 }
