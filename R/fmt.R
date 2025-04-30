@@ -52,7 +52,10 @@ set_excel_fmt_class <- function(
 
   for (i in seq_along(cols)) {
     col <- cols[[i]]
-    class(data[[col]]) <- c(fmt_class[[i]], class(data[[col]]))
+
+    if (!all(is.null(col))) {
+      class(data[[col]]) <- c(fmt_class[[i]], class(data[[col]]))
+    }
   }
 
   data
