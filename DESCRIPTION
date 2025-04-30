@@ -13,6 +13,8 @@ License: MIT + file LICENSE
 URL: https://github.com/elipousson/openxlsx2Extras,
     https://elipousson.github.io/openxlsx2Extras/
 BugReports: https://github.com/elipousson/openxlsx2Extras/issues
+Depends:
+    R (>= 4.1.0)
 Imports:
     cli,
     fs,
