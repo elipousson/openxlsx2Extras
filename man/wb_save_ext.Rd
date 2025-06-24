@@ -18,6 +18,7 @@ wb_save_ext(wb, file = NULL, overwrite = TRUE, ...)
   Arguments passed on to \code{\link[openxlsx2:wb_save]{openxlsx2::wb_save}}
   \describe{
     \item{\code{path}}{Deprecated argument. Please use \code{file} in new code.}
+    \item{\code{flush}}{Experimental, streams the worksheet file to disk}
   }}
 }
 \description{

@@ -17,10 +17,12 @@
 #' )
 #'
 #' @export
-fmt_marquee_txt <- function(text,
-                            ...,
-                            style = marquee::classic_style(),
-                            ignore_html = TRUE) {
+fmt_marquee_txt <- function(
+  text,
+  ...,
+  style = marquee::classic_style(),
+  ignore_html = TRUE
+) {
   check_installed("marquee")
 
   parsed_text <- marquee::marquee_parse(
@@ -31,7 +33,20 @@ fmt_marquee_txt <- function(text,
 
   purrr::pmap(
     parsed_text,
-    \(text, type, indentation, indent, size, ol_index, weight, bullets, color, underline, strikethrough, ...) {
+    \(
+      text,
+      type,
+      indentation,
+      indent,
+      size,
+      ol_index,
+      weight,
+      bullets,
+      color,
+      underline,
+      strikethrough,
+      ...
+    ) {
       before <- paste0(rep(" ", indent), collapse = "")
 
       if (type == "li") {
@@ -93,13 +108,15 @@ fmt_marquee_txt <- function(text,
 #' )
 #'
 #' @export
-wb_add_marquee_text <- function(wb = NULL,
-                                text,
-                                sheet = current_sheet(),
-                                dims = NULL,
-                                ...,
-                                cols = 1,
-                                widths = "auto") {
+wb_add_marquee_text <- function(
+  wb = NULL,
+  text,
+  sheet = current_sheet(),
+  dims = NULL,
+  ...,
+  cols = 1,
+  widths = "auto"
+) {
   text <- fmt_marquee_txt(text, ...)
 
   if (is.null(dims)) {

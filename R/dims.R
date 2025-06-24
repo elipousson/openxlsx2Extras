@@ -9,9 +9,7 @@
 #' @param sheets Default to use all workbook sheets.
 #' @keywords internal
 #' @export
-wb_sheets_cols_to_dims <- function(wb,
-                                   cols,
-                                   sheets = NULL) {
+wb_sheets_cols_to_dims <- function(wb, cols, sheets = NULL) {
   sheets <- sheets %||% openxlsx2::wb_get_sheet_names(wb)
 
   if (is.character(cols) && has_length(sheets, 1)) {
@@ -34,9 +32,7 @@ wb_sheets_cols_to_dims <- function(wb,
 #' @keywords internal
 #' @rdname wb_sheets_cols_to_dims
 #' @export
-wb_cols_to_index <- function(wb,
-                             cols,
-                             sheet = current_sheet()) {
+wb_cols_to_index <- function(wb, cols, sheet = current_sheet()) {
   values <- names(openxlsx2::wb_data(wb, sheet = sheet))
 
   match(
@@ -48,8 +44,6 @@ wb_cols_to_index <- function(wb,
 #' @keywords internal
 #' @rdname wb_sheets_cols_to_dims
 #' @export
-wb_cols_to_dims <- function(wb,
-                            cols,
-                            sheet = current_sheet()) {
+wb_cols_to_dims <- function(wb, cols, sheet = current_sheet()) {
   openxlsx2::wb_dims(x = openxlsx2::wb_data(wb, sheet = sheet), cols = cols)
 }

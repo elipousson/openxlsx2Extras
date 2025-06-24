@@ -22,18 +22,20 @@
 #' @export
 #' @importFrom fs file_exists
 #' @importFrom openxlsx2 wb_to_df
-as_wb <- function(x,
-                  ...,
-                  sheet_names = NULL,
-                  creator = NULL,
-                  title = NULL,
-                  subject = NULL,
-                  category = NULL,
-                  datetime_created = Sys.time(),
-                  theme = NULL,
-                  keywords = NULL,
-                  properties = NULL,
-                  call = caller_env()) {
+as_wb <- function(
+  x,
+  ...,
+  sheet_names = NULL,
+  creator = NULL,
+  title = NULL,
+  subject = NULL,
+  category = NULL,
+  datetime_created = Sys.time(),
+  theme = NULL,
+  keywords = NULL,
+  properties = NULL,
+  call = caller_env()
+) {
   # If x is a wbWorkbook object, use wb_save_ext to save to file
   # All other arguments except file, path, and overwrite are ignored
   if (is_wb(x)) {
@@ -134,10 +136,7 @@ as_wb <- function(x,
 #' map_wb(list(mtcars[1:3, ], mtcars[4:6, ]))
 #'
 #' @export
-map_wb <- function(x,
-                   ...,
-                   properties = NULL,
-                   .progress = FALSE) {
+map_wb <- function(x, ..., properties = NULL, .progress = FALSE) {
   if (is_named(properties)) {
     properties <- vctrs::vec_recycle(
       list(properties),

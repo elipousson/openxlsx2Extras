@@ -41,12 +41,14 @@
 #'
 #' @export
 #' @importFrom purrr map_chr list_cbind
-prep_wb_data <- function(x,
-                         list_columns = c("collapse", "drop", "asis"),
-                         sep = "; ",
-                         geometry = c("drop", "coords", "wkt"),
-                         coords = c("lon", "lat"),
-                         call = caller_env()) {
+prep_wb_data <- function(
+  x,
+  list_columns = c("collapse", "drop", "asis"),
+  sep = "; ",
+  geometry = c("drop", "coords", "wkt"),
+  coords = c("lon", "lat"),
+  call = caller_env()
+) {
   # TODO: Improve coercion for non-data frame objects
   # See https://github.com/elipousson/openxlsx2Extras/issues/4
   if (!is.data.frame(x)) {

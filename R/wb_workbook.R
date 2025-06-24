@@ -26,18 +26,19 @@
 #' @returns A `wbWorkbook` object.
 #' @export
 wb_new_workbook <- function(
-    sheet_names = NULL,
-    ...,
-    default = "Sheet",
-    creator = NULL,
-    title = NULL,
-    subject = NULL,
-    category = NULL,
-    datetime_created = Sys.time(),
-    theme = NULL,
-    keywords = NULL,
-    properties = NULL,
-    call = caller_env()) {
+  sheet_names = NULL,
+  ...,
+  default = "Sheet",
+  creator = NULL,
+  title = NULL,
+  subject = NULL,
+  category = NULL,
+  datetime_created = Sys.time(),
+  theme = NULL,
+  keywords = NULL,
+  properties = NULL,
+  call = caller_env()
+) {
   if (is.character(properties)) {
     properties <- as.list(properties)
   }

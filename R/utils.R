@@ -17,14 +17,16 @@
 #' @source <https://github.com/JanMarvin/openxlsx2/blob/main/R/write_xlsx.R#L281-L301>
 #' @keywords internal utils
 #' @export
-set_sheet_list_names <- function(x,
-                                 sheet_names = NULL,
-                                 ...,
-                                 n_sheets = NULL,
-                                 .prep_fn = prep_wb_data,
-                                 repair = "unique",
-                                 default = "Sheet",
-                                 call = caller_env()) {
+set_sheet_list_names <- function(
+  x,
+  sheet_names = NULL,
+  ...,
+  n_sheets = NULL,
+  .prep_fn = prep_wb_data,
+  repair = "unique",
+  default = "Sheet",
+  call = caller_env()
+) {
   if (is_named(x) && !is.null(sheet_names)) {
     cli::cli_warn(
       "{.arg x} names are ignored when {.arg sheet_names} is supplied."
@@ -57,15 +59,17 @@ set_sheet_list_names <- function(x,
 #' as_sheet_names("Sheet names longer than 31 characters are truncated")
 #'
 #' @export
-as_sheet_names <- function(sheet_names = NULL,
-                           n_sheets = 1,
-                           default = "Sheet",
-                           max_length = 31,
-                           excess_length = c("truncate", "error"),
-                           repair = "unique",
-                           quiet = FALSE,
-                           arg = caller_arg(sheet_names),
-                           call = caller_env()) {
+as_sheet_names <- function(
+  sheet_names = NULL,
+  n_sheets = 1,
+  default = "Sheet",
+  max_length = 31,
+  excess_length = c("truncate", "error"),
+  repair = "unique",
+  quiet = FALSE,
+  arg = caller_arg(sheet_names),
+  call = caller_env()
+) {
   sheet_names <- sheet_names %||% paste(default, seq_len(n_sheets))
 
   sheet_names <- as.character(sheet_names)
@@ -145,14 +149,16 @@ as_sheet_names <- function(sheet_names = NULL,
 #' as_sheet_list(list(head = x, y))
 #'
 #' @export
-as_sheet_list <- function(x,
-                          sheet_names = NULL,
-                          ...,
-                          n_sheets = NULL,
-                          .prep_fn = prep_wb_data,
-                          repair = "unique",
-                          default = "Sheet",
-                          call = caller_env()) {
+as_sheet_list <- function(
+  x,
+  sheet_names = NULL,
+  ...,
+  n_sheets = NULL,
+  .prep_fn = prep_wb_data,
+  repair = "unique",
+  default = "Sheet",
+  call = caller_env()
+) {
   if (!is_bare_list(x)) {
     x <- list(x)
   }

@@ -27,18 +27,20 @@
 #' wb_add_data_ext(wb, mtcars, as_table = TRUE)
 #'
 #' @importFrom openxlsx2 wb_add_data
-wb_add_data_ext <- function(wb,
-                            x,
-                            sheet = current_sheet(),
-                            ...,
-                            start_row = 1,
-                            list_columns = c("collapse", "drop", "asis"),
-                            sep = "; ",
-                            geometry = c("drop", "coords", "wkt"),
-                            coords = c("lon", "lat"),
-                            labels = c("drop", "row_before"),
-                            as_table = FALSE,
-                            call = caller_env()) {
+wb_add_data_ext <- function(
+  wb,
+  x,
+  sheet = current_sheet(),
+  ...,
+  start_row = 1,
+  list_columns = c("collapse", "drop", "asis"),
+  sep = "; ",
+  geometry = c("drop", "coords", "wkt"),
+  coords = c("lon", "lat"),
+  labels = c("drop", "row_before"),
+  as_table = FALSE,
+  call = caller_env()
+) {
   x <- prep_wb_data(
     x,
     list_columns = list_columns,

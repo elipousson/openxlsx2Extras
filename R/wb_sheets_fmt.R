@@ -11,17 +11,20 @@
 #' @export
 #' @importFrom openxlsx2 wb_add_numfmt
 #' @importFrom vctrs vec_recycle
-wb_sheets_fmt <- function(wb,
-                          .f = openxlsx2::wb_add_numfmt,
-                          cols = NULL,
-                          sheets = NULL,
-                          dims = NULL,
-                          ...) {
-  dims <- dims %||% wb_sheets_cols_to_dims(
-    wb,
-    cols = cols,
-    sheets = sheets
-  )
+wb_sheets_fmt <- function(
+  wb,
+  .f = openxlsx2::wb_add_numfmt,
+  cols = NULL,
+  sheets = NULL,
+  dims = NULL,
+  ...
+) {
+  dims <- dims %||%
+    wb_sheets_cols_to_dims(
+      wb,
+      cols = cols,
+      sheets = sheets
+    )
 
   sheets <- vctrs::vec_recycle(sheets, size = length(dims))
 

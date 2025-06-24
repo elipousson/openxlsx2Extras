@@ -24,10 +24,7 @@
 #' })
 #'
 #' @export
-wb_save_ext <- function(wb,
-                        file = NULL,
-                        overwrite = TRUE,
-                        ...) {
+wb_save_ext <- function(wb, file = NULL, overwrite = TRUE, ...) {
   if (is.null(file)) {
     # Get properties
     core_props <- wb$get_properties()
@@ -100,23 +97,25 @@ wb_save_ext <- function(wb,
 #' })
 #'
 #' @export
-write_xlsx_ext <- function(x,
-                           file = NULL,
-                           ...,
-                           sheet_names = NULL,
-                           creator = NULL,
-                           title = NULL,
-                           subject = NULL,
-                           category = NULL,
-                           datetime_created = Sys.time(),
-                           theme = NULL,
-                           keywords = NULL,
-                           as_table = FALSE,
-                           start_row = 1,
-                           geometry = "drop",
-                           labels = "drop",
-                           overwrite = TRUE,
-                           call = caller_env()) {
+write_xlsx_ext <- function(
+  x,
+  file = NULL,
+  ...,
+  sheet_names = NULL,
+  creator = NULL,
+  title = NULL,
+  subject = NULL,
+  category = NULL,
+  datetime_created = Sys.time(),
+  theme = NULL,
+  keywords = NULL,
+  as_table = FALSE,
+  start_row = 1,
+  geometry = "drop",
+  labels = "drop",
+  overwrite = TRUE,
+  call = caller_env()
+) {
   # If x is a wbWorkbook object, use wb_save_ext to save to file
   # All other arguments except file, path, and overwrite are ignored
   if (is_wb(x)) {

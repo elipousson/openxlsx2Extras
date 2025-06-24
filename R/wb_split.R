@@ -56,7 +56,8 @@ wb_to_df_list <- function(file, sheet_names = NULL, ...) {
       file = wb,
       sheet = sheet_name,
       !!!df_params
-    )) %||% data.frame()
+    )) %||%
+      data.frame()
   }
 
   df_list
@@ -87,7 +88,14 @@ wb_to_df_list <- function(file, sheet_names = NULL, ...) {
 #' wb_split(wb, .by = carb)
 #'
 #' @export
-wb_split <- function(file, .by, ..., .keep = TRUE, properties = "inherit", wb_params = list()) {
+wb_split <- function(
+  file,
+  .by,
+  ...,
+  .keep = TRUE,
+  properties = "inherit",
+  wb_params = list()
+) {
   if (is_wb(file) && (properties == "inherit")) {
     properties <- as.list(openxlsx2::wb_get_properties(file))
   }
@@ -136,20 +144,23 @@ wb_split <- function(file, .by, ..., .keep = TRUE, properties = "inherit", wb_pa
 
 #' Write a data frame list to a series of Excel files
 #' @noRd
-write_xlsx_split <- function(x,
-                             file = NULL,
-                             ...,
-                             path = getwd(),
-                             ext = "xlsx") {
+write_xlsx_split <- function(
+  x,
+  file = NULL,
+  ...,
+  path = getwd(),
+  ext = "xlsx"
+) {
   # FIXME: Allow workbook and workbook list inputs
   wb_list <- map_wb(x, ...)
 
-  file <- file %||% purrr::map_chr(
-    seq_along(wb_list),
-    \(x) {
-      fs::file_temp(paste0("file", x), tmp_dir = path, ext = ext)
-    }
-  )
+  file <- file %||%
+    purrr::map_chr(
+      seq_along(wb_list),
+      \(x) {
+        fs::file_temp(paste0("file", x), tmp_dir = path, ext = ext)
+      }
+    )
 
   purrr::walk2(
     wb_list,

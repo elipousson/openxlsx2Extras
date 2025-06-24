@@ -1,10 +1,12 @@
-get_currency_numfmt <- function(currency = NULL,
-                                use_subunits = TRUE,
-                                decimals = NULL,
-                                locale = NULL,
-                                accounting = FALSE,
-                                force_sign = FALSE,
-                                sep_mark = ",") {
+get_currency_numfmt <- function(
+  currency = NULL,
+  use_subunits = TRUE,
+  decimals = NULL,
+  locale = NULL,
+  accounting = FALSE,
+  force_sign = FALSE,
+  sep_mark = ","
+) {
   rlang::check_installed("gt")
 
   currency <- currency %||% gt:::get_locale_currency_code(currency)
@@ -36,27 +38,30 @@ get_currency_numfmt <- function(currency = NULL,
   numfmt
 }
 
-wb_add_currencyfmt <- function(wb,
-                               sheet = openxlsx2::current_sheet(),
-                               dims = "A1",
-                               numfmt = NULL,
-                               currency = NULL,
-                               use_subunits = TRUE,
-                               decimals = NULL,
-                               locale = NULL,
-                               accounting = FALSE,
-                               force_sign = FALSE,
-                               sep_mark = ",",
-                               ...) {
-  numfmt <- numfmt %||% get_currency_numfmt(
-    currency = currency,
-    use_subunits = use_subunits,
-    decimals = decimals,
-    locale = locale,
-    accounting = accounting,
-    force_sign = force_sign,
-    sep_mark = sep_mark
-  )
+wb_add_currencyfmt <- function(
+  wb,
+  sheet = openxlsx2::current_sheet(),
+  dims = "A1",
+  numfmt = NULL,
+  currency = NULL,
+  use_subunits = TRUE,
+  decimals = NULL,
+  locale = NULL,
+  accounting = FALSE,
+  force_sign = FALSE,
+  sep_mark = ",",
+  ...
+) {
+  numfmt <- numfmt %||%
+    get_currency_numfmt(
+      currency = currency,
+      use_subunits = use_subunits,
+      decimals = decimals,
+      locale = locale,
+      accounting = accounting,
+      force_sign = force_sign,
+      sep_mark = sep_mark
+    )
 
   openxlsx2::wb_add_numfmt(
     wb,

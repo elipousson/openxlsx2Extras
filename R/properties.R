@@ -10,21 +10,23 @@
 #'   as default values for any other parameter that is not explicitly set.
 #' @returns A workbook with modified properties.
 #' @export
-wb_set_properties_ext <- function(wb,
-                                  ...,
-                                  creator = NULL,
-                                  title = NULL,
-                                  subject = NULL,
-                                  category = NULL,
-                                  datetime_created = NULL,
-                                  datetime_modified = NULL,
-                                  modifier = NULL,
-                                  keywords = NULL,
-                                  comments = NULL,
-                                  manager = NULL,
-                                  company = NULL,
-                                  custom = NULL,
-                                  properties = NULL) {
+wb_set_properties_ext <- function(
+  wb,
+  ...,
+  creator = NULL,
+  title = NULL,
+  subject = NULL,
+  category = NULL,
+  datetime_created = NULL,
+  datetime_modified = NULL,
+  modifier = NULL,
+  keywords = NULL,
+  comments = NULL,
+  manager = NULL,
+  company = NULL,
+  custom = NULL,
+  properties = NULL
+) {
   if (is.character(properties)) {
     properties <- as.list(properties)
   }
@@ -42,7 +44,8 @@ wb_set_properties_ext <- function(wb,
     subject = subject %||% properties[["subject"]],
     category = category %||% properties[["category"]],
     datetime_created = datetime_created %||% properties[["datetime_created"]],
-    datetime_modified = datetime_modified %||% properties[["datetime_modified"]],
+    datetime_modified = datetime_modified %||%
+      properties[["datetime_modified"]],
     modifier = modifier %||% properties[["modifier"]],
     keywords = keywords %||% properties[["keywords"]],
     comments = comments %||% properties[["comments"]],

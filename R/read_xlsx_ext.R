@@ -11,9 +11,7 @@
 #' @inheritParams vctrs::vec_as_names
 #' @inheritDotParams openxlsx2::read_xlsx
 #' @export
-read_xlsx_ext <- function(file,
-                          ...,
-                          repair = "unique") {
+read_xlsx_ext <- function(file, ..., repair = "unique") {
   xlsx_df <- openxlsx2::read_xlsx(file = file, ...)
 
   rlang::set_names(

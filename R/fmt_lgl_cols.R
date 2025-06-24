@@ -33,9 +33,11 @@ vec_fmt_lgl <- function(x, values = c("Y", "N")) {
 #' @examples
 #' fmt_lgl_cols(data.frame(x = c(TRUE, FALSE, TRUE)))
 #' @export
-fmt_lgl_cols <- function(.data,
-                         .cols = tidyselect::where(is.logical),
-                         values = c("Y", "N")) {
+fmt_lgl_cols <- function(
+  .data,
+  .cols = tidyselect::where(is.logical),
+  values = c("Y", "N")
+) {
   check_installed("dplyr")
   dplyr::mutate(
     .data = .data,

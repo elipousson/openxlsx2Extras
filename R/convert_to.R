@@ -49,20 +49,14 @@ NULL
 #' use the input or output file name as the second argument.
 #' @param ... additional arguments passed to [openxlsx2::write_xlsx()]
 #' @export
-csv_to_wb <- function(file,
-                      new_file = NULL,
-                      .f = utils::read.csv,
-                      ...) {
+csv_to_wb <- function(file, new_file = NULL, .f = utils::read.csv, ...) {
   x <- lapply(file, .f)
   openxlsx2::write_xlsx(x = x, file = set_new_file(file, new_file), ...)
 }
 
 #' @rdname convert_to
 #' @export
-csv_to_xlsx <- function(file,
-                        new_file = NULL,
-                        .f = utils::read.csv,
-                        ...) {
+csv_to_xlsx <- function(file, new_file = NULL, .f = utils::read.csv, ...) {
   csv_to_wb(
     file,
     .f = .f,
@@ -78,12 +72,14 @@ csv_to_xlsx <- function(file,
 #' @param ext File extension for output file. Defaults to "csv".
 #' @param ... Additional arguments passed to `.f`
 #' @export
-xlsx_to_csv <- function(file,
-                        new_file = NULL,
-                        sheet = 1,
-                        .f = utils::write.csv,
-                        ext = "csv",
-                        ...) {
+xlsx_to_csv <- function(
+  file,
+  new_file = NULL,
+  sheet = 1,
+  .f = utils::write.csv,
+  ext = "csv",
+  ...
+) {
   .f(
     openxlsx2::wb_to_df(
       file = file,
@@ -97,10 +93,12 @@ xlsx_to_csv <- function(file,
 #' [set_new_file()] sets new_file based on file or as temporary file.
 #' @noRd
 #' @importFrom fs path_ext_set file_temp
-set_new_file <- function(file = NULL,
-                         new_file = NULL,
-                         tmp_dir = tempdir(),
-                         ext = "xlsx") {
+set_new_file <- function(
+  file = NULL,
+  new_file = NULL,
+  tmp_dir = tempdir(),
+  ext = "xlsx"
+) {
   if (!is.null(new_file)) {
     return(new_file)
   }

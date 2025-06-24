@@ -10,9 +10,7 @@
 #' @param style_names Optional if styles is a named list.
 #' @export
 #' @importFrom openxlsx2 wb_add_style
-wb_add_styles <- function(wb,
-                          styles,
-                          style_names = NULL) {
+wb_add_styles <- function(wb, styles, style_names = NULL) {
   if (!is_bare_list(styles)) {
     styles <- list(styles)
   }

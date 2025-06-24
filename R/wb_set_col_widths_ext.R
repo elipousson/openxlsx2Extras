@@ -18,10 +18,12 @@
 #' @keywords internal
 #' @export
 #' @importFrom openxlsx2 wb_data wb_set_col_widths
-wb_set_col_widths_ext <- function(wb,
-                                  cols = NULL,
-                                  widths = "auto",
-                                  sheet = current_sheet()) {
+wb_set_col_widths_ext <- function(
+  wb,
+  cols = NULL,
+  widths = "auto",
+  sheet = current_sheet()
+) {
   cols <- cols %||% seq(ncol(openxlsx2::wb_data(wb, sheet = sheet)))
 
   if (any(is.na(suppressWarnings(as.integer(cols))))) {
