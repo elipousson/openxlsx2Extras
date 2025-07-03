@@ -57,6 +57,10 @@ fmt_marquee_txt <- function(
         before <- paste0(before, ol_index, ". ")
       }
 
+      if (!is.null(color) && !inherits(color, "wbColour")) {
+        color <- openxlsx2::wb_color(color)
+      }
+
       openxlsx2::fmt_txt(
         x = paste0(before, text),
         bold = weight > 400,
