@@ -1,4 +1,4 @@
-# openxlsx2Extras (development version)
+# openxlsx2Extras 0.0.0.9000
 
 * Add `set_sheet_list_names()`, `as_sheet_names()`, and `as_sheet_list()` utility functions (based on existing openxlsx2 code). (2024-12-02)
 * Add `prep_wb_data()` function (see #4, 2024-12-02).
