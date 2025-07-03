@@ -9,11 +9,11 @@ get_currency_numfmt <- function(
 ) {
   rlang::check_installed("gt")
 
-  currency <- currency %||% gt:::get_locale_currency_code(currency)
+  currency <- currency %||% get_locale_currency_code(currency)
 
-  gt:::validate_currency(currency = currency)
+  validate_currency(currency = currency)
 
-  decimals <- gt:::get_currency_decimals(
+  decimals <- get_currency_decimals(
     currency = currency,
     decimals = decimals,
     use_subunits = use_subunits
@@ -28,7 +28,7 @@ get_currency_numfmt <- function(
   if (accounting) {
     currency_sym <- paste0(
       "[$",
-      gt:::currencies[gt:::currencies[["curr_code"]] == currency, ][["symbol"]],
+      currencies()[currencies()[["curr_code"]] == currency, ][["symbol"]],
       "]"
     )
 
@@ -69,4 +69,32 @@ wb_add_currencyfmt <- function(
     dims = dims,
     numfmt = numfmt
   )
+}
+
+#' @noRd
+currencies <- function(...) {
+  check_installed("gt")
+  utils::getFromNamespace("currencies", "gt")
+}
+
+#' @noRd
+get_currency_decimals <- function(...) {
+  check_installed("gt")
+  .f <- utils::getFromNamespace("get_currency_decimals", "gt")
+  .f(...)
+}
+
+
+#' @noRd
+get_locale_currency_code <- function(...) {
+  check_installed("gt")
+  .f <- utils::getFromNamespace("get_locale_currency_code", "gt")
+  .f(...)
+}
+
+#' @noRd
+validate_currency <- function(...) {
+  check_installed("gt")
+  .f <- utils::getFromNamespace("validate_currency", "gt")
+  .f(...)
 }
