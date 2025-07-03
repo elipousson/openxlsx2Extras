@@ -41,6 +41,10 @@ wb_add_data_ext <- function(
   as_table = FALSE,
   call = caller_env()
 ) {
+  # TODO: Add support for data frame list inputs
+  # if (!is.dataframe(x) && all(purr::map_lgl(x, is.data.frame))) {
+  # }
+
   x <- prep_wb_data(
     x,
     list_columns = list_columns,
@@ -50,6 +54,15 @@ wb_add_data_ext <- function(
     call = call
   )
 
+  # Add sheet if it doesn't already exist
+  if (
+    !inherits(sheet, "openxlsx2_waiver") &&
+      is_string(sheet) &&
+      !(sheet %in% wb$sheet_names)
+  ) {
+    wb <- wb$add_worksheet(sheet = sheet)
+  }
+
   labels <- arg_match(labels, error_call = call)
 
   if (labels == "row_before") {
@@ -57,7 +70,12 @@ wb_add_data_ext <- function(
 
     if (!is.null(labels)) {
       labels <- as.data.frame(t(as.data.frame(labels)))
-      wb <- wb$add_data(x = labels, start_row = start_row, col_names = FALSE)
+      wb <- wb$add_data(
+        x = labels,
+        sheet = sheet,
+        start_row = start_row,
+        col_names = FALSE
+      )
       start_row <- start_row + 1
     }
   }
