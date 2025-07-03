@@ -130,9 +130,6 @@ software. See <strong>Details</strong> for general information on column widths.
 <span class="r-in"><span><span class="st">  - Nested bullet</span></span></span>
 <span class="r-in"><span><span class="st">- Bulleted list item 2"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in purrr::pmap(parsed_text, function(text, type, indentation, indent,     size, ol_index, weight, bullets, color, underline, strikethrough,     ...) {    before &lt;- paste0(rep(" ", indent), collapse = "")    if (type == "li") {        bullet &lt;- bullets[[indentation - 2]]        before &lt;- paste0(before, bullet, " ")    }    else if (ol_index &gt; 0) {        before &lt;- paste0(before, ol_index, ". ")    }    openxlsx2::fmt_txt(x = paste0(before, text), bold = weight &gt;         400, underline = underline, strike = strikethrough, size = size,         color = color)}):</span> <span style="color: #00BBBB;">ℹ</span> In index: 1.</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Caused by error:</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> color must be class wbColour</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
