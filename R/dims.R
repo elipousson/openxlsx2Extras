@@ -47,3 +47,44 @@ wb_cols_to_index <- function(wb, cols, sheet = current_sheet()) {
 wb_cols_to_dims <- function(wb, cols, sheet = current_sheet()) {
   openxlsx2::wb_dims(x = openxlsx2::wb_data(wb, sheet = sheet), cols = cols)
 }
+
+#' Extended helper to specify the dims or cols arguments
+#'
+#' [wb_dims_ext()] extends [openxlsx2::wb_dims()] by allowing a workbook input
+#' used to set `x` and supporting tidy selection for the `cols` argument.
+#'
+#' @inheritParams openxlsx2::wb_dims
+#' @keywords internal
+#' @export
+wb_dims_ext <- function(
+  wb = NULL,
+  sheet = openxlsx2::current_sheet(),
+  cols,
+  x = NULL,
+  select = NULL,
+  error_call = rlang::caller_env()
+) {
+  x <- x %||% openxlsx2::wb_data(wb, sheet = sheet)
+  rlang::check_installed("tidyselect")
+
+  cols <- tidyselect::eval_select(
+    expr = rlang::enquo(cols),
+    data = x,
+    error_call = error_call
+  )
+
+  # FIXME: Improve handling for integer(0) cols
+  stopifnot(
+    length(cols) != 0
+  )
+
+  if (select == "cols") {
+    return(cols)
+  }
+
+  openxlsx2::wb_dims(
+    x = x,
+    cols = cols,
+    select = select
+  )
+}
