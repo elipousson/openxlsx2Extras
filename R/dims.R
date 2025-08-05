@@ -78,7 +78,7 @@ wb_dims_ext <- function(
     length(cols) != 0
   )
 
-  if (select == "cols") {
+  if (!is.null(select) && select == "cols") {
     return(cols)
   }
 

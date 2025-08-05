@@ -7,18 +7,13 @@
 wb_dims_ext(
   wb = NULL,
   sheet = openxlsx2::current_sheet(),
-  .cols,
-  ...,
+  cols,
   x = NULL,
   select = NULL,
   error_call = rlang::caller_env()
 )
 }
 \arguments{
-\item{...}{construct \code{dims} arguments, from rows/cols vectors or objects that
-can be coerced to data frame. \code{x}, \code{rows}, \code{cols}, \code{from_row}, \code{from_col}, \code{from_dims}
-\code{row_names}, and \code{col_names} are accepted.}
-
 \item{select}{A string, one of the followings.
 it improves the selection of various parts of \code{x}
 One of "x", "data", "col_names", or "row_names".
@@ -28,6 +23,7 @@ One of "x", "data", "col_names", or "row_names".
 \code{"row_names"} Will only return row names.}
 }
 \description{
-Extended helper to specify the dims or cols arguments
+\code{\link[=wb_dims_ext]{wb_dims_ext()}} extends \code{\link[openxlsx2:wb_dims]{openxlsx2::wb_dims()}} by allowing a workbook input
+used to set \code{x} and supporting tidy selection for the \code{cols} argument.
 }
 \keyword{internal}
