@@ -4,15 +4,24 @@
 \alias{read_xlsx_ext}
 \title{Create a data frame from a Workbook (with extra features)}
 \usage{
-read_xlsx_ext(file, ..., repair = "unique")
+read_xlsx_ext(
+  file,
+  sheet = 1,
+  ...,
+  names_from = "basename",
+  names_to = rlang::zap(),
+  combine = TRUE,
+  repair = "unique_quiet"
+)
 }
 \arguments{
 \item{file}{An xlsx file, \link[openxlsx2]{wbWorkbook} object or URL to xlsx file.}
 
+\item{sheet}{Defaults to 1.}
+
 \item{...}{
   Arguments passed on to \code{\link[openxlsx2:wb_to_df]{openxlsx2::read_xlsx}}
   \describe{
-    \item{\code{sheet}}{Either sheet name or index. When missing the first sheet in the workbook is selected.}
     \item{\code{start_row}}{first row to begin looking for data.}
     \item{\code{start_col}}{first column to begin looking for data.}
     \item{\code{row_names}}{If \code{TRUE}, the first col of data will be used as row names.}
@@ -34,6 +43,13 @@ If no sheet is selected, the first appearance will be selected. See \code{\link[
     \item{\code{check_names}}{If \code{TRUE} then the names of the variables in the data frame are checked to ensure that they are syntactically valid variable names.}
     \item{\code{show_hyperlinks}}{If \code{TRUE} instead of the displayed text, hyperlink targets are shown.}
   }}
+
+\item{names_to}{By default, \code{names(x)} are lost. To keep them, supply a
+string to \code{names_to} and the names will be saved into a column with that
+name. If \code{names_to} is supplied and \code{x} is not named, the position of
+the elements will be used instead of the names.}
+
+\item{combine}{If \code{TRUE}, always return a data frames. If \code{FALSE}, return a list of data frames.}
 
 \item{repair}{Either a string or a function. If a string, it must be one of
 \code{"check_unique"}, \code{"minimal"}, \code{"unique"}, \code{"universal"}, \code{"unique_quiet"},
@@ -62,7 +78,16 @@ are used, any setting of \code{quiet} is silently overridden.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 
-\code{\link[=read_xlsx_ext]{read_xlsx_ext()}} uses \code{\link[openxlsx2:wb_to_df]{openxlsx2::read_xlsx()}} but allows use of a name
-repair argument (\code{"unique"} by default) to avoid blank \code{""} or \code{NA} values
-for column names.
+\code{\link[=read_xlsx_ext]{read_xlsx_ext()}} uses \code{\link[openxlsx2:wb_to_df]{openxlsx2::read_xlsx()}} with a few added features:
+\itemize{
+\item allows use of a name repair argument (\code{"unique_quite"} by default) to avoid
+blank \code{""} or \code{NA} values for column names.
+\item allows vector inputs for the file or sheet argument. These parameters are
+recycled to a common length and result in the return of a data frame list
+unless the \code{combine = TRUE} is set. If \code{combine = TRUE}, set \code{names_to}
+(passed to \code{purrr::list_rbind}) to combined the file basename values
+(default) or full path values as a column (depending on the \code{names_from}
+argument). \code{names_from} can also be a length > 1 character vector that can be
+recycled to match the length of file.
+}
 }
