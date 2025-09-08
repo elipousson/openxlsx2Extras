@@ -20,6 +20,7 @@ write_xlsx_ext(
   start_row = 1,
   geometry = "drop",
   labels = "drop",
+  na.strings = na_strings(),
   overwrite = TRUE,
   call = caller_env()
 )
@@ -64,6 +65,8 @@ existing geometry column (keeping the existing sf column name).}
 \item{labels}{Method for handling column labels. "drop" (default) or
 "row_before". If "row_before", insert column labels in the row before the
 column names.}
+
+\item{na.strings}{Used to set a temporary value for the \code{openxlsx2.na.strings} option.}
 
 \item{overwrite}{If \code{FALSE}, will not overwrite when \code{file} already exists.}
 

@@ -70,6 +70,7 @@ wb_save_ext <- function(wb, file = NULL, overwrite = TRUE, ...) {
 #'   data frames. x can also be any object coercible to a data frame (other than
 #'   a bare list) by [base::as.data.frame()]. If x is a named list and
 #'   `sheet_names` is supplied, the existing names for x are ignored.
+#' @param na.strings Used to set a temporary value for the `openxlsx2.na.strings` option.
 #' @inheritParams wb_new_workbook
 #' @inheritParams wb_add_data_ext
 #' @param title,subject,category,keywords Additional workbook properties passed
@@ -113,9 +114,24 @@ write_xlsx_ext <- function(
   start_row = 1,
   geometry = "drop",
   labels = "drop",
+  na.strings = na_strings(),
   overwrite = TRUE,
   call = caller_env()
 ) {
+  # Use `na.strings` value if supplied (even if input is already a workbook)
+  if (
+    !inherits(na.strings, "openxlsx2_waiver") &&
+      is.character(na.strings) &&
+      getOption("openxlsx2.na.strings") != na.strings
+  ) {
+    # TODO: Check if is the right way to set temp options
+    withr::local_options(
+      list(
+        openxlsx2.na.strings = na.strings
+      )
+    )
+  }
+
   # If x is a wbWorkbook object, use wb_save_ext to save to file
   # All other arguments except file, path, and overwrite are ignored
   if (is_wb(x)) {

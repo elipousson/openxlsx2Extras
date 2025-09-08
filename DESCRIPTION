@@ -23,15 +23,15 @@ Imports:
     purrr,
     rlang,
     utils,
-    vctrs
+    vctrs,
+    withr
 Suggests:
     dplyr,
     gt,
     marquee,
     sf,
     testthat (>= 3.0.0),
-    tidyselect,
-    withr
+    tidyselect
 Config/testthat/edition: 3
 Encoding: UTF-8
 Language: en-US
