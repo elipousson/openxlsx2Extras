@@ -121,8 +121,7 @@ write_xlsx_ext <- function(
   # Use `na.strings` value if supplied (even if input is already a workbook)
   if (
     !inherits(na.strings, "openxlsx2_waiver") &&
-      is.character(na.strings) &&
-      getOption("openxlsx2.na.strings") != na.strings
+      is.character(na.strings)
   ) {
     # TODO: Check if is the right way to set temp options
     withr::local_options(
