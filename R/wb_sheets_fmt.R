@@ -83,6 +83,8 @@ wb_rename_sheets_with <- function(wb, .fn, .sheets = tidyselect::everything()) {
     data = existing_sheet_names
   )
 
+  existing_sheet_names <- existing_sheet_names[select_sheet_names]
+
   new_sheet_names <- set_names(
     select_sheet_names,
     .fn(names(select_sheet_names))
