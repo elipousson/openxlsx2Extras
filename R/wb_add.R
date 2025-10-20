@@ -91,7 +91,11 @@ wb_add_data_ext <- function(
 
 #' Get label attributes from each column in a data frame
 #' @noRd
-get_col_labels <- function(data) {
+get_col_labels <- function(data, missing_val = "") {
   # TODO: See if this should be replaced w/ vapply or map_chr
-  unlist(lapply(data, \(x) attr(x, "label")))
+  unlist(
+    lapply(data, \(x) {
+      attr(x, "label") %||% missing_val # missing_val could default to NA_character_
+    })
+  )
 }
