@@ -31,11 +31,11 @@ read_xlsx_ext <- function(
   combine = TRUE,
   repair = "unique_quiet"
 ) {
-    if (length(file) > 1 || length(sheet) > 1) {
-      read_args <- vctrs::vec_recycle_common(file = file, sheet = sheet)
-      file <- read_args[["file"]]
-      sheet <- read_args[["sheet"]]
-    }
+  if (length(file) > 1 || length(sheet) > 1) {
+    read_args <- vctrs::vec_recycle_common(file = file, sheet = sheet)
+    file <- read_args[["file"]]
+    sheet <- read_args[["sheet"]]
+  }
 
   if (is_string(names_from)) {
     nm <- switch(names_from, "basename" = basename(file), "path" = file)
