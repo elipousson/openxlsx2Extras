@@ -90,7 +90,7 @@ xlsx_to_csv <- function(
   )
 }
 
-#' [set_new_file()] sets new_file based on file or as temporary file.
+#' `set_new_file()` sets new_file based on file or as temporary file.
 #' @noRd
 #' @importFrom fs path_ext_set file_temp
 set_new_file <- function(
