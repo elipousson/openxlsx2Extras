@@ -68,10 +68,10 @@ wb_add_data_ext <- function(
   if (labels == "row_before") {
     col_labels <- get_col_labels(x)
 
-    if (!is.null(labels)) {
-      labels <- as.data.frame(t(as.data.frame(labels)))
+    if (!is.null(col_labels)) {
+      col_labels <- as.data.frame(t(as.data.frame(col_labels)))
       wb <- wb$add_data(
-        x = labels,
+        x = col_labels,
         sheet = sheet,
         start_row = start_row,
         col_names = FALSE
