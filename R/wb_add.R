@@ -15,9 +15,10 @@
 #'   one function or the other depending on this value.
 #' @inheritDotParams openxlsx2::wb_add_data
 #' @inheritDotParams openxlsx2::wb_add_data_table
-#' @param labels Method for handling column labels. "drop" (default) or
-#'   "row_before". If "row_before", insert column labels in the row before the
-#'   column names.
+#' @param labels Method for handling column labels. "drop" (default),
+#'   "row_before", or "comments". If "row_before", insert column labels in the
+#'   row before the column names. If "comments", add column labels as columns on
+#'   the column names in the start row.
 #' @export
 #' @examples
 #' wb <- wb_new_workbook("mtcars")
@@ -37,7 +38,7 @@ wb_add_data_ext <- function(
   sep = "; ",
   geometry = c("drop", "coords", "wkt"),
   coords = c("lon", "lat"),
-  labels = c("drop", "row_before"),
+  labels = c("drop", "row_before", "comments"),
   as_table = FALSE,
   call = caller_env()
 ) {
@@ -78,6 +79,27 @@ wb_add_data_ext <- function(
       )
       start_row <- start_row + 1
     }
+  } else if (labels == "comments") {
+    col_labels <- get_col_labels(x)
+
+    wb <- purrr::reduce(
+      seq_along(col_labels),
+      function(x, y) {
+        label <- col_labels[y]
+        if (label == "" || is.na(label)) {
+          return(x)
+        }
+
+        openxlsx2::wb_add_comment(
+          wb = x,
+          sheet = sheet,
+          comment = label,
+          dims = openxlsx2::rowcol_to_dims(col = y, row = start_row),
+          author = ""
+        )
+      },
+      .init = wb
+    )
   }
 
   if (as_table) {

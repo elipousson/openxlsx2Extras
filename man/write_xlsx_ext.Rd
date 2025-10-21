@@ -62,9 +62,10 @@ columns with names matching \code{coords}. "wkt" converts geometry to a Well
 Known Text (WKT) character vector using \code{\link[sf:st_as_text]{sf::st_as_text()}} and replaces the
 existing geometry column (keeping the existing sf column name).}
 
-\item{labels}{Method for handling column labels. "drop" (default) or
-"row_before". If "row_before", insert column labels in the row before the
-column names.}
+\item{labels}{Method for handling column labels. "drop" (default),
+"row_before", or "comments". If "row_before", insert column labels in the
+row before the column names. If "comments", add column labels as columns on
+the column names in the start row.}
 
 \item{na.strings}{Used to set a temporary value for the \code{openxlsx2.na.strings} option.}
 

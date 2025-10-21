@@ -14,7 +14,7 @@ wb_add_data_ext(
   sep = "; ",
   geometry = c("drop", "coords", "wkt"),
   coords = c("lon", "lat"),
-  labels = c("drop", "row_before"),
+  labels = c("drop", "row_before", "comments"),
   as_table = FALSE,
   call = caller_env()
 )
@@ -70,9 +70,10 @@ existing geometry column (keeping the existing sf column name).}
 
 \item{coords}{Length 2 character vector with column names to add if \code{geometry = "coords"}. Must be length 2 in longitude, latitude order.}
 
-\item{labels}{Method for handling column labels. "drop" (default) or
-"row_before". If "row_before", insert column labels in the row before the
-column names.}
+\item{labels}{Method for handling column labels. "drop" (default),
+"row_before", or "comments". If "row_before", insert column labels in the
+row before the column names. If "comments", add column labels as columns on
+the column names in the start row.}
 
 \item{as_table}{Default \code{FALSE}. If \code{TRUE}, use
 \code{\link[openxlsx2:wb_add_data_table]{openxlsx2::wb_add_data_table()}} to add data to workbook. If \code{FALSE}, use

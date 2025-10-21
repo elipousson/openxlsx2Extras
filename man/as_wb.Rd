@@ -32,9 +32,10 @@ other parameters. A file path is loaded to a data frame using
 \code{\link[openxlsx2:wb_add_data_table]{openxlsx2::wb_add_data_table()}} to add data to workbook. If \code{FALSE}, use
 \code{\link[openxlsx2:wb_add_data]{openxlsx2::wb_add_data()}}. Additional parameters in \code{...} are passed to
 one function or the other depending on this value.}
-    \item{\code{labels}}{Method for handling column labels. "drop" (default) or
-"row_before". If "row_before", insert column labels in the row before the
-column names.}
+    \item{\code{labels}}{Method for handling column labels. "drop" (default),
+"row_before", or "comments". If "row_before", insert column labels in the
+row before the column names. If "comments", add column labels as columns on
+the column names in the start row.}
     \item{\code{list_columns}}{String, one of "collapse" (default), "drop", or "asis"}
     \item{\code{sep}}{String to use in collapsing list columns. Ignored unless
 \code{list_columns = "collapse"}. Defaults to \code{"; "}.}
