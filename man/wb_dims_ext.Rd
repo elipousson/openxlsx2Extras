@@ -10,6 +10,8 @@ wb_dims_ext(
   cols,
   x = NULL,
   select = NULL,
+  start_row = NULL,
+  start_col = NULL,
   error_call = rlang::caller_env()
 )
 }

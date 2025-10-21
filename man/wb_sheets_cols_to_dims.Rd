@@ -6,11 +6,29 @@
 \alias{wb_cols_to_dims}
 \title{Get a list of dimensions from one or more sheets}
 \usage{
-wb_sheets_cols_to_dims(wb, cols, sheets = NULL)
+wb_sheets_cols_to_dims(
+  wb,
+  cols,
+  sheets = NULL,
+  start_row = NULL,
+  start_col = NULL
+)
 
-wb_cols_to_index(wb, cols, sheet = current_sheet())
+wb_cols_to_index(
+  wb,
+  cols,
+  sheet = current_sheet(),
+  start_row = NULL,
+  start_col = NULL
+)
 
-wb_cols_to_dims(wb, cols, sheet = current_sheet())
+wb_cols_to_dims(
+  wb,
+  cols,
+  sheet = current_sheet(),
+  start_row = NULL,
+  start_col = NULL
+)
 }
 \arguments{
 \item{cols}{A character vector or list of character vectors. Length of cols

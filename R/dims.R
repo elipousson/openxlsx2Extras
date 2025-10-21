@@ -9,7 +9,13 @@
 #' @param sheets Default to use all workbook sheets.
 #' @keywords internal
 #' @export
-wb_sheets_cols_to_dims <- function(wb, cols, sheets = NULL) {
+wb_sheets_cols_to_dims <- function(
+  wb,
+  cols,
+  sheets = NULL,
+  start_row = NULL,
+  start_col = NULL
+) {
   sheets <- sheets %||% openxlsx2::wb_get_sheet_names(wb)
 
   if (is.character(cols) && has_length(sheets, 1)) {
@@ -20,11 +26,18 @@ wb_sheets_cols_to_dims <- function(wb, cols, sheets = NULL) {
     cols,
     size = length(sheets)
   )
+  # TODO: Recycle sizes for start_row and start_col also
 
   purrr::imap(
     sheets,
     \(x, idx) {
-      wb_cols_to_dims(wb, sheet = x, cols = cols[[idx]])
+      wb_cols_to_dims(
+        wb,
+        sheet = x,
+        cols = cols[[idx]],
+        start_row = start_row,
+        start_col = start_col
+      )
     }
   )
 }
@@ -32,8 +45,19 @@ wb_sheets_cols_to_dims <- function(wb, cols, sheets = NULL) {
 #' @keywords internal
 #' @rdname wb_sheets_cols_to_dims
 #' @export
-wb_cols_to_index <- function(wb, cols, sheet = current_sheet()) {
-  values <- names(openxlsx2::wb_data(wb, sheet = sheet))
+wb_cols_to_index <- function(
+  wb,
+  cols,
+  sheet = current_sheet(),
+  start_row = NULL,
+  start_col = NULL
+) {
+  values <- names(openxlsx2::wb_data(
+    wb,
+    sheet = sheet,
+    start_row = start_row,
+    start_col = start_col
+  ))
 
   match(
     cols,
@@ -44,8 +68,22 @@ wb_cols_to_index <- function(wb, cols, sheet = current_sheet()) {
 #' @keywords internal
 #' @rdname wb_sheets_cols_to_dims
 #' @export
-wb_cols_to_dims <- function(wb, cols, sheet = current_sheet()) {
-  openxlsx2::wb_dims(x = openxlsx2::wb_data(wb, sheet = sheet), cols = cols)
+wb_cols_to_dims <- function(
+  wb,
+  cols,
+  sheet = current_sheet(),
+  start_row = NULL,
+  start_col = NULL
+) {
+  openxlsx2::wb_dims(
+    x = openxlsx2::wb_data(
+      wb,
+      sheet = sheet,
+      start_row = start_row,
+      start_col = start_col
+    ),
+    cols = cols
+  )
 }
 
 #' Extended helper to specify the dims or cols arguments
@@ -62,9 +100,18 @@ wb_dims_ext <- function(
   cols,
   x = NULL,
   select = NULL,
+  start_row = NULL,
+  start_col = NULL,
   error_call = rlang::caller_env()
 ) {
-  x <- x %||% openxlsx2::wb_data(wb, sheet = sheet)
+  x <- x %||%
+    openxlsx2::wb_data(
+      wb,
+      sheet = sheet,
+      start_row = start_row,
+      start_col = start_col
+    )
+
   rlang::check_installed("tidyselect")
 
   cols <- tidyselect::eval_select(
