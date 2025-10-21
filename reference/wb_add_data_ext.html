@@ -58,7 +58,7 @@ workbook with special handling for input data with geometry or list columns
 <span>  sep <span class="op">=</span> <span class="st">"; "</span>,</span>
 <span>  geometry <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"drop"</span>, <span class="st">"coords"</span>, <span class="st">"wkt"</span><span class="op">)</span>,</span>
 <span>  coords <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"lon"</span>, <span class="st">"lat"</span><span class="op">)</span>,</span>
-<span>  labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"drop"</span>, <span class="st">"row_before"</span><span class="op">)</span>,</span>
+<span>  labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"drop"</span>, <span class="st">"row_before"</span>, <span class="st">"comments"</span><span class="op">)</span>,</span>
 <span>  as_table <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  call <span class="op">=</span> <span class="fu">caller_env</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -173,9 +173,10 @@ existing geometry column (keeping the existing sf column name).</p></dd>
 
 
 <dt id="arg-labels">labels<a class="anchor" aria-label="anchor" href="#arg-labels"></a></dt>
-<dd><p>Method for handling column labels. "drop" (default) or
-"row_before". If "row_before", insert column labels in the row before the
-column names.</p></dd>
+<dd><p>Method for handling column labels. "drop" (default),
+"row_before", or "comments". If "row_before", insert column labels in the
+row before the column names. If "comments", add column labels as columns on
+the column names in the start row.</p></dd>
 
 
 <dt id="arg-as-table">as_table<a class="anchor" aria-label="anchor" href="#arg-as-table"></a></dt>
