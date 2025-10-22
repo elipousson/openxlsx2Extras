@@ -19,7 +19,7 @@ wb_sheets_cols_to_dims <- function(
   sheets <- sheets %||% openxlsx2::wb_get_sheet_names(wb)
 
   if (is.character(cols) && has_length(sheets, 1)) {
-    cols <- list(cols)
+    cols <- list(unique(cols))
   }
 
   cols <- vctrs::vec_recycle(
