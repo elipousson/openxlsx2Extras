@@ -48,7 +48,7 @@ extension. This function is not stable and may change in the future.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">wb_save_ext</span><span class="op">(</span><span class="va">wb</span>, file <span class="op">=</span> <span class="cn">NULL</span>, overwrite <span class="op">=</span> <span class="cn">TRUE</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">wb_save_ext</span><span class="op">(</span><span class="va">wb</span>, file <span class="op">=</span> <span class="cn">NULL</span>, overwrite <span class="op">=</span> <span class="cn">TRUE</span>, flush <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -67,15 +67,8 @@ extension. This function is not stable and may change in the future.</p>
 <dd><p>If <code>FALSE</code>, will not overwrite when <code>file</code> already exists.</p></dd>
 
 
-<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>Arguments passed on to <code><a href="https://janmarvin.github.io/openxlsx2/reference/wb_save.html" class="external-link">openxlsx2::wb_save</a></code></p><dl><dt><code>path</code></dt>
-<dd><p>Deprecated argument. Please use <code>file</code> in new code.</p></dd>
-
-    <dt><code>flush</code></dt>
+<dt id="arg-flush">flush<a class="anchor" aria-label="anchor" href="#arg-flush"></a></dt>
 <dd><p>Experimental, streams the worksheet file to disk</p></dd>
-
-
-</dl></dd>
 
 </dl></div>
 

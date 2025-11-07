@@ -60,6 +60,7 @@ workbook with special handling for input data with geometry or list columns
 <span>  coords <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"lon"</span>, <span class="st">"lat"</span><span class="op">)</span>,</span>
 <span>  labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"drop"</span>, <span class="st">"row_before"</span>, <span class="st">"comments"</span><span class="op">)</span>,</span>
 <span>  as_table <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  na.strings <span class="op">=</span> <span class="fu">openxlsx2</span><span class="fu">::</span><span class="fu"><a href="https://janmarvin.github.io/openxlsx2/reference/waivers.html" class="external-link">na_strings</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  call <span class="op">=</span> <span class="fu">caller_env</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -109,11 +110,6 @@ NOTE: can only have one filter per worksheet.</p></dd>
 
     <dt><code>remove_cell_style</code></dt>
 <dd><p>keep the cell style?</p></dd>
-
-    <dt><code>na.strings</code></dt>
-<dd><p>Value used for replacing <code>NA</code> values from <code>x</code>. Default
-looks if <code>options(openxlsx2.na.strings)</code> is set. Otherwise <code><a href="https://janmarvin.github.io/openxlsx2/reference/waivers.html" class="external-link">na_strings()</a></code>
-uses the special <code>#N/A</code> value within the workbook.</p></dd>
 
     <dt><code>inline_strings</code></dt>
 <dd><p>write characters as inline strings</p></dd>
@@ -184,6 +180,12 @@ the column names in the start row.</p></dd>
 <code><a href="https://janmarvin.github.io/openxlsx2/reference/wb_add_data_table.html" class="external-link">openxlsx2::wb_add_data_table()</a></code> to add data to workbook. If <code>FALSE</code>, use
 <code><a href="https://janmarvin.github.io/openxlsx2/reference/wb_add_data.html" class="external-link">openxlsx2::wb_add_data()</a></code>. Additional parameters in <code>...</code> are passed to
 one function or the other depending on this value.</p></dd>
+
+
+<dt id="arg-na-strings">na.strings<a class="anchor" aria-label="anchor" href="#arg-na-strings"></a></dt>
+<dd><p>Value used for replacing <code>NA</code> values from <code>x</code>. Default
+looks if <code>options(openxlsx2.na.strings)</code> is set. Otherwise <code><a href="https://janmarvin.github.io/openxlsx2/reference/waivers.html" class="external-link">na_strings()</a></code>
+uses the special <code>#N/A</code> value within the workbook.</p></dd>
 
 
 <dt id="arg-call">call<a class="anchor" aria-label="anchor" href="#arg-call"></a></dt>

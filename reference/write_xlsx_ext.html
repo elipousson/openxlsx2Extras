@@ -67,7 +67,7 @@ frame.</p>
 <span>  start_row <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  geometry <span class="op">=</span> <span class="st">"drop"</span>,</span>
 <span>  labels <span class="op">=</span> <span class="st">"drop"</span>,</span>
-<span>  na.strings <span class="op">=</span> <span class="fu"><a href="https://janmarvin.github.io/openxlsx2/reference/waivers.html" class="external-link">na_strings</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  na.strings <span class="op">=</span> <span class="fu">openxlsx2</span><span class="fu">::</span><span class="fu"><a href="https://janmarvin.github.io/openxlsx2/reference/waivers.html" class="external-link">na_strings</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  overwrite <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  call <span class="op">=</span> <span class="fu">caller_env</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -143,7 +143,9 @@ the column names in the start row.</p></dd>
 
 
 <dt id="arg-na-strings">na.strings<a class="anchor" aria-label="anchor" href="#arg-na-strings"></a></dt>
-<dd><p>Used to set a temporary value for the <code>openxlsx2.na.strings</code> option.</p></dd>
+<dd><p>Value used for replacing <code>NA</code> values from <code>x</code>. Default
+looks if <code>options(openxlsx2.na.strings)</code> is set. Otherwise <code><a href="https://janmarvin.github.io/openxlsx2/reference/waivers.html" class="external-link">na_strings()</a></code>
+uses the special <code>#N/A</code> value within the workbook.</p></dd>
 
 
 <dt id="arg-overwrite">overwrite<a class="anchor" aria-label="anchor" href="#arg-overwrite"></a></dt>
