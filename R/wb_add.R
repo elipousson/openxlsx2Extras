@@ -40,6 +40,7 @@ wb_add_data_ext <- function(
   coords = c("lon", "lat"),
   labels = c("drop", "row_before", "comments"),
   as_table = FALSE,
+  na.strings = openxlsx2::na_strings(),
   call = caller_env()
 ) {
   # TODO: Add support for data frame list inputs
@@ -75,6 +76,7 @@ wb_add_data_ext <- function(
         x = col_labels,
         sheet = sheet,
         start_row = start_row,
+        na.strings = na.strings,
         col_names = FALSE
       )
       start_row <- start_row + 1
@@ -103,9 +105,21 @@ wb_add_data_ext <- function(
   }
 
   if (as_table) {
-    wb$add_data_table(x = x, sheet = sheet, ..., start_row = start_row)
+    wb$add_data_table(
+      x = x,
+      sheet = sheet,
+      ...,
+      na.strings = na.strings,
+      start_row = start_row
+    )
   } else {
-    wb$add_data(x = x, sheet = sheet, ..., start_row = start_row)
+    wb$add_data(
+      x = x,
+      sheet = sheet,
+      ...,
+      na.strings = na.strings,
+      start_row = start_row
+    )
   }
 
   wb

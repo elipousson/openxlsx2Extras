@@ -49,6 +49,9 @@ existing geometry column (keeping the existing sf column name).}
     \item{\code{wb}}{A Workbook object containing a worksheet.}
     \item{\code{sheet}}{The worksheet to write to. Can be the worksheet index or name.}
     \item{\code{start_row}}{A vector specifying the starting row to write \code{x} to.}
+    \item{\code{na.strings}}{Value used for replacing \code{NA} values from \code{x}. Default
+looks if \code{options(openxlsx2.na.strings)} is set. Otherwise \code{\link[openxlsx2:na_strings]{na_strings()}}
+uses the special \verb{#N/A} value within the workbook.}
   }}
 
 \item{sheet_names}{Optional character vector of worksheet names.}

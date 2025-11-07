@@ -5,7 +5,7 @@
 \title{Save a workboook object to file while filling file name from assigned
 workbook title}
 \usage{
-wb_save_ext(wb, file = NULL, overwrite = TRUE, ...)
+wb_save_ext(wb, file = NULL, overwrite = TRUE, flush = FALSE)
 }
 \arguments{
 \item{wb}{A \code{wbWorkbook} object to write to file}
@@ -14,12 +14,7 @@ wb_save_ext(wb, file = NULL, overwrite = TRUE, ...)
 
 \item{overwrite}{If \code{FALSE}, will not overwrite when \code{file} already exists.}
 
-\item{...}{
-  Arguments passed on to \code{\link[openxlsx2:wb_save]{openxlsx2::wb_save}}
-  \describe{
-    \item{\code{path}}{Deprecated argument. Please use \code{file} in new code.}
-    \item{\code{flush}}{Experimental, streams the worksheet file to disk}
-  }}
+\item{flush}{Experimental, streams the worksheet file to disk}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}

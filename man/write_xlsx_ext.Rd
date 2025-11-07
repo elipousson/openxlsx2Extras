@@ -20,7 +20,7 @@ write_xlsx_ext(
   start_row = 1,
   geometry = "drop",
   labels = "drop",
-  na.strings = na_strings(),
+  na.strings = openxlsx2::na_strings(),
   overwrite = TRUE,
   call = caller_env()
 )
@@ -67,7 +67,9 @@ existing geometry column (keeping the existing sf column name).}
 row before the column names. If "comments", add column labels as columns on
 the column names in the start row.}
 
-\item{na.strings}{Used to set a temporary value for the \code{openxlsx2.na.strings} option.}
+\item{na.strings}{Value used for replacing \code{NA} values from \code{x}. Default
+looks if \code{options(openxlsx2.na.strings)} is set. Otherwise \code{\link[openxlsx2:na_strings]{na_strings()}}
+uses the special \verb{#N/A} value within the workbook.}
 
 \item{overwrite}{If \code{FALSE}, will not overwrite when \code{file} already exists.}
 
