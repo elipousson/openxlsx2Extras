@@ -49,7 +49,8 @@ string to \code{names_to} and the names will be saved into a column with that
 name. If \code{names_to} is supplied and \code{x} is not named, the position of
 the elements will be used instead of the names.}
 
-\item{combine}{If \code{TRUE}, always return a data frames. If \code{FALSE}, return a list of data frames.}
+\item{combine}{If \code{TRUE}, always return a data frames. If \code{FALSE}, return a
+list of data frames.}
 
 \item{repair}{Either a string or a function. If a string, it must be one of
 \code{"check_unique"}, \code{"minimal"}, \code{"unique"}, \code{"universal"}, \code{"unique_quiet"},

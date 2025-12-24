@@ -16,7 +16,8 @@
 #'  recycled to match the length of file.
 #'
 #' @param sheet Defaults to 1.
-#' @param combine If `TRUE`, always return a data frames. If `FALSE`, return a list of data frames.
+#' @param combine If `TRUE`, always return a data frames. If `FALSE`, return a
+#' list of data frames.
 #' @inheritParams purrr::list_rbind
 #' @inheritParams openxlsx2::read_xlsx
 #' @inheritParams vctrs::vec_as_names
@@ -31,6 +32,15 @@ read_xlsx_ext <- function(
   combine = TRUE,
   repair = "unique_quiet"
 ) {
+  # Only workbooks with path values are supported
+  if (
+    inherits(file, "wbWorkbook") &&
+      (length(file[["path"]]) > 0) &&
+      file.exists(file[["path"]])
+  ) {
+    file <- file[["path"]]
+  }
+
   if (length(file) > 1 || length(sheet) > 1) {
     read_args <- vctrs::vec_recycle_common(file = file, sheet = sheet)
     file <- read_args[["file"]]
