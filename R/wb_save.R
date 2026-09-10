@@ -22,6 +22,7 @@
 #'   fs::dir_ls()
 #' })
 #'
+#' @returns A `wbWorkbook` object, saved to `file` as a side effect.
 #' @export
 wb_save_ext <- function(
   wb,
@@ -101,6 +102,8 @@ wb_save_ext <- function(
 #'   fs::dir_ls()
 #' })
 #'
+#' @returns Invisibly returns `x` unmodified. The workbook built from `x` is
+#'   saved to `file` as a side effect.
 #' @export
 write_xlsx_ext <- function(
   x,
@@ -138,8 +141,6 @@ write_xlsx_ext <- function(
     return(wb_save_ext(x, file = file, overwrite = overwrite))
   }
 
-  bare_list_input <- is_bare_list(x)
-
   wb <- as_wb(
     x = x,
     creator = creator,
@@ -163,9 +164,5 @@ write_xlsx_ext <- function(
   wb_save_ext(wb, file = file, overwrite = overwrite)
 
   # Invisibly return x w/o modification
-  if (bare_list_input) {
-    return(invisible(x))
-  }
-
-  invisible(x[[1]])
+  invisible(x)
 }

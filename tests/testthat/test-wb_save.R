@@ -65,3 +65,12 @@ test_that("write_xlsx_ext() saves an existing workbook input", {
 
   expect_true(file.exists("wb input.xlsx"))
 })
+
+test_that("write_xlsx_ext() invisibly returns a data frame input unmodified", {
+  withr::local_dir(withr::local_tempdir())
+
+  result <- withVisible(write_xlsx_ext(mtcars, "mtcars.xlsx"))
+
+  expect_false(result$visible)
+  expect_identical(result$value, mtcars)
+})
