@@ -36,25 +36,37 @@ export(wb_to_df_list)
 export(write_xlsx_ext)
 export(xlsx_to_csv)
 import(rlang)
-importFrom(cli,cli_abort)
-importFrom(cli,cli_warn)
-importFrom(fs,file_exists)
-importFrom(fs,file_temp)
-importFrom(fs,path_ext_set)
-importFrom(lifecycle,badge)
-importFrom(lifecycle,deprecated)
-importFrom(openxlsx2,create_dxfs_style)
-importFrom(openxlsx2,current_sheet)
-importFrom(openxlsx2,wb_add_data)
-importFrom(openxlsx2,wb_add_numfmt)
-importFrom(openxlsx2,wb_add_style)
-importFrom(openxlsx2,wb_color)
-importFrom(openxlsx2,wb_data)
-importFrom(openxlsx2,wb_set_col_widths)
-importFrom(openxlsx2,wb_to_df)
-importFrom(openxlsx2,write_xlsx)
-importFrom(purrr,list_cbind)
-importFrom(purrr,map_chr)
-importFrom(utils,read.csv)
-importFrom(utils,write.csv)
+importFrom(cli,
+  cli_abort,
+  cli_warn
+)
+importFrom(fs,
+  file_exists,
+  file_temp,
+  path_ext_set
+)
+importFrom(lifecycle,
+  badge,
+  deprecated
+)
+importFrom(openxlsx2,
+  create_dxfs_style,
+  current_sheet,
+  wb_add_data,
+  wb_add_numfmt,
+  wb_add_style,
+  wb_color,
+  wb_data,
+  wb_set_col_widths,
+  wb_to_df,
+  write_xlsx
+)
+importFrom(purrr,
+  list_cbind,
+  map_chr
+)
+importFrom(utils,
+  read.csv,
+  write.csv
+)
 importFrom(vctrs,vec_recycle)

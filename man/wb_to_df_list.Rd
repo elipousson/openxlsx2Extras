@@ -7,7 +7,7 @@
 wb_to_df_list(file, sheet_names = NULL, ...)
 }
 \arguments{
-\item{file}{An xlsx file, \link[openxlsx2]{wbWorkbook} object or URL to xlsx file.}
+\item{file}{A workbook file path, a \link[openxlsx2]{wbWorkbook} object, or a valid URL.}
 
 \item{sheet_names}{Character vector of sheet names. If not supplied, all
 sheet names from the supplied workbook are used.}
@@ -15,36 +15,36 @@ sheet names from the supplied workbook are used.}
 \item{...}{
   Arguments passed on to \code{\link[openxlsx2:wb_to_df]{openxlsx2::wb_to_df}}
   \describe{
-    \item{\code{sheet}}{Either sheet name or index. When missing the first sheet in the workbook is selected.}
-    \item{\code{start_row}}{first row to begin looking for data.}
-    \item{\code{start_col}}{first column to begin looking for data.}
-    \item{\code{row_names}}{If \code{TRUE}, the first col of data will be used as row names.}
-    \item{\code{col_names}}{If \code{TRUE}, the first row of data will be used as column names.}
-    \item{\code{skip_empty_rows}}{If \code{TRUE}, empty rows are skipped.}
-    \item{\code{skip_empty_cols}}{If \code{TRUE}, empty columns are skipped.}
-    \item{\code{skip_hidden_rows}}{If \code{TRUE}, hidden rows are skipped.}
-    \item{\code{skip_hidden_cols}}{If \code{TRUE}, hidden columns are skipped.}
-    \item{\code{rows}}{A numeric vector specifying which rows in the xlsx file to read.
-If \code{NULL}, all rows are read.}
-    \item{\code{cols}}{A numeric vector specifying which columns in the xlsx file to read.
-If \code{NULL}, all columns are read.}
-    \item{\code{detect_dates}}{If \code{TRUE}, attempt to recognize dates and perform conversion.}
-    \item{\code{na.strings}}{A character vector of strings which are to be interpreted as \code{NA}.
-Blank cells will be returned as \code{NA}.}
-    \item{\code{na.numbers}}{A numeric vector of digits which are to be interpreted as \code{NA}.
-Blank cells will be returned as \code{NA}.}
-    \item{\code{fill_merged_cells}}{If \code{TRUE}, the value in a merged cell is given to all cells within the merge.}
-    \item{\code{dims}}{Character string of type "A1:B2" as optional dimensions to be imported.}
-    \item{\code{show_formula}}{If \code{TRUE}, the underlying Excel formulas are shown.}
-    \item{\code{convert}}{If \code{TRUE}, a conversion to dates and numerics is attempted.}
-    \item{\code{types}}{A named numeric indicating, the type of the data.
-Names must match the returned data. See \strong{Details} for more.}
-    \item{\code{named_region}}{Character string with a \code{named_region} (defined name or table).
-If no sheet is selected, the first appearance will be selected. See \code{\link[openxlsx2:wb_get_named_regions]{wb_get_named_regions()}}}
-    \item{\code{keep_attributes}}{If \code{TRUE} additional attributes are returned.
-(These are used internally to define a cell type.)}
-    \item{\code{check_names}}{If \code{TRUE} then the names of the variables in the data frame are checked to ensure that they are syntactically valid variable names.}
-    \item{\code{show_hyperlinks}}{If \code{TRUE} instead of the displayed text, hyperlink targets are shown.}
+    \item{\code{sheet}}{The name or index of the worksheet to read. Defaults to the first sheet.}
+    \item{\code{start_row,start_col}}{Optional numeric values specifying the first row or column
+to begin data discovery.}
+    \item{\code{row_names}}{Logical; if TRUE, uses the first column of the selection as row names.}
+    \item{\code{col_names}}{Logical; if TRUE, uses the first row of the selection as column headers.}
+    \item{\code{skip_empty_rows,skip_empty_cols}}{Logical; if TRUE, filters out rows or
+columns containing only missing values.}
+    \item{\code{skip_hidden_rows,skip_hidden_cols}}{Logical; if TRUE, excludes rows or
+columns marked as hidden in the worksheet metadata.}
+    \item{\code{rows,cols}}{Optional numeric vectors specifying the exact indices to read.}
+    \item{\code{detect_dates}}{Logical; if TRUE, identifies date and datetime styles for conversion.}
+    \item{\code{na}}{A character vector or a named list (e.g., \code{list(strings = "", numbers = -99)})
+defining values to treat as \code{NA}.}
+    \item{\code{fill_merged_cells}}{Logical; if TRUE, propagates the top-left value of a
+merged range to all cells in that range.}
+    \item{\code{dims}}{A character string defining the range. Supports wildcards
+(e.g., "A1:++" or "A-:+5").}
+    \item{\code{show_formula}}{Logical; if TRUE, returns the formula strings instead of
+calculated values.}
+    \item{\code{convert}}{Logical; if TRUE, attempts to coerce columns to appropriate R classes.}
+    \item{\code{types}}{A named vector (numeric or character) to explicitly define column types.}
+    \item{\code{named_region}}{A character string referring to a defined name or spreadsheet Table.}
+    \item{\code{keep_attributes}}{Logical; if TRUE, attaches metadata such as the internal
+type table (tt) and types as attributes to the output.}
+    \item{\code{check_names}}{Logical; if TRUE, ensures column names are syntactically
+valid R names via \code{\link[=make.names]{make.names()}}.}
+    \item{\code{show_hyperlinks}}{Logical; if TRUE, replaces cell values with their
+underlying hyperlink targets.}
+    \item{\code{apply_numfmts}}{Logical; if TRUE, applies spreadsheet number formatting
+and returns strings.}
   }}
 }
 \value{

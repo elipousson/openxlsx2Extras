@@ -23,7 +23,7 @@ prep_wb_data(
 \code{list_columns = "collapse"}. Defaults to \code{"; "}.}
 
 \item{geometry}{String, one of "drop" (default), "coords", or "wkt". "coords"
-uses \code{\link[sf:geos_unary]{sf::st_centroid()}} to convert input to POINT geometry, transforms
+uses \code{\link[sf:st_centroid]{sf::st_centroid()}} to convert input to POINT geometry, transforms
 geometry to EPSG:4326, converts geometry to coordinates, and adds new
 columns with names matching \code{coords}. "wkt" converts geometry to a Well
 Known Text (WKT) character vector using \code{\link[sf:st_as_text]{sf::st_as_text()}} and replaces the

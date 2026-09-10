@@ -14,12 +14,12 @@ wb_split(
 )
 }
 \arguments{
-\item{file}{An xlsx file, \link[openxlsx2]{wbWorkbook} object or URL to xlsx file.}
+\item{file}{A workbook file path, a \link[openxlsx2]{wbWorkbook} object, or a valid URL.}
 
 \item{.by}{Passed to \code{\link[dplyr:group_split]{dplyr::group_split()}}.}
 
 \item{...}{
-  Arguments passed on to \code{\link[=wb_to_df_list]{wb_to_df_list}}
+  Arguments passed on to \code{\link{wb_to_df_list}}
   \describe{
     \item{\code{sheet_names}}{Character vector of sheet names. If not supplied, all
 sheet names from the supplied workbook are used.}

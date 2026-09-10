@@ -13,7 +13,7 @@ other parameters. A file path is loaded to a data frame using
 \code{\link[openxlsx2:wb_to_df]{openxlsx2::wb_to_df()}}.}
 
 \item{...}{
-  Arguments passed on to \code{\link[=as_wb]{as_wb}}
+  Arguments passed on to \code{\link{as_wb}}
   \describe{
     \item{\code{sheet_names}}{Optional character vector of worksheet names.}
     \item{\code{title,subject,category,keywords}}{Additional arguments passed to
@@ -29,7 +29,7 @@ mentioned in error messages as the source of the error. See the
   }}
 
 \item{properties}{A named list (typically from
-\code{\link[openxlsx2:properties-wb]{openxlsx2::wb_get_properties()}}) used to set new workbook properties for
+\code{\link[openxlsx2:wb_get_properties]{openxlsx2::wb_get_properties()}}) used to set new workbook properties for
 any values set to \code{NULL}. \code{datetime_created} defaults to \code{\link[=Sys.time]{Sys.time()}} so
 must be set to \code{NULL} to inherit value from \code{properties}.}
 

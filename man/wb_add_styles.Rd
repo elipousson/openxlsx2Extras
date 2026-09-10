@@ -7,7 +7,7 @@
 wb_add_styles(wb, styles, style_names = NULL)
 }
 \arguments{
-\item{wb}{A workbook}
+\item{wb}{A \link[openxlsx2]{wbWorkbook} object.}
 
 \item{styles}{Required. List or style xml character, created by a
 ⁠create_*()⁠ function. Passed to \code{style} argument of

@@ -26,7 +26,7 @@ other parameters. A file path is loaded to a data frame using
 \code{\link[openxlsx2:wb_to_df]{openxlsx2::wb_to_df()}}.}
 
 \item{...}{
-  Arguments passed on to \code{\link[=wb_add_data_ext]{wb_add_data_ext}}
+  Arguments passed on to \code{\link{wb_add_data_ext}}
   \describe{
     \item{\code{as_table}}{Default \code{FALSE}. If \code{TRUE}, use
 \code{\link[openxlsx2:wb_add_data_table]{openxlsx2::wb_add_data_table()}} to add data to workbook. If \code{FALSE}, use
@@ -40,7 +40,7 @@ the column names in the start row.}
     \item{\code{sep}}{String to use in collapsing list columns. Ignored unless
 \code{list_columns = "collapse"}. Defaults to \code{"; "}.}
     \item{\code{geometry}}{String, one of "drop" (default), "coords", or "wkt". "coords"
-uses \code{\link[sf:geos_unary]{sf::st_centroid()}} to convert input to POINT geometry, transforms
+uses \code{\link[sf:st_centroid]{sf::st_centroid()}} to convert input to POINT geometry, transforms
 geometry to EPSG:4326, converts geometry to coordinates, and adds new
 columns with names matching \code{coords}. "wkt" converts geometry to a Well
 Known Text (WKT) character vector using \code{\link[sf:st_as_text]{sf::st_as_text()}} and replaces the
@@ -49,9 +49,6 @@ existing geometry column (keeping the existing sf column name).}
     \item{\code{wb}}{A Workbook object containing a worksheet.}
     \item{\code{sheet}}{The worksheet to write to. Can be the worksheet index or name.}
     \item{\code{start_row}}{A vector specifying the starting row to write \code{x} to.}
-    \item{\code{na.strings}}{Value used for replacing \code{NA} values from \code{x}. Default
-looks if \code{options(openxlsx2.na.strings)} is set. Otherwise \code{\link[openxlsx2:na_strings]{na_strings()}}
-uses the special \verb{#N/A} value within the workbook.}
   }}
 
 \item{sheet_names}{Optional character vector of worksheet names.}
@@ -67,7 +64,7 @@ uses the special \verb{#N/A} value within the workbook.}
 See \strong{Details} for options.}
 
 \item{properties}{A named list (typically from
-\code{\link[openxlsx2:properties-wb]{openxlsx2::wb_get_properties()}}) used to set new workbook properties for
+\code{\link[openxlsx2:wb_get_properties]{openxlsx2::wb_get_properties()}}) used to set new workbook properties for
 any values set to \code{NULL}. \code{datetime_created} defaults to \code{\link[=Sys.time]{Sys.time()}} so
 must be set to \code{NULL} to inherit value from \code{properties}.}
 

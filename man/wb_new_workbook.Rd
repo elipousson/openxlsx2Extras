@@ -25,25 +25,28 @@ wb_new_workbook(
 \item{...}{
   Arguments passed on to \code{\link[openxlsx2:wb_add_worksheet]{openxlsx2::wb_add_worksheet}}
   \describe{
-    \item{\code{grid_lines}}{A logical. If \code{FALSE}, the worksheet grid lines will be
-hidden.}
-    \item{\code{row_col_headers}}{A logical. If \code{FALSE}, the worksheet colname and rowname will be
-hidden.}
-    \item{\code{tab_color}}{Color of the sheet tab. A  \code{\link[openxlsx2:wb_color]{wb_color()}},  a valid color (belonging to
-\code{grDevices::colors()}) or a valid hex color beginning with "#".}
-    \item{\code{zoom}}{The sheet zoom level, a numeric between 10 and 400 as a
-percentage. (A zoom value smaller than 10 will default to 10.)}
-    \item{\code{header,odd_header,even_header,first_header,footer,odd_footer,even_footer,first_footer}}{Character vector of length 3 corresponding to positions left, center,
-right.  \code{header} and \code{footer} are used to default additional arguments.
-Setting \code{even}, \code{odd}, or \code{first}, overrides \code{header}/\code{footer}. Use \code{NA} to
-skip a position.}
-    \item{\code{visible}}{If \code{FALSE}, sheet is hidden else visible.}
-    \item{\code{has_drawing}}{If \code{TRUE} prepare a drawing output (TODO does this work?)}
-    \item{\code{paper_size}}{An integer corresponding to a paper size. See \code{\link[openxlsx2:wb_page_setup]{wb_page_setup()}} for
-details.}
-    \item{\code{orientation}}{One of "portrait" or "landscape"}
-    \item{\code{hdpi,vdpi}}{Horizontal and vertical DPI. Can be set with \code{options("openxlsx2.dpi" = X)},
-\code{options("openxlsx2.hdpi" = X)} or \code{options("openxlsx2.vdpi" = X)}}
+    \item{\code{grid_lines}}{Logical; if \code{FALSE}, the worksheet grid lines are hidden.}
+    \item{\code{row_col_headers}}{Logical; if \code{FALSE}, row numbers and column letters are hidden.}
+    \item{\code{tab_color}}{The color of the worksheet tab. Accepts a \code{\link[openxlsx2:wb_color]{wb_color()}} object,
+a standard R color name, or a hex color code (e.g., "#4F81BD").}
+    \item{\code{zoom}}{The sheet zoom level as a percentage; a numeric value between
+10 and 400. Values below 10 default to 10.}
+    \item{\code{header,footer}}{Default character vectors of length three for the left,
+center, and right sections of the header or footer.}
+    \item{\code{odd_header,odd_footer}}{Specific definitions for odd-numbered pages.
+Defaults to the values provided in \code{header} and \code{footer}.}
+    \item{\code{even_header,even_footer}}{Specific definitions for even-numbered pages.
+Defaults to the values provided in \code{header} and \code{footer}.}
+    \item{\code{first_header,first_footer}}{Specific definitions for the first page
+of the worksheet. Defaults to the values provided in \code{header} and \code{footer}.}
+    \item{\code{visible}}{The visibility state of the sheet. One of "visible", "hidden",
+or "veryHidden".}
+    \item{\code{has_drawing}}{\emph{defunct}}
+    \item{\code{paper_size}}{An integer code representing a standard paper size.
+Refer to \code{\link[openxlsx2:wb_page_setup]{wb_page_setup()}} for a complete list of codes.}
+    \item{\code{orientation}}{The page orientation, either "portrait" or "landscape".}
+    \item{\code{hdpi,vdpi}}{The horizontal and vertical DPI (dots per inch) for
+printing and rendering. Can be set globally via \code{options("openxlsx2.hdpi")}.}
   }}
 
 \item{default}{Default prefix to use for numbered sheets. Default values are
@@ -61,7 +64,7 @@ used if \code{sheet_names = NULL} or if \code{n_sheets} is greater than the leng
 See \strong{Details} for options.}
 
 \item{properties}{A named list (typically from
-\code{\link[openxlsx2:properties-wb]{openxlsx2::wb_get_properties()}}) used to set new workbook properties for
+\code{\link[openxlsx2:wb_get_properties]{openxlsx2::wb_get_properties()}}) used to set new workbook properties for
 any values set to \code{NULL}. \code{datetime_created} defaults to \code{\link[=Sys.time]{Sys.time()}} so
 must be set to \code{NULL} to inherit value from \code{properties}.}
 

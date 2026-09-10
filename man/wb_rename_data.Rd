@@ -7,5 +7,5 @@
 wb_rename_data(wb, ..., sheet = 1, start_row = 1, start_col = 1)
 }
 \description{
-Use \code{\link[tidyselect:eval_select]{tidyselect::eval_rename()}} to rename columns in workbook data.
+Use \code{\link[tidyselect:eval_rename]{tidyselect::eval_rename()}} to rename columns in workbook data.
 }

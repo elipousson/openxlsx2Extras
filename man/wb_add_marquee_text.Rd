@@ -25,7 +25,7 @@ is valid markdown so there is no restrictions on the content}
 \item{dims}{Spreadsheet cell range that will determine \code{start_col} and \code{start_row}: "A1", "A1:B2", "A:B"}
 
 \item{...}{
-  Arguments passed on to \code{\link[=fmt_marquee_txt]{fmt_marquee_txt}}
+  Arguments passed on to \code{\link{fmt_marquee_txt}}
   \describe{
     \item{\code{style}}{A style set such as \code{\link[marquee:classic_style]{classic_style()}} that defines how the text
 should be rendered}
@@ -43,7 +43,7 @@ software. See \strong{Details} for general information on column widths.}
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 
 \code{\link[=wb_add_marquee_text]{wb_add_marquee_text()}} uses \code{\link[=fmt_marquee_txt]{fmt_marquee_txt()}} to add Markdown formatted
-text to a Workbook. \code{\link[openxlsx2:col_widths-wb]{openxlsx2::wb_set_col_widths()}} is applied to the
+text to a Workbook. \code{\link[openxlsx2:wb_set_col_widths]{openxlsx2::wb_set_col_widths()}} is applied to the
 workbook to adjust widths for the specified columns. Set \code{widths = NULL} to
 disable this functionality.
 }

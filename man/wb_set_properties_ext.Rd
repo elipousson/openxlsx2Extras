@@ -46,7 +46,7 @@ as default values for any other parameter that is not explicitly set.}
 A workbook with modified properties.
 }
 \description{
-\code{\link[=wb_set_properties_ext]{wb_set_properties_ext()}} extends \code{\link[openxlsx2:properties-wb]{openxlsx2::wb_set_properties()}} by adding
+\code{\link[=wb_set_properties_ext]{wb_set_properties_ext()}} extends \code{\link[openxlsx2:wb_set_properties]{openxlsx2::wb_set_properties()}} by adding
 a properties argument that uses a named list to default default values for
 existing properties.
 }

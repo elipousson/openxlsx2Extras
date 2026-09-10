@@ -41,6 +41,9 @@ NOTE: can only have one filter per worksheet.}
     \item{\code{name}}{The name of a named region if specified.}
     \item{\code{apply_cell_style}}{Should we write cell styles to the workbook}
     \item{\code{remove_cell_style}}{keep the cell style?}
+    \item{\code{na}}{Value used for replacing \code{NA} values from \code{x}. Default
+looks if \code{options("openxlsx2.na")} is set. Otherwise \code{\link[openxlsx2:na_strings]{na_strings()}}
+uses the special \verb{#N/A} value within the workbook.}
     \item{\code{inline_strings}}{write characters as inline strings}
     \item{\code{enforce}}{enforce that selected dims is filled. For this to work, \code{dims} must match \code{x}}
     \item{\code{table_style}}{Any table style name or "none" (see \code{vignette("openxlsx2_style_manual")})}
@@ -50,6 +53,7 @@ NOTE: can only have one filter per worksheet.}
     \item{\code{banded_rows}}{logical. If \code{TRUE}, rows are color banded.}
     \item{\code{banded_cols}}{logical. If \code{TRUE}, the columns are color banded.}
     \item{\code{total_row}}{logical. With the default \code{FALSE} no total row is added.}
+    \item{\code{params}}{list. Optional arguments passed to the data table creation.}
   }}
 
 \item{start_row}{A vector specifying the starting row to write \code{x} to.}
@@ -60,7 +64,7 @@ NOTE: can only have one filter per worksheet.}
 \code{list_columns = "collapse"}. Defaults to \code{"; "}.}
 
 \item{geometry}{String, one of "drop" (default), "coords", or "wkt". "coords"
-uses \code{\link[sf:geos_unary]{sf::st_centroid()}} to convert input to POINT geometry, transforms
+uses \code{\link[sf:st_centroid]{sf::st_centroid()}} to convert input to POINT geometry, transforms
 geometry to EPSG:4326, converts geometry to coordinates, and adds new
 columns with names matching \code{coords}. "wkt" converts geometry to a Well
 Known Text (WKT) character vector using \code{\link[sf:st_as_text]{sf::st_as_text()}} and replaces the
@@ -77,10 +81,6 @@ the column names in the start row.}
 \code{\link[openxlsx2:wb_add_data_table]{openxlsx2::wb_add_data_table()}} to add data to workbook. If \code{FALSE}, use
 \code{\link[openxlsx2:wb_add_data]{openxlsx2::wb_add_data()}}. Additional parameters in \code{...} are passed to
 one function or the other depending on this value.}
-
-\item{na.strings}{Value used for replacing \code{NA} values from \code{x}. Default
-looks if \code{options(openxlsx2.na.strings)} is set. Otherwise \code{\link[openxlsx2:na_strings]{na_strings()}}
-uses the special \verb{#N/A} value within the workbook.}
 
 \item{call}{The execution environment of a currently
 running function, e.g. \code{caller_env()}. The function will be

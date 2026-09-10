@@ -56,7 +56,7 @@ one function or the other depending on this value.}
 \item{start_row}{A vector specifying the starting row to write \code{x} to.}
 
 \item{geometry}{String, one of "drop" (default), "coords", or "wkt". "coords"
-uses \code{\link[sf:geos_unary]{sf::st_centroid()}} to convert input to POINT geometry, transforms
+uses \code{\link[sf:st_centroid]{sf::st_centroid()}} to convert input to POINT geometry, transforms
 geometry to EPSG:4326, converts geometry to coordinates, and adds new
 columns with names matching \code{coords}. "wkt" converts geometry to a Well
 Known Text (WKT) character vector using \code{\link[sf:st_as_text]{sf::st_as_text()}} and replaces the
@@ -66,10 +66,6 @@ existing geometry column (keeping the existing sf column name).}
 "row_before", or "comments". If "row_before", insert column labels in the
 row before the column names. If "comments", add column labels as columns on
 the column names in the start row.}
-
-\item{na.strings}{Value used for replacing \code{NA} values from \code{x}. Default
-looks if \code{options(openxlsx2.na.strings)} is set. Otherwise \code{\link[openxlsx2:na_strings]{na_strings()}}
-uses the special \verb{#N/A} value within the workbook.}
 
 \item{overwrite}{If \code{FALSE}, will not overwrite when \code{file} already exists.}
 
