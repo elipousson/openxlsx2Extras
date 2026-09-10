@@ -85,6 +85,9 @@ user who calls this function indirectly, via another function which exposes
 specifying \verb{repair = "unique", quiet = TRUE}. When the \code{"*_quiet"} options
 are used, any setting of \code{quiet} is silently overridden.}
 }
+\value{
+A data frame, or (if \code{combine = FALSE}) a list of data frames.
+}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 

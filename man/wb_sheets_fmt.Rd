@@ -22,6 +22,9 @@ is recycled to match length of sheets.}
 
 \item{sheets}{Default to use all workbook sheets.}
 }
+\value{
+A \code{wbWorkbook} object.
+}
 \description{
 \code{\link[=wb_sheets_fmt]{wb_sheets_fmt()}} applies a formatting function to one or more sheets and
 columns. \code{sheets} is recycled to match the length of \code{dims}. \code{dims} can be

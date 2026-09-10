@@ -16,6 +16,7 @@
 #'   characters. "truncate" trims to length of `max_length` and "error" errors.
 #' @source <https://github.com/JanMarvin/openxlsx2/blob/main/R/write_xlsx.R#L281-L301>
 #' @keywords internal utils
+#' @returns `x` with names set to the resolved sheet names.
 #' @export
 set_sheet_list_names <- function(
   x,
@@ -58,6 +59,7 @@ set_sheet_list_names <- function(
 #'
 #' as_sheet_names("Sheet names longer than 31 characters are truncated")
 #'
+#' @returns A character vector of sheet names.
 #' @export
 as_sheet_names <- function(
   sheet_names = NULL,

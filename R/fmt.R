@@ -15,6 +15,8 @@
 #' @inheritParams rlang::arg_match
 #' @param strict If `TRUE`, error if any character values in cols are not
 #' included in the names of `data`. Default `FALSE`.
+#' @returns A data frame matching `data` with `fmt_class` added to the class
+#'   of the specified `cols`.
 #' @export
 #' @importFrom vctrs vec_recycle
 set_excel_fmt_class <- function(

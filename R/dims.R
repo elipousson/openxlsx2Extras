@@ -7,6 +7,7 @@
 #' @param cols A character vector or list of character vectors. Length of cols
 #'   is recycled to match length of sheets.
 #' @param sheets Default to use all workbook sheets.
+#' @returns A list of dims character strings, one per sheet.
 #' @keywords internal
 #' @export
 wb_sheets_cols_to_dims <- function(
@@ -44,6 +45,7 @@ wb_sheets_cols_to_dims <- function(
 
 #' @keywords internal
 #' @rdname wb_sheets_cols_to_dims
+#' @returns An integer vector of column positions matching `cols`.
 #' @export
 wb_cols_to_index <- function(
   wb,
@@ -67,6 +69,7 @@ wb_cols_to_index <- function(
 
 #' @keywords internal
 #' @rdname wb_sheets_cols_to_dims
+#' @returns A dims character string covering `cols`.
 #' @export
 wb_cols_to_dims <- function(
   wb,
@@ -93,6 +96,8 @@ wb_cols_to_dims <- function(
 #'
 #' @inheritParams openxlsx2::wb_dims
 #' @keywords internal
+#' @returns A dims character string, or (if `select = "cols"`) an integer
+#'   vector of the selected column positions.
 #' @export
 wb_dims_ext <- function(
   wb = NULL,

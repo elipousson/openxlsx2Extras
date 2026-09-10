@@ -16,6 +16,9 @@ wb_save_ext(wb, file = NULL, overwrite = TRUE, flush = FALSE)
 
 \item{flush}{Experimental, streams the worksheet file to disk}
 }
+\value{
+A \code{wbWorkbook} object, saved to \code{file} as a side effect.
+}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 

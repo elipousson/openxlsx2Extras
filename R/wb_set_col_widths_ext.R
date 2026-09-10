@@ -16,6 +16,7 @@
 #' wb_set_col_widths_ext(wb)
 #'
 #' @keywords internal
+#' @returns A `wbWorkbook` object.
 #' @export
 #' @importFrom openxlsx2 wb_data wb_set_col_widths
 wb_set_col_widths_ext <- function(

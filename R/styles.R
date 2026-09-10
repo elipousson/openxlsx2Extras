@@ -8,6 +8,7 @@
 #'   ⁠create_*()⁠ function. Passed to `style` argument of
 #'   [openxlsx2::wb_add_style()].
 #' @param style_names Optional if styles is a named list.
+#' @returns A `wbWorkbook` object.
 #' @export
 #' @importFrom openxlsx2 wb_add_style
 wb_add_styles <- function(wb, styles, style_names = NULL) {

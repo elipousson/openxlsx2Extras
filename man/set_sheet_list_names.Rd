@@ -48,6 +48,11 @@ be 31 or less.}
 \item{excess_length}{Handling for sheet names that exceed \code{max_length} in
 characters. "truncate" trims to length of \code{max_length} and "error" errors.}
 }
+\value{
+\code{x} with names set to the resolved sheet names.
+
+A character vector of sheet names.
+}
 \description{
 \code{\link[=set_sheet_list_names]{set_sheet_list_names()}} and \code{\link[=as_sheet_names]{as_sheet_names()}} are adapted from the existing
 functionality for handling sheet names in \code{\link[openxlsx2:write_xlsx]{openxlsx2::write_xlsx()}}.

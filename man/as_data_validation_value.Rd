@@ -11,6 +11,10 @@ as_data_validation_value(x, allow_blank = TRUE)
 
 \item{allow_blank}{If \code{TRUE}, add a blank space \code{" "} to the returned values.}
 }
+\value{
+A length-1 character string with \code{x} collapsed into a
+comma-separated, quoted list.
+}
 \description{
 \code{\link[=as_data_validation_value]{as_data_validation_value()}} collapses a character vector as a single string
 for use as a validation \code{value} argument by

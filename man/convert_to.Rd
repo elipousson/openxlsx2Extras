@@ -42,6 +42,15 @@ a sheet name). Defaults to 1.}
 
 \item{ext}{File extension for output file. Defaults to "csv".}
 }
+\value{
+A \code{wbWorkbook} object.
+
+A \code{wbWorkbook} object, saved to \code{new_file} as a side effect.
+
+The return value of \code{.f}, typically the invisible \code{NULL} result of
+\code{\link[utils:write.csv]{utils::write.csv()}}. The converted data is written to \code{new_file} as a
+side effect.
+}
 \description{
 A set of functions to convert between CSV and XLSX formats using
 flexible input and output options.

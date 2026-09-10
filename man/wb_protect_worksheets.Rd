@@ -23,6 +23,9 @@ wb_protect_worksheets(
 
 \item{properties}{Defaults to \code{c("insertColumns", "insertRows", "deleteColumns", "deleteRows")}}
 }
+\value{
+A \code{wbWorkbook} object.
+}
 \description{
 Protect one or more sheets in a workbook
 }

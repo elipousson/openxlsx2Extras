@@ -22,6 +22,7 @@
 #' @inheritParams openxlsx2::read_xlsx
 #' @inheritParams vctrs::vec_as_names
 #' @inheritDotParams openxlsx2::read_xlsx
+#' @returns A data frame, or (if `combine = FALSE`) a list of data frames.
 #' @export
 read_xlsx_ext <- function(
   file,

@@ -36,6 +36,9 @@ running function, e.g. \code{caller_env()}. The function will be
 mentioned in error messages as the source of the error. See the
 \code{call} argument of \code{\link[rlang:abort]{abort()}} for more information.}
 }
+\value{
+A data frame with list and geometry columns handled as specified.
+}
 \description{
 \code{\link[=prep_wb_data]{prep_wb_data()}} prepares a data frame for addition to a workbook by handling
 list columns and geometry columns (for sf data frames).

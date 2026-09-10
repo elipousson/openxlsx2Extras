@@ -7,6 +7,7 @@
 #' vec_fmt_lgl(c(TRUE, FALSE))
 #'
 #' vec_fmt_lgl(c(TRUE, FALSE), c("Yes", "No"))
+#' @returns A character vector the same length as `x`.
 #' @export
 vec_fmt_lgl <- function(x, values = c("Y", "N")) {
   check_installed("dplyr")
@@ -32,6 +33,8 @@ vec_fmt_lgl <- function(x, values = c("Y", "N")) {
 #' @inheritParams vec_fmt_lgl
 #' @examples
 #' fmt_lgl_cols(data.frame(x = c(TRUE, FALSE, TRUE)))
+#' @returns A data frame matching `.data` with logical columns replaced by
+#'   character values.
 #' @export
 fmt_lgl_cols <- function(
   .data,

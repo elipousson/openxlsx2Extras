@@ -15,6 +15,9 @@ wb_add_styles(wb, styles, style_names = NULL)
 
 \item{style_names}{Optional if styles is a named list.}
 }
+\value{
+A \code{wbWorkbook} object.
+}
 \description{
 \code{\link[=wb_add_styles]{wb_add_styles()}} extends \code{\link[openxlsx2:wb_add_style]{openxlsx2::wb_add_style()}} by allowing the
 addition of multiple styles as a named list.

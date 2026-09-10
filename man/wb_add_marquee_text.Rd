@@ -39,6 +39,9 @@ automatic sizing. \code{widths} is recycled to the length of \code{cols}. openxl
 sets the default width is 8.43, as this is the standard in some spreadsheet
 software. See \strong{Details} for general information on column widths.}
 }
+\value{
+A \code{wbWorkbook} object.
+}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 

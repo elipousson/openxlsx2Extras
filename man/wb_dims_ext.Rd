@@ -24,6 +24,10 @@ One of "x", "data", "col_names", or "row_names".
 \code{"col_names"} will only return column names
 \code{"row_names"} Will only return row names.}
 }
+\value{
+A dims character string, or (if \code{select = "cols"}) an integer
+vector of the selected column positions.
+}
 \description{
 \code{\link[=wb_dims_ext]{wb_dims_ext()}} extends \code{\link[openxlsx2:wb_dims]{openxlsx2::wb_dims()}} by allowing a workbook input
 used to set \code{x} and supporting tidy selection for the \code{cols} argument.

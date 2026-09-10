@@ -16,6 +16,7 @@
 #'   abc"
 #' )
 #'
+#' @returns A list of `fmt_txt` objects, one per parsed line of `text`.
 #' @export
 fmt_marquee_txt <- function(
   text,
@@ -111,6 +112,7 @@ fmt_marquee_txt <- function(
 #' - Bulleted list item 2"
 #' )
 #'
+#' @returns A `wbWorkbook` object.
 #' @export
 wb_add_marquee_text <- function(
   wb = NULL,

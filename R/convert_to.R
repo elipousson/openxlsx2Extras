@@ -48,6 +48,7 @@ NULL
 #' `utils::write.csv` for [xlsx_to_csv()]. Other functions are allowed but must
 #' use the input or output file name as the second argument.
 #' @param ... additional arguments passed to [openxlsx2::write_xlsx()]
+#' @returns A `wbWorkbook` object.
 #' @export
 csv_to_wb <- function(file, new_file = NULL, .f = utils::read.csv, ...) {
   x <- lapply(file, .f)
@@ -55,6 +56,7 @@ csv_to_wb <- function(file, new_file = NULL, .f = utils::read.csv, ...) {
 }
 
 #' @rdname convert_to
+#' @returns A `wbWorkbook` object, saved to `new_file` as a side effect.
 #' @export
 csv_to_xlsx <- function(file, new_file = NULL, .f = utils::read.csv, ...) {
   csv_to_wb(
@@ -71,6 +73,9 @@ csv_to_xlsx <- function(file, new_file = NULL, .f = utils::read.csv, ...) {
 #' a sheet name). Defaults to 1.
 #' @param ext File extension for output file. Defaults to "csv".
 #' @param ... Additional arguments passed to `.f`
+#' @returns The return value of `.f`, typically the invisible `NULL` result of
+#'   [utils::write.csv()]. The converted data is written to `new_file` as a
+#'   side effect.
 #' @export
 xlsx_to_csv <- function(
   file,

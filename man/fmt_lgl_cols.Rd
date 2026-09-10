@@ -22,6 +22,10 @@ handled by the verb (i.e. \code{\link[dplyr:summarise]{summarise()}} or \code{\l
 \item{values}{Default to \code{c("Y", "N")} Length 2 vector where first element
 replaces \code{TRUE} and the second element replaces \code{FALSE}.}
 }
+\value{
+A data frame matching \code{.data} with logical columns replaced by
+character values.
+}
 \description{
 \code{\link[=fmt_lgl_cols]{fmt_lgl_cols()}} uses \code{\link[=vec_fmt_lgl]{vec_fmt_lgl()}} to format all (or specified) logical
 vector columns to use replacement values.

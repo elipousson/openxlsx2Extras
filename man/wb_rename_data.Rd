@@ -6,6 +6,9 @@
 \usage{
 wb_rename_data(wb, ..., sheet = 1, start_row = 1, start_col = 1)
 }
+\value{
+A \code{wbWorkbook} object.
+}
 \description{
 Use \code{\link[tidyselect:eval_rename]{tidyselect::eval_rename()}} to rename columns in workbook data.
 }

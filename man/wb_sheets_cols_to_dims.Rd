@@ -36,6 +36,13 @@ is recycled to match length of sheets.}
 
 \item{sheets}{Default to use all workbook sheets.}
 }
+\value{
+A list of dims character strings, one per sheet.
+
+An integer vector of column positions matching \code{cols}.
+
+A dims character string covering \code{cols}.
+}
 \description{
 \code{\link[=wb_sheets_cols_to_dims]{wb_sheets_cols_to_dims()}} gets a list of dimension specifications based on
 columns. Used to get dimensions for multiple column ranges across multiple

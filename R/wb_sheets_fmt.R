@@ -8,6 +8,7 @@
 #' @param .f Formatting function to apply to workbook.
 #' @inheritParams wb_sheets_cols_to_dims
 #' @keywords internal
+#' @returns A `wbWorkbook` object.
 #' @export
 #' @importFrom openxlsx2 wb_add_numfmt
 #' @importFrom vctrs vec_recycle

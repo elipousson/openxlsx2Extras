@@ -9,6 +9,11 @@ wb_rename_sheets(wb, ...)
 
 wb_rename_sheets_with(wb, .fn, .sheets = tidyselect::everything())
 }
+\value{
+A \code{wbWorkbook} object.
+
+A \code{wbWorkbook} object.
+}
 \description{
 \code{wb_rename_sheets()} and \code{wb_rename_sheets_with()} use the tidyselect package
 to rename sheets.

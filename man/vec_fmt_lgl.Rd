@@ -12,6 +12,9 @@ vec_fmt_lgl(x, values = c("Y", "N"))
 \item{values}{Default to \code{c("Y", "N")} Length 2 vector where first element
 replaces \code{TRUE} and the second element replaces \code{FALSE}.}
 }
+\value{
+A character vector the same length as \code{x}.
+}
 \description{
 Format a logical vector to specified values
 }

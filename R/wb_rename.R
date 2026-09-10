@@ -3,6 +3,7 @@
 #' `wb_rename_sheets()` and `wb_rename_sheets_with()` use the tidyselect package
 #'  to rename sheets.
 #'
+#' @returns A `wbWorkbook` object.
 #' @export
 wb_rename_sheets <- function(
   wb,
@@ -35,6 +36,7 @@ wb_rename_sheets <- function(
 }
 
 #' @rdname wb_rename_sheets
+#' @returns A `wbWorkbook` object.
 #' @export
 wb_rename_sheets_with <- function(wb, .fn, .sheets = tidyselect::everything()) {
   existing_sheet_names <- openxlsx2::wb_get_sheet_names(wb)
@@ -70,6 +72,7 @@ wb_rename_sheets_with <- function(wb, .fn, .sheets = tidyselect::everything()) {
 #'
 #' Use [tidyselect::eval_rename()] to rename columns in workbook data.
 #'
+#' @returns A `wbWorkbook` object.
 #' @export
 wb_rename_data <- function(
   wb,

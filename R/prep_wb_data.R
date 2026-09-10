@@ -39,6 +39,7 @@
 #'   prep_wb_data(nc, geometry = "wkt")
 #' }
 #'
+#' @returns A data frame with list and geometry columns handled as specified.
 #' @export
 #' @importFrom purrr map_chr list_cbind
 prep_wb_data <- function(

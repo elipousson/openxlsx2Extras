@@ -19,6 +19,7 @@
 #'
 #' as_wb(list(mtcars[1:3, ], mtcars[4:6, ]))
 #'
+#' @returns A `wbWorkbook` object.
 #' @export
 #' @importFrom fs file_exists
 #' @importFrom openxlsx2 wb_to_df

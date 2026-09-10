@@ -27,6 +27,10 @@ match length of cols using \code{\link[vctrs:vec_recycle]{vctrs::vec_recycle()}}
 \item{strict}{If \code{TRUE}, error if any character values in cols are not
 included in the names of \code{data}. Default \code{FALSE}.}
 }
+\value{
+A data frame matching \code{data} with \code{fmt_class} added to the class
+of the specified \code{cols}.
+}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 }

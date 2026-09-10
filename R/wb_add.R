@@ -20,6 +20,7 @@
 #'   row before the column names. If "comments", add column labels as columns on
 #'   the column names in the start row.
 #' @param na.strings `r lifecycle::badge("deprecated")` Use `na` instead.
+#' @returns A `wbWorkbook` object.
 #' @export
 #' @examples
 #' wb <- wb_new_workbook("mtcars")

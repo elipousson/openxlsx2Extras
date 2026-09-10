@@ -77,6 +77,9 @@ running function, e.g. \code{caller_env()}. The function will be
 mentioned in error messages as the source of the error. See the
 \code{call} argument of \code{\link[rlang:abort]{abort()}} for more information.}
 }
+\value{
+A \code{wbWorkbook} object.
+}
 \description{
 \code{\link[=as_wb]{as_wb()}} converts a data frame, a list of data frames, or an Excel file path
 to a wbWorkbook object.

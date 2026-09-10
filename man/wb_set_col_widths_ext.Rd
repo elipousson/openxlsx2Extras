@@ -23,6 +23,9 @@ software. See \strong{Details} for general information on column widths.}
 
 \item{sheet}{A name or index of a worksheet, a vector in the case of \code{remove_}}
 }
+\value{
+A \code{wbWorkbook} object.
+}
 \description{
 \code{\link[=wb_set_col_widths_ext]{wb_set_col_widths_ext()}} extends \code{\link[openxlsx2:wb_set_col_widths]{openxlsx2::wb_set_col_widths()}} by making
 \code{cols} optional (defaults to all columns) and allows setting columns based on

@@ -22,6 +22,9 @@ should be rendered}
 
 \item{ignore_html}{Should HTML code be removed from the output}
 }
+\value{
+A list of \code{fmt_txt} objects, one per parsed line of \code{text}.
+}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 
