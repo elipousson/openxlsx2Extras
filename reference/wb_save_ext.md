@@ -35,6 +35,7 @@ wb_save_ext(wb, file = NULL, overwrite = TRUE, flush = FALSE)
 ## Examples
 
 ``` r
+
 withr::with_tempdir({
   wb <- wb_new_workbook(
     title = "Title used for output file",

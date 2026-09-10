@@ -43,6 +43,7 @@ fmt_marquee_txt(
 ## Examples
 
 ``` r
+
 fmt_marquee_txt(
   "# ABC
 

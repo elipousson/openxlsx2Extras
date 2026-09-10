@@ -23,9 +23,9 @@ wb_split(
 
 - file:
 
-  An xlsx file,
+  A workbook file path, a
   [wbWorkbook](https://janmarvin.github.io/openxlsx2/reference/wbWorkbook.html)
-  object or URL to xlsx file.
+  object, or a valid URL.
 
 - .by:
 
@@ -68,6 +68,7 @@ A list of wbWorkbook objects.
 ## Examples
 
 ``` r
+
 wb <- as_wb(list(mtcars[1:3, ], mtcars[4:6, ]))
 
 wb_split(wb, .by = carb)
@@ -76,17 +77,20 @@ wb_split(wb, .by = carb)
 #>  
 #> Worksheets:
 #>  Sheets: Sheet 1, Sheet 2 
-#>  Write order: 1, 2
+#>  Write order: 1, 2 
+#> 
 #> $`4`
 #> A Workbook object.
 #>  
 #> Worksheets:
 #>  Sheets: Sheet 1, Sheet 2 
-#>  Write order: 1, 2
+#>  Write order: 1, 2 
+#> 
 #> $`2`
 #> A Workbook object.
 #>  
 #> Worksheets:
 #>  Sheets: Sheet 1, Sheet 2 
-#>  Write order: 1, 2
+#>  Write order: 1, 2 
+#> 
 ```

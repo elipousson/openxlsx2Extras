@@ -111,13 +111,6 @@ write_xlsx_ext(
   the column names. If "comments", add column labels as columns on the
   column names in the start row.
 
-- na.strings:
-
-  Value used for replacing `NA` values from `x`. Default looks if
-  `options(openxlsx2.na.strings)` is set. Otherwise
-  [`na_strings()`](https://janmarvin.github.io/openxlsx2/reference/waivers.html)
-  uses the special `#N/A` value within the workbook.
-
 - overwrite:
 
   If `FALSE`, will not overwrite when `file` already exists.

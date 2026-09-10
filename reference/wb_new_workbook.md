@@ -38,56 +38,67 @@ wb_new_workbook(
 
   `grid_lines`
 
-  :   A logical. If `FALSE`, the worksheet grid lines will be hidden.
+  :   Logical; if `FALSE`, the worksheet grid lines are hidden.
 
   `row_col_headers`
 
-  :   A logical. If `FALSE`, the worksheet colname and rowname will be
-      hidden.
+  :   Logical; if `FALSE`, row numbers and column letters are hidden.
 
   `tab_color`
 
-  :   Color of the sheet tab. A
-      [`wb_color()`](https://janmarvin.github.io/openxlsx2/reference/wb_color.html),
-      a valid color (belonging to
-      [`grDevices::colors()`](https://rdrr.io/r/grDevices/colors.html))
-      or a valid hex color beginning with "#".
+  :   The color of the worksheet tab. Accepts a
+      [`wb_color()`](https://janmarvin.github.io/openxlsx2/reference/wb_color.html)
+      object, a standard R color name, or a hex color code (e.g.,
+      "#4F81BD").
 
   `zoom`
 
-  :   The sheet zoom level, a numeric between 10 and 400 as a
-      percentage. (A zoom value smaller than 10 will default to 10.)
+  :   The sheet zoom level as a percentage; a numeric value between 10
+      and 400. Values below 10 default to 10.
 
-  `header,odd_header,even_header,first_header,footer,odd_footer,even_footer,first_footer`
+  `header,footer`
 
-  :   Character vector of length 3 corresponding to positions left,
-      center, right. `header` and `footer` are used to default
-      additional arguments. Setting `even`, `odd`, or `first`, overrides
-      `header`/`footer`. Use `NA` to skip a position.
+  :   Default character vectors of length three for the left, center,
+      and right sections of the header or footer.
+
+  `odd_header,odd_footer`
+
+  :   Specific definitions for odd-numbered pages. Defaults to the
+      values provided in `header` and `footer`.
+
+  `even_header,even_footer`
+
+  :   Specific definitions for even-numbered pages. Defaults to the
+      values provided in `header` and `footer`.
+
+  `first_header,first_footer`
+
+  :   Specific definitions for the first page of the worksheet. Defaults
+      to the values provided in `header` and `footer`.
 
   `visible`
 
-  :   If `FALSE`, sheet is hidden else visible.
+  :   The visibility state of the sheet. One of "visible", "hidden", or
+      "veryHidden".
 
   `has_drawing`
 
-  :   If `TRUE` prepare a drawing output (TODO does this work?)
+  :   *defunct*
 
   `paper_size`
 
-  :   An integer corresponding to a paper size. See
+  :   An integer code representing a standard paper size. Refer to
       [`wb_page_setup()`](https://janmarvin.github.io/openxlsx2/reference/wb_page_setup.html)
-      for details.
+      for a complete list of codes.
 
   `orientation`
 
-  :   One of "portrait" or "landscape"
+  :   The page orientation, either "portrait" or "landscape".
 
   `hdpi,vdpi`
 
-  :   Horizontal and vertical DPI. Can be set with
-      `options("openxlsx2.dpi" = X)`, `options("openxlsx2.hdpi" = X)` or
-      `options("openxlsx2.vdpi" = X)`
+  :   The horizontal and vertical DPI (dots per inch) for printing and
+      rendering. Can be set globally via `options("openxlsx2.hdpi")`.
 
 - default:
 
@@ -147,18 +158,19 @@ wb_new_workbook()
 #>  
 #> Worksheets:
 #>  No worksheets attached
+#>  
 
 wb_new_workbook("Sheet 1")
 #> A Workbook object.
 #>  
 #> Worksheets:
 #>  Sheets: Sheet 1 
-#>  Write order: 1
+#>  Write order: 1 
 
 wb_new_workbook(c("Data", "Analysis"))
 #> A Workbook object.
 #>  
 #> Worksheets:
 #>  Sheets: Data, Analysis 
-#>  Write order: 1, 2
+#>  Write order: 1, 2 
 ```

@@ -15,9 +15,9 @@ wb_to_df_list(file, sheet_names = NULL, ...)
 
 - file:
 
-  An xlsx file,
+  A workbook file path, a
   [wbWorkbook](https://janmarvin.github.io/openxlsx2/reference/wbWorkbook.html)
-  object or URL to xlsx file.
+  object, or a valid URL.
 
 - sheet_names:
 
@@ -31,109 +31,99 @@ wb_to_df_list(file, sheet_names = NULL, ...)
 
   `sheet`
 
-  :   Either sheet name or index. When missing the first sheet in the
-      workbook is selected.
+  :   The name or index of the worksheet to read. Defaults to the first
+      sheet.
 
-  `start_row`
+  `start_row,start_col`
 
-  :   first row to begin looking for data.
-
-  `start_col`
-
-  :   first column to begin looking for data.
+  :   Optional numeric values specifying the first row or column to
+      begin data discovery.
 
   `row_names`
 
-  :   If `TRUE`, the first col of data will be used as row names.
+  :   Logical; if TRUE, uses the first column of the selection as row
+      names.
 
   `col_names`
 
-  :   If `TRUE`, the first row of data will be used as column names.
+  :   Logical; if TRUE, uses the first row of the selection as column
+      headers.
 
-  `skip_empty_rows`
+  `skip_empty_rows,skip_empty_cols`
 
-  :   If `TRUE`, empty rows are skipped.
+  :   Logical; if TRUE, filters out rows or columns containing only
+      missing values.
 
-  `skip_empty_cols`
+  `skip_hidden_rows,skip_hidden_cols`
 
-  :   If `TRUE`, empty columns are skipped.
+  :   Logical; if TRUE, excludes rows or columns marked as hidden in the
+      worksheet metadata.
 
-  `skip_hidden_rows`
+  `rows,cols`
 
-  :   If `TRUE`, hidden rows are skipped.
-
-  `skip_hidden_cols`
-
-  :   If `TRUE`, hidden columns are skipped.
-
-  `rows`
-
-  :   A numeric vector specifying which rows in the xlsx file to read.
-      If `NULL`, all rows are read.
-
-  `cols`
-
-  :   A numeric vector specifying which columns in the xlsx file to
-      read. If `NULL`, all columns are read.
+  :   Optional numeric vectors specifying the exact indices to read.
 
   `detect_dates`
 
-  :   If `TRUE`, attempt to recognize dates and perform conversion.
+  :   Logical; if TRUE, identifies date and datetime styles for
+      conversion.
 
-  `na.strings`
+  `na`
 
-  :   A character vector of strings which are to be interpreted as `NA`.
-      Blank cells will be returned as `NA`.
-
-  `na.numbers`
-
-  :   A numeric vector of digits which are to be interpreted as `NA`.
-      Blank cells will be returned as `NA`.
+  :   A character vector or a named list (e.g.,
+      `list(strings = "", numbers = -99)`) defining values to treat as
+      `NA`.
 
   `fill_merged_cells`
 
-  :   If `TRUE`, the value in a merged cell is given to all cells within
-      the merge.
+  :   Logical; if TRUE, propagates the top-left value of a merged range
+      to all cells in that range.
 
   `dims`
 
-  :   Character string of type "A1:B2" as optional dimensions to be
-      imported.
+  :   A character string defining the range. Supports wildcards (e.g.,
+      "A1:++" or "A-:+5").
 
   `show_formula`
 
-  :   If `TRUE`, the underlying Excel formulas are shown.
+  :   Logical; if TRUE, returns the formula strings instead of
+      calculated values.
 
   `convert`
 
-  :   If `TRUE`, a conversion to dates and numerics is attempted.
+  :   Logical; if TRUE, attempts to coerce columns to appropriate R
+      classes.
 
   `types`
 
-  :   A named numeric indicating, the type of the data. Names must match
-      the returned data. See **Details** for more.
+  :   A named vector (numeric or character) to explicitly define column
+      types.
 
   `named_region`
 
-  :   Character string with a `named_region` (defined name or table). If
-      no sheet is selected, the first appearance will be selected. See
-      [`wb_get_named_regions()`](https://janmarvin.github.io/openxlsx2/reference/named_region-wb.html)
+  :   A character string referring to a defined name or spreadsheet
+      Table.
 
   `keep_attributes`
 
-  :   If `TRUE` additional attributes are returned. (These are used
-      internally to define a cell type.)
+  :   Logical; if TRUE, attaches metadata such as the internal type
+      table (tt) and types as attributes to the output.
 
   `check_names`
 
-  :   If `TRUE` then the names of the variables in the data frame are
-      checked to ensure that they are syntactically valid variable
-      names.
+  :   Logical; if TRUE, ensures column names are syntactically valid R
+      names via
+      [`make.names()`](https://rdrr.io/r/base/make.names.html).
 
   `show_hyperlinks`
 
-  :   If `TRUE` instead of the displayed text, hyperlink targets are
-      shown.
+  :   Logical; if TRUE, replaces cell values with their underlying
+      hyperlink targets.
+
+  `apply_numfmts`
+
+  :   Logical; if TRUE, applies spreadsheet number formatting and
+      returns strings.
 
 ## Value
 

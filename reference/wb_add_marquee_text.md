@@ -73,6 +73,7 @@ wb_add_marquee_text(
 ## Examples
 
 ``` r
+
 library(openxlsx2)
 
 wb <- wb_workbook()

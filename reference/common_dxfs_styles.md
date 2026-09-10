@@ -10,10 +10,6 @@ with bad, good, and neutral values.
 common_dxfs_styles
 ```
 
-## Format
-
-An object of class `list` of length 3.
-
 ## Source
 
 https://stackoverflow.com/questions/27611260/what-are-the-rgb-codes-for-the-conditional-formatting-styles-in-excel#comment78058968_27611522

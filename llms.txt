@@ -12,12 +12,14 @@ for this package.
 You can install the development version of openxlsx2Extras like so:
 
 ``` r
+
 pak::pkg_install("elipousson/openxlsx2Extras")
 ```
 
 ## Example
 
 ``` r
+
 library(openxlsx2)
 library(openxlsx2Extras)
 ```
@@ -53,6 +55,7 @@ For example,
 allows users to set a filename based on the workbook title:
 
 ``` r
+
 wb <- wb_workbook(
   title = "Title used for output file"
 )
@@ -72,6 +75,7 @@ supports creating multiple worksheets in a single function call
 `sheet_names`):
 
 ``` r
+
 wb_new_workbook(
   title = "Workbook created with wb_new_workbook",
   sheet_names = c("First sheet", "Second sheet"),

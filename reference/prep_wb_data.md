@@ -60,6 +60,7 @@ prep_wb_data(
 ## Examples
 
 ``` r
+
 list_df <- vctrs::data_frame(
   num = 1,
   alpha = list(list("A", "B", "C"))

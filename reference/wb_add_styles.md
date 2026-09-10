@@ -14,7 +14,9 @@ wb_add_styles(wb, styles, style_names = NULL)
 
 - wb:
 
-  A workbook
+  A
+  [wbWorkbook](https://janmarvin.github.io/openxlsx2/reference/wbWorkbook.html)
+  object.
 
 - styles:
 

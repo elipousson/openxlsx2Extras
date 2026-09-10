@@ -88,6 +88,13 @@ wb_add_data_ext(
 
   :   keep the cell style?
 
+  `na`
+
+  :   Value used for replacing `NA` values from `x`. Default looks if
+      `options("openxlsx2.na")` is set. Otherwise
+      [`na_strings()`](https://janmarvin.github.io/openxlsx2/reference/waivers.html)
+      uses the special `#N/A` value within the workbook.
+
   `inline_strings`
 
   :   write characters as inline strings
@@ -125,6 +132,10 @@ wb_add_data_ext(
   `total_row`
 
   :   logical. With the default `FALSE` no total row is added.
+
+  `params`
+
+  :   list. Optional arguments passed to the data table creation.
 
 - start_row:
 
@@ -172,13 +183,6 @@ wb_add_data_ext(
   Additional parameters in `...` are passed to one function or the other
   depending on this value.
 
-- na.strings:
-
-  Value used for replacing `NA` values from `x`. Default looks if
-  `options(openxlsx2.na.strings)` is set. Otherwise
-  [`na_strings()`](https://janmarvin.github.io/openxlsx2/reference/waivers.html)
-  uses the special `#N/A` value within the workbook.
-
 - call:
 
   The execution environment of a currently running function, e.g.
@@ -197,12 +201,12 @@ wb_add_data_ext(wb, mtcars)
 #>  
 #> Worksheets:
 #>  Sheets: mtcars 
-#>  Write order: 1
+#>  Write order: 1 
 
 wb_add_data_ext(wb, mtcars, as_table = TRUE)
 #> A Workbook object.
 #>  
 #> Worksheets:
 #>  Sheets: mtcars 
-#>  Write order: 1
+#>  Write order: 1 
 ```

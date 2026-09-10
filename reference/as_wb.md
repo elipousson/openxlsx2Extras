@@ -91,13 +91,6 @@ as_wb(
 
   :   A vector specifying the starting row to write `x` to.
 
-  `na.strings`
-
-  :   Value used for replacing `NA` values from `x`. Default looks if
-      `options(openxlsx2.na.strings)` is set. Otherwise
-      [`na_strings()`](https://janmarvin.github.io/openxlsx2/reference/waivers.html)
-      uses the special `#N/A` value within the workbook.
-
 - sheet_names:
 
   Optional character vector of worksheet names.
@@ -152,12 +145,12 @@ as_wb(mtcars[1:3, ])
 #>  
 #> Worksheets:
 #>  Sheets: Sheet 1 
-#>  Write order: 1
+#>  Write order: 1 
 
 as_wb(list(mtcars[1:3, ], mtcars[4:6, ]))
 #> A Workbook object.
 #>  
 #> Worksheets:
 #>  Sheets: Sheet 1, Sheet 2 
-#>  Write order: 1, 2
+#>  Write order: 1, 2 
 ```

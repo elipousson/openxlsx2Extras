@@ -83,11 +83,13 @@ map_wb(list(mtcars[1:3, ], mtcars[4:6, ]))
 #>  
 #> Worksheets:
 #>  Sheets: Sheet 1 
-#>  Write order: 1
+#>  Write order: 1 
+#> 
 #> [[2]]
 #> A Workbook object.
 #>  
 #> Worksheets:
 #>  Sheets: Sheet 1 
-#>  Write order: 1
+#>  Write order: 1 
+#> 
 ```

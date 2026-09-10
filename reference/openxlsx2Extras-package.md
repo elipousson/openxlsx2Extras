@@ -18,6 +18,11 @@ Useful links:
 **Maintainer**: Eli Pousson <eli.pousson@gmail.com>
 ([ORCID](https://orcid.org/0000-0001-8280-1706)) \[copyright holder\]
 
+Authors:
+
+- Eli Pousson <eli.pousson@gmail.com>
+  ([ORCID](https://orcid.org/0000-0001-8280-1706)) \[copyright holder\]
+
 Other contributors:
 
 - Jan Marvin Garbuszus <jan.garbuszus@ruhr-uni-bochum.de>
