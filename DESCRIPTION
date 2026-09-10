@@ -19,7 +19,7 @@ Imports:
     cli,
     fs,
     lifecycle,
-    openxlsx2,
+    openxlsx2 (>= 1.23),
     purrr,
     rlang,
     utils,

@@ -118,10 +118,20 @@ write_xlsx_ext <- function(
   start_row = 1,
   geometry = "drop",
   labels = "drop",
-  na.strings = openxlsx2::na_strings(),
+  na = openxlsx2::na_strings(),
+  na.strings = lifecycle::deprecated(),
   overwrite = TRUE,
   call = caller_env()
 ) {
+  if (lifecycle::is_present(na.strings)) {
+    lifecycle::deprecate_soft(
+      "0.0.0.9000",
+      "write_xlsx_ext(na.strings = )",
+      "write_xlsx_ext(na = )"
+    )
+    na <- na.strings
+  }
+
   # If x is a wbWorkbook object, use wb_save_ext to save to file
   # All other arguments except file, path, and overwrite are ignored
   if (is_wb(x)) {
@@ -141,7 +151,7 @@ write_xlsx_ext <- function(
     keywords = keywords,
     sheet_names = sheet_names,
     ...,
-    na.strings = na.strings,
+    na = na,
     as_table = as_table,
     start_row = start_row,
     geometry = geometry,

@@ -19,6 +19,7 @@
 #'   "row_before", or "comments". If "row_before", insert column labels in the
 #'   row before the column names. If "comments", add column labels as columns on
 #'   the column names in the start row.
+#' @param na.strings `r lifecycle::badge("deprecated")` Use `na` instead.
 #' @export
 #' @examples
 #' wb <- wb_new_workbook("mtcars")
@@ -40,9 +41,19 @@ wb_add_data_ext <- function(
   coords = c("lon", "lat"),
   labels = c("drop", "row_before", "comments"),
   as_table = FALSE,
-  na.strings = openxlsx2::na_strings(),
+  na = openxlsx2::na_strings(),
+  na.strings = lifecycle::deprecated(),
   call = caller_env()
 ) {
+  if (lifecycle::is_present(na.strings)) {
+    lifecycle::deprecate_soft(
+      "0.0.0.9000",
+      "wb_add_data_ext(na.strings = )",
+      "wb_add_data_ext(na = )"
+    )
+    na <- na.strings
+  }
+
   # TODO: Add support for data frame list inputs
   # if (!is.dataframe(x) && all(purr::map_lgl(x, is.data.frame))) {
   # }
@@ -76,7 +87,7 @@ wb_add_data_ext <- function(
         x = col_labels,
         sheet = sheet,
         start_row = start_row,
-        na.strings = na.strings,
+        na = na,
         col_names = FALSE
       )
       start_row <- start_row + 1
@@ -109,7 +120,7 @@ wb_add_data_ext <- function(
       x = x,
       sheet = sheet,
       ...,
-      na.strings = na.strings,
+      na = na,
       start_row = start_row
     )
   } else {
@@ -117,7 +128,7 @@ wb_add_data_ext <- function(
       x = x,
       sheet = sheet,
       ...,
-      na.strings = na.strings,
+      na = na,
       start_row = start_row
     )
   }
