@@ -52,6 +52,10 @@ as_wb(
       before the column names. If "comments", add column labels as
       columns on the column names in the start row.
 
+  `na.strings`
+
+  :   **\[deprecated\]** Use `na` instead.
+
   `list_columns`
 
   :   String, one of "collapse" (default), "drop", or "asis"
@@ -90,6 +94,13 @@ as_wb(
   `start_row`
 
   :   A vector specifying the starting row to write `x` to.
+
+  `na`
+
+  :   Value used for replacing `NA` values from `x`. Default looks if
+      `options("openxlsx2.na")` is set. Otherwise
+      [`na_strings()`](https://janmarvin.github.io/openxlsx2/reference/waivers.html)
+      uses the special `#N/A` value within the workbook.
 
 - sheet_names:
 

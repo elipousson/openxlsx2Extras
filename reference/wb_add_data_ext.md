@@ -24,7 +24,8 @@ wb_add_data_ext(
   coords = c("lon", "lat"),
   labels = c("drop", "row_before", "comments"),
   as_table = FALSE,
-  na.strings = openxlsx2::na_strings(),
+  na = openxlsx2::na_strings(),
+  na.strings = lifecycle::deprecated(),
   call = caller_env()
 )
 ```
@@ -87,13 +88,6 @@ wb_add_data_ext(
   `remove_cell_style`
 
   :   keep the cell style?
-
-  `na`
-
-  :   Value used for replacing `NA` values from `x`. Default looks if
-      `options("openxlsx2.na")` is set. Otherwise
-      [`na_strings()`](https://janmarvin.github.io/openxlsx2/reference/waivers.html)
-      uses the special `#N/A` value within the workbook.
 
   `inline_strings`
 
@@ -182,6 +176,17 @@ wb_add_data_ext(
   [`openxlsx2::wb_add_data()`](https://janmarvin.github.io/openxlsx2/reference/wb_add_data.html).
   Additional parameters in `...` are passed to one function or the other
   depending on this value.
+
+- na:
+
+  Value used for replacing `NA` values from `x`. Default looks if
+  `options("openxlsx2.na")` is set. Otherwise
+  [`na_strings()`](https://janmarvin.github.io/openxlsx2/reference/waivers.html)
+  uses the special `#N/A` value within the workbook.
+
+- na.strings:
+
+  **\[deprecated\]** Use `na` instead.
 
 - call:
 

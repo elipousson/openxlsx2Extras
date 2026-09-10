@@ -82,6 +82,9 @@ one function or the other depending on this value.</p></dd>
 row before the column names. If "comments", add column labels as columns on
 the column names in the start row.</p></dd>
 
+    <dt><code>na.strings</code></dt>
+<dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a> Use <code>na</code> instead.</p></dd>
+
     <dt><code>list_columns</code></dt>
 <dd><p>String, one of "collapse" (default), "drop", or "asis"</p></dd>
 
@@ -108,6 +111,11 @@ existing geometry column (keeping the existing sf column name).</p></dd>
 
     <dt><code>start_row</code></dt>
 <dd><p>A vector specifying the starting row to write <code>x</code> to.</p></dd>
+
+    <dt><code>na</code></dt>
+<dd><p>Value used for replacing <code>NA</code> values from <code>x</code>. Default
+looks if <code>options("openxlsx2.na")</code> is set. Otherwise <code><a href="https://janmarvin.github.io/openxlsx2/reference/waivers.html" class="external-link">na_strings()</a></code>
+uses the special <code>#N/A</code> value within the workbook.</p></dd>
 
 
 </dl></dd>

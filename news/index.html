@@ -34,7 +34,23 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.0.0.9000" id="openxlsx2extras-0009000">openxlsx2Extras 0.0.0.9000<a class="anchor" aria-label="anchor" href="#openxlsx2extras-0009000"></a></h2>
-<ul><li>Add <code><a href="../reference/set_sheet_list_names.html">set_sheet_list_names()</a></code>, <code><a href="../reference/set_sheet_list_names.html">as_sheet_names()</a></code>, and <code><a href="../reference/as_sheet_list.html">as_sheet_list()</a></code> utility functions (based on existing openxlsx2 code). (2024-12-02)</li>
+<ul><li>Increase minimum required version of openxlsx2 to 1.23, which introduced the <code>na</code> argument used by <code><a href="../reference/wb_add_data_ext.html">wb_add_data_ext()</a></code> and <code><a href="../reference/write_xlsx_ext.html">write_xlsx_ext()</a></code>.</li>
+<li>
+<code><a href="../reference/read_xlsx_ext.html">read_xlsx_ext()</a></code> now accepts vector <code>file</code> or <code>sheet</code> arguments to read multiple files or sheets, combined into a single data frame by default (controlled by the new <code>combine</code>, <code>names_from</code>, and <code>names_to</code> arguments). (2025-09-05)</li>
+<li>
+<code><a href="../reference/read_xlsx_ext.html">read_xlsx_ext()</a></code> now accepts a <code>wbWorkbook</code> object for <code>file</code> when the workbook has an existing file path. (2025-12-24)</li>
+<li>
+<code><a href="../reference/wb_add_data_ext.html">wb_add_data_ext()</a></code> gains a <code>labels = "comments"</code> option to add column labels as cell comments instead of an extra row. (2025-10-20)</li>
+<li>Fix <code><a href="../reference/wb_add_data_ext.html">wb_add_data_ext()</a></code> <code>labels = "row_before"</code> handling, which referenced the wrong object and did not handle missing labels. (2025-10-20)</li>
+<li>
+<code><a href="../reference/wb_add_data_ext.html">wb_add_data_ext()</a></code> and <code><a href="../reference/write_xlsx_ext.html">write_xlsx_ext()</a></code> gain a <code>na</code> argument matching <code><a href="https://janmarvin.github.io/openxlsx2/reference/wb_add_data.html" class="external-link">openxlsx2::wb_add_data()</a></code>. The <code>na.strings</code> argument is soft-deprecated in favor of <code>na</code>.</li>
+<li>Add <code><a href="../reference/wb_dims_ext.html">wb_dims_ext()</a></code> helper extending <code><a href="https://janmarvin.github.io/openxlsx2/reference/wb_dims.html" class="external-link">openxlsx2::wb_dims()</a></code> with workbook input and tidyselect support for the <code>cols</code> argument. (2025-08-04)</li>
+<li>
+<code><a href="../reference/wb_sheets_cols_to_dims.html">wb_cols_to_dims()</a></code>, <code><a href="../reference/wb_sheets_cols_to_dims.html">wb_cols_to_index()</a></code>, <code><a href="../reference/wb_sheets_cols_to_dims.html">wb_sheets_cols_to_dims()</a></code>, and <code><a href="../reference/wb_dims_ext.html">wb_dims_ext()</a></code> gain <code>start_row</code> and <code>start_col</code> arguments, and <code><a href="../reference/wb_sheets_cols_to_dims.html">wb_sheets_cols_to_dims()</a></code> now de-duplicates character <code>cols</code> input. (2025-10-21)</li>
+<li>Add <code><a href="../reference/wb_protect_worksheets.html">wb_protect_worksheets()</a></code> function to protect multiple worksheets at once. (2025-10-20)</li>
+<li>Add <code><a href="../reference/wb_rename_data.html">wb_rename_data()</a></code> function to rename workbook columns using tidyselect syntax. (2025-10-20)</li>
+<li>Add <code><a href="../reference/wb_rename_sheets.html">wb_rename_sheets()</a></code> and <code><a href="../reference/wb_rename_sheets.html">wb_rename_sheets_with()</a></code> functions to rename workbook sheets using tidyselect syntax. (2025-10-20)</li>
+<li>Add <code><a href="../reference/set_sheet_list_names.html">set_sheet_list_names()</a></code>, <code><a href="../reference/set_sheet_list_names.html">as_sheet_names()</a></code>, and <code><a href="../reference/as_sheet_list.html">as_sheet_list()</a></code> utility functions (based on existing openxlsx2 code). (2024-12-02)</li>
 <li>Add <code><a href="../reference/prep_wb_data.html">prep_wb_data()</a></code> function (see <a href="https://github.com/elipousson/openxlsx2Extras/issues/4" class="external-link">#4</a>, 2024-12-02).</li>
 <li>Add <code><a href="../reference/read_xlsx_ext.html">read_xlsx_ext()</a></code>, <code><a href="../reference/write_xlsx_ext.html">write_xlsx_ext()</a></code> (<a href="https://github.com/elipousson/openxlsx2Extras/issues/3" class="external-link">#3</a>), and <code><a href="../reference/wb_add_data_ext.html">wb_add_data_ext()</a></code> functions (2024-11-10).</li>
 <li>Add <code><a href="../reference/set_excel_fmt_class.html">set_excel_fmt_class()</a></code> function.</li>

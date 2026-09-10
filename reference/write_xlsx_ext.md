@@ -29,7 +29,8 @@ write_xlsx_ext(
   start_row = 1,
   geometry = "drop",
   labels = "drop",
-  na.strings = openxlsx2::na_strings(),
+  na = openxlsx2::na_strings(),
+  na.strings = lifecycle::deprecated(),
   overwrite = TRUE,
   call = caller_env()
 )
@@ -110,6 +111,17 @@ write_xlsx_ext(
   "comments". If "row_before", insert column labels in the row before
   the column names. If "comments", add column labels as columns on the
   column names in the start row.
+
+- na:
+
+  Value used for replacing `NA` values from `x`. Default looks if
+  `options("openxlsx2.na")` is set. Otherwise
+  [`na_strings()`](https://janmarvin.github.io/openxlsx2/reference/waivers.html)
+  uses the special `#N/A` value within the workbook.
+
+- na.strings:
+
+  **\[deprecated\]** Use `na` instead.
 
 - overwrite:
 
