@@ -44,6 +44,7 @@ wb_new_workbook <- function(
   }
 
   wb <- openxlsx2::wb_workbook(
+    creator = creator %||% properties[["creator"]],
     title = title %||% properties[["title"]],
     subject = subject %||% properties[["subject"]],
     category = category %||% properties[["category"]],
