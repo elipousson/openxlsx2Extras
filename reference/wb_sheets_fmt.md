@@ -31,3 +31,7 @@ wb_sheets_fmt(
 - sheets:
 
   Default to use all workbook sheets.
+
+## Value
+
+A `wbWorkbook` object.

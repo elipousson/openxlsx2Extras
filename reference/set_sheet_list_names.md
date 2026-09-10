@@ -62,6 +62,12 @@ as_sheet_names(
   Handling for sheet names that exceed `max_length` in characters.
   "truncate" trims to length of `max_length` and "error" errors.
 
+## Value
+
+`x` with names set to the resolved sheet names.
+
+A character vector of sheet names.
+
 ## Examples
 
 ``` r

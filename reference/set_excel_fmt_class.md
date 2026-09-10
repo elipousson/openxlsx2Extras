@@ -40,6 +40,11 @@ set_excel_fmt_class(
   If `TRUE`, error if any character values in cols are not included in
   the names of `data`. Default `FALSE`.
 
+## Value
+
+A data frame matching `data` with `fmt_class` added to the class of the
+specified `cols`.
+
 ## Details
 
 `set_excel_fmt_class()` applies a style to each specified column. See

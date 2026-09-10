@@ -57,6 +57,16 @@ xlsx_to_csv(
 
   File extension for output file. Defaults to "csv".
 
+## Value
+
+A `wbWorkbook` object.
+
+A `wbWorkbook` object, saved to `new_file` as a side effect.
+
+The return value of `.f`, typically the invisible `NULL` result of
+[`utils::write.csv()`](https://rdrr.io/r/utils/write.table.html). The
+converted data is written to `new_file` as a side effect.
+
 ## Details
 
 These functions allow seamless conversion between CSV and XLSX formats:

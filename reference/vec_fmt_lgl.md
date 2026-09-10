@@ -19,6 +19,10 @@ vec_fmt_lgl(x, values = c("Y", "N"))
   Default to `c("Y", "N")` Length 2 vector where first element replaces
   `TRUE` and the second element replaces `FALSE`.
 
+## Value
+
+A character vector the same length as `x`.
+
 ## Examples
 
 ``` r

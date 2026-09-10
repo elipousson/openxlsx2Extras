@@ -9,3 +9,7 @@ to rename columns in workbook data.
 ``` r
 wb_rename_data(wb, ..., sheet = 1, start_row = 1, start_col = 1)
 ```
+
+## Value
+
+A `wbWorkbook` object.

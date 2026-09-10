@@ -32,6 +32,10 @@ wb_save_ext(wb, file = NULL, overwrite = TRUE, flush = FALSE)
 
   Experimental, streams the worksheet file to disk
 
+## Value
+
+A `wbWorkbook` object, saved to `file` as a side effect.
+
 ## Examples
 
 ``` r

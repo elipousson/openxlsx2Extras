@@ -70,6 +70,10 @@ wb_add_marquee_text(
   some spreadsheet software. See **Details** for general information on
   column widths.
 
+## Value
+
+A `wbWorkbook` object.
+
 ## Examples
 
 ``` r

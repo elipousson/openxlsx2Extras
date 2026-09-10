@@ -135,6 +135,11 @@ write_xlsx_ext(
   [`abort()`](https://rlang.r-lib.org/reference/abort.html) for more
   information.
 
+## Value
+
+Invisibly returns `x` unmodified. The workbook built from `x` is saved
+to `file` as a side effect.
+
 ## Examples
 
 ``` r

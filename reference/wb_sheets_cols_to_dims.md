@@ -42,3 +42,11 @@ wb_cols_to_dims(
 - sheets:
 
   Default to use all workbook sheets.
+
+## Value
+
+A list of dims character strings, one per sheet.
+
+An integer vector of column positions matching `cols`.
+
+A dims character string covering `cols`.

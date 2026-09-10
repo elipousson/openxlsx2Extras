@@ -142,6 +142,10 @@ as_wb(
   [`abort()`](https://rlang.r-lib.org/reference/abort.html) for more
   information.
 
+## Value
+
+A `wbWorkbook` object.
+
 ## See also
 
 - [`write_xlsx_ext()`](https://elipousson.github.io/openxlsx2Extras/reference/write_xlsx_ext.md)

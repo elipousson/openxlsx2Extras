@@ -36,6 +36,11 @@ fmt_lgl_cols(
   Default to `c("Y", "N")` Length 2 vector where first element replaces
   `TRUE` and the second element replaces `FALSE`.
 
+## Value
+
+A data frame matching `.data` with logical columns replaced by character
+values.
+
 ## Examples
 
 ``` r

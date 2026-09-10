@@ -31,3 +31,8 @@ wb_dims_ext(
   column and row names if they are present. (default if none of `rows`
   and `cols` are provided) `"col_names"` will only return column names
   `"row_names"` Will only return row names.
+
+## Value
+
+A dims character string, or (if `select = "cols"`) an integer vector of
+the selected column positions.

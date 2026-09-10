@@ -40,6 +40,10 @@ fmt_marquee_txt(
 
   Should HTML code be removed from the output
 
+## Value
+
+A list of `fmt_txt` objects, one per parsed line of `text`.
+
 ## Examples
 
 ``` r

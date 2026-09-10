@@ -57,6 +57,10 @@ prep_wb_data(
   [`abort()`](https://rlang.r-lib.org/reference/abort.html) for more
   information.
 
+## Value
+
+A data frame with list and geometry columns handled as specified.
+
 ## Examples
 
 ``` r

@@ -179,3 +179,7 @@ read_xlsx_ext(
   `repair = "unique_quiet"` is like specifying
   `repair = "unique", quiet = TRUE`. When the `"*_quiet"` options are
   used, any setting of `quiet` is silently overridden.
+
+## Value
+
+A data frame, or (if `combine = FALSE`) a list of data frames.

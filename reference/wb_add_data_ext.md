@@ -196,6 +196,10 @@ wb_add_data_ext(
   [`abort()`](https://rlang.r-lib.org/reference/abort.html) for more
   information.
 
+## Value
+
+A `wbWorkbook` object.
+
 ## Examples
 
 ``` r

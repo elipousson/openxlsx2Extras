@@ -36,3 +36,7 @@ wb_protect_worksheets(
 
   Defaults to
   `c("insertColumns", "insertRows", "deleteColumns", "deleteRows")`
+
+## Value
+
+A `wbWorkbook` object.

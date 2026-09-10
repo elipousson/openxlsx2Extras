@@ -27,3 +27,7 @@ wb_add_styles(wb, styles, style_names = NULL)
 - style_names:
 
   Optional if styles is a named list.
+
+## Value
+
+A `wbWorkbook` object.

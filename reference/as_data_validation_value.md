@@ -20,3 +20,8 @@ as_data_validation_value(x, allow_blank = TRUE)
 - allow_blank:
 
   If `TRUE`, add a blank space `" "` to the returned values.
+
+## Value
+
+A length-1 character string with `x` collapsed into a comma-separated,
+quoted list.

@@ -38,6 +38,10 @@ wb_set_col_widths_ext(
 
   A name or index of a worksheet, a vector in the case of `remove_`
 
+## Value
+
+A `wbWorkbook` object.
+
 ## See also
 
 [`openxlsx2::wb_data()`](https://janmarvin.github.io/openxlsx2/reference/wb_data.html),

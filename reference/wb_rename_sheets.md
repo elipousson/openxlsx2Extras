@@ -10,3 +10,9 @@ wb_rename_sheets(wb, ...)
 
 wb_rename_sheets_with(wb, .fn, .sheets = tidyselect::everything())
 ```
+
+## Value
+
+A `wbWorkbook` object.
+
+A `wbWorkbook` object.
