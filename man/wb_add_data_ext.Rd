@@ -16,7 +16,8 @@ wb_add_data_ext(
   coords = c("lon", "lat"),
   labels = c("drop", "row_before", "comments"),
   as_table = FALSE,
-  na.strings = openxlsx2::na_strings(),
+  na = openxlsx2::na_strings(),
+  na.strings = lifecycle::deprecated(),
   call = caller_env()
 )
 }
@@ -41,9 +42,6 @@ NOTE: can only have one filter per worksheet.}
     \item{\code{name}}{The name of a named region if specified.}
     \item{\code{apply_cell_style}}{Should we write cell styles to the workbook}
     \item{\code{remove_cell_style}}{keep the cell style?}
-    \item{\code{na}}{Value used for replacing \code{NA} values from \code{x}. Default
-looks if \code{options("openxlsx2.na")} is set. Otherwise \code{\link[openxlsx2:na_strings]{na_strings()}}
-uses the special \verb{#N/A} value within the workbook.}
     \item{\code{inline_strings}}{write characters as inline strings}
     \item{\code{enforce}}{enforce that selected dims is filled. For this to work, \code{dims} must match \code{x}}
     \item{\code{table_style}}{Any table style name or "none" (see \code{vignette("openxlsx2_style_manual")})}
@@ -81,6 +79,12 @@ the column names in the start row.}
 \code{\link[openxlsx2:wb_add_data_table]{openxlsx2::wb_add_data_table()}} to add data to workbook. If \code{FALSE}, use
 \code{\link[openxlsx2:wb_add_data]{openxlsx2::wb_add_data()}}. Additional parameters in \code{...} are passed to
 one function or the other depending on this value.}
+
+\item{na}{Value used for replacing \code{NA} values from \code{x}. Default
+looks if \code{options("openxlsx2.na")} is set. Otherwise \code{\link[openxlsx2:na_strings]{na_strings()}}
+uses the special \verb{#N/A} value within the workbook.}
+
+\item{na.strings}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{na} instead.}
 
 \item{call}{The execution environment of a currently
 running function, e.g. \code{caller_env()}. The function will be

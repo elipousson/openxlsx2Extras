@@ -36,6 +36,7 @@ one function or the other depending on this value.}
 "row_before", or "comments". If "row_before", insert column labels in the
 row before the column names. If "comments", add column labels as columns on
 the column names in the start row.}
+    \item{\code{na.strings}}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{na} instead.}
     \item{\code{list_columns}}{String, one of "collapse" (default), "drop", or "asis"}
     \item{\code{sep}}{String to use in collapsing list columns. Ignored unless
 \code{list_columns = "collapse"}. Defaults to \code{"; "}.}
@@ -49,6 +50,9 @@ existing geometry column (keeping the existing sf column name).}
     \item{\code{wb}}{A Workbook object containing a worksheet.}
     \item{\code{sheet}}{The worksheet to write to. Can be the worksheet index or name.}
     \item{\code{start_row}}{A vector specifying the starting row to write \code{x} to.}
+    \item{\code{na}}{Value used for replacing \code{NA} values from \code{x}. Default
+looks if \code{options("openxlsx2.na")} is set. Otherwise \code{\link[openxlsx2:na_strings]{na_strings()}}
+uses the special \verb{#N/A} value within the workbook.}
   }}
 
 \item{sheet_names}{Optional character vector of worksheet names.}

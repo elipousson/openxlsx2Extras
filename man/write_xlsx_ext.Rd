@@ -20,7 +20,8 @@ write_xlsx_ext(
   start_row = 1,
   geometry = "drop",
   labels = "drop",
-  na.strings = openxlsx2::na_strings(),
+  na = openxlsx2::na_strings(),
+  na.strings = lifecycle::deprecated(),
   overwrite = TRUE,
   call = caller_env()
 )
@@ -66,6 +67,12 @@ existing geometry column (keeping the existing sf column name).}
 "row_before", or "comments". If "row_before", insert column labels in the
 row before the column names. If "comments", add column labels as columns on
 the column names in the start row.}
+
+\item{na}{Value used for replacing \code{NA} values from \code{x}. Default
+looks if \code{options("openxlsx2.na")} is set. Otherwise \code{\link[openxlsx2:na_strings]{na_strings()}}
+uses the special \verb{#N/A} value within the workbook.}
+
+\item{na.strings}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{na} instead.}
 
 \item{overwrite}{If \code{FALSE}, will not overwrite when \code{file} already exists.}
 
