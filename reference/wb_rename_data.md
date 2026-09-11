@@ -10,6 +10,30 @@ to rename columns in workbook data.
 wb_rename_data(wb, ..., sheet = 1, start_row = 1, start_col = 1)
 ```
 
+## Arguments
+
+- wb:
+
+  A `wbWorkbook` object.
+
+- ...:
+
+  `<new_name> = <old_name>` pairs passed to
+  [`tidyselect::eval_rename()`](https://tidyselect.r-lib.org/reference/eval_select.html)
+  specifying how to rename columns.
+
+- sheet:
+
+  Sheet containing the column names to rename. Defaults to 1.
+
+- start_row:
+
+  Row number containing the column names. Defaults to 1.
+
+- start_col:
+
+  Column number where data starts. Defaults to 1.
+
 ## Value
 
 A `wbWorkbook` object.

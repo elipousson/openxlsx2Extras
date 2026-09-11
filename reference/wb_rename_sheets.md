@@ -11,6 +11,27 @@ wb_rename_sheets(wb, ...)
 wb_rename_sheets_with(wb, .fn, .sheets = tidyselect::everything())
 ```
 
+## Arguments
+
+- wb:
+
+  A `wbWorkbook` object.
+
+- ...:
+
+  For `wb_rename_sheets()`, `<new_name> = <old_name>` pairs passed to
+  [`tidyselect::eval_rename()`](https://tidyselect.r-lib.org/reference/eval_select.html)
+  specifying how to rename sheets.
+
+- .fn:
+
+  Function used to transform the selected sheet names.
+
+- .sheets:
+
+  Tidyselect expression selecting which sheets to rename. Defaults to
+  all sheets.
+
 ## Value
 
 A `wbWorkbook` object.

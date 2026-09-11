@@ -165,6 +165,14 @@ and returns strings.</p></dd>
 </dl></dd>
 
 
+<dt id="arg-names-from">names_from<a class="anchor" aria-label="anchor" href="#arg-names-from"></a></dt>
+<dd><p>String, one of "basename" (default) or "path", used to
+name the elements of <code>file</code>. Can also be a character vector recycled to
+the length of <code>file</code> to supply custom names. These names are used as the
+list names when <code>combine = FALSE</code> and passed to <code><a href="https://purrr.tidyverse.org/reference/list_c.html" class="external-link">purrr::list_rbind()</a></code> as
+the source of <code>names_to</code> values when <code>combine = TRUE</code>.</p></dd>
+
+
 <dt id="arg-names-to">names_to<a class="anchor" aria-label="anchor" href="#arg-names-to"></a></dt>
 <dd><p>By default, <code>names(x)</code> are lost. To keep them, supply a
 string to <code>names_to</code> and the names will be saved into a column with that

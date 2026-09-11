@@ -141,6 +141,15 @@ read_xlsx_ext(
   :   Logical; if TRUE, applies spreadsheet number formatting and
       returns strings.
 
+- names_from:
+
+  String, one of "basename" (default) or "path", used to name the
+  elements of `file`. Can also be a character vector recycled to the
+  length of `file` to supply custom names. These names are used as the
+  list names when `combine = FALSE` and passed to
+  [`purrr::list_rbind()`](https://purrr.tidyverse.org/reference/list_c.html)
+  as the source of `names_to` values when `combine = TRUE`.
+
 - names_to:
 
   By default, `names(x)` are lost. To keep them, supply a string to
