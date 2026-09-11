@@ -53,6 +53,12 @@ underlying hyperlink targets.}
 and returns strings.}
   }}
 
+\item{names_from}{String, one of "basename" (default) or "path", used to
+name the elements of \code{file}. Can also be a character vector recycled to
+the length of \code{file} to supply custom names. These names are used as the
+list names when \code{combine = FALSE} and passed to \code{purrr::list_rbind()} as
+the source of \code{names_to} values when \code{combine = TRUE}.}
+
 \item{names_to}{By default, \code{names(x)} are lost. To keep them, supply a
 string to \code{names_to} and the names will be saved into a column with that
 name. If \code{names_to} is supplied and \code{x} is not named, the position of

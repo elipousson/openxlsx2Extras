@@ -9,6 +9,17 @@ wb_rename_sheets(wb, ...)
 
 wb_rename_sheets_with(wb, .fn, .sheets = tidyselect::everything())
 }
+\arguments{
+\item{wb}{A \code{wbWorkbook} object.}
+
+\item{...}{For \code{wb_rename_sheets()}, \verb{<new_name> = <old_name>} pairs passed
+to \code{\link[tidyselect:eval_rename]{tidyselect::eval_rename()}} specifying how to rename sheets.}
+
+\item{.fn}{Function used to transform the selected sheet names.}
+
+\item{.sheets}{Tidyselect expression selecting which sheets to rename.
+Defaults to all sheets.}
+}
 \value{
 A \code{wbWorkbook} object.
 

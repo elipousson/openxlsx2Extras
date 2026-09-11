@@ -18,6 +18,11 @@
 #' @param sheet Defaults to 1.
 #' @param combine If `TRUE`, always return a data frames. If `FALSE`, return a
 #' list of data frames.
+#' @param names_from String, one of "basename" (default) or "path", used to
+#'   name the elements of `file`. Can also be a character vector recycled to
+#'   the length of `file` to supply custom names. These names are used as the
+#'   list names when `combine = FALSE` and passed to `purrr::list_rbind()` as
+#'   the source of `names_to` values when `combine = TRUE`.
 #' @inheritParams purrr::list_rbind
 #' @inheritParams openxlsx2::read_xlsx
 #' @inheritParams vctrs::vec_as_names

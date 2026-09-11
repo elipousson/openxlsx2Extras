@@ -3,6 +3,9 @@
 #' `wb_rename_sheets()` and `wb_rename_sheets_with()` use the tidyselect package
 #'  to rename sheets.
 #'
+#' @param wb A `wbWorkbook` object.
+#' @param ... For `wb_rename_sheets()`, `<new_name> = <old_name>` pairs passed
+#'   to [tidyselect::eval_rename()] specifying how to rename sheets.
 #' @examples
 #' wb <- as_wb(list(a = mtcars[1:2, ], b = mtcars[3:4, ]))
 #' wb_rename_sheets(wb, sales = "a", inventory = "b")
@@ -43,6 +46,9 @@ wb_rename_sheets <- function(
 }
 
 #' @rdname wb_rename_sheets
+#' @param .fn Function used to transform the selected sheet names.
+#' @param .sheets Tidyselect expression selecting which sheets to rename.
+#'   Defaults to all sheets.
 #' @returns A `wbWorkbook` object.
 #' @export
 wb_rename_sheets_with <- function(wb, .fn, .sheets = tidyselect::everything()) {
@@ -79,6 +85,12 @@ wb_rename_sheets_with <- function(wb, .fn, .sheets = tidyselect::everything()) {
 #'
 #' Use [tidyselect::eval_rename()] to rename columns in workbook data.
 #'
+#' @param wb A `wbWorkbook` object.
+#' @param ... `<new_name> = <old_name>` pairs passed to
+#'   [tidyselect::eval_rename()] specifying how to rename columns.
+#' @param sheet Sheet containing the column names to rename. Defaults to 1.
+#' @param start_row Row number containing the column names. Defaults to 1.
+#' @param start_col Column number where data starts. Defaults to 1.
 #' @examples
 #' wb <- as_wb(mtcars[1:3, c("mpg", "hp")])
 #'

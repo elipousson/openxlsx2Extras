@@ -6,6 +6,18 @@
 \usage{
 wb_rename_data(wb, ..., sheet = 1, start_row = 1, start_col = 1)
 }
+\arguments{
+\item{wb}{A \code{wbWorkbook} object.}
+
+\item{...}{\verb{<new_name> = <old_name>} pairs passed to
+\code{\link[tidyselect:eval_rename]{tidyselect::eval_rename()}} specifying how to rename columns.}
+
+\item{sheet}{Sheet containing the column names to rename. Defaults to 1.}
+
+\item{start_row}{Row number containing the column names. Defaults to 1.}
+
+\item{start_col}{Column number where data starts. Defaults to 1.}
+}
 \value{
 A \code{wbWorkbook} object.
 }
