@@ -96,7 +96,7 @@ wb_split <- function(
   properties = "inherit",
   wb_params = list()
 ) {
-  if (is_wb(file) && (properties == "inherit")) {
+  if (is_wb(file) && identical(properties, "inherit")) {
     properties <- as.list(openxlsx2::wb_get_properties(file))
   }
 
