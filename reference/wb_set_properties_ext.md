@@ -71,3 +71,11 @@ wb_set_properties_ext(
 ## Value
 
 A workbook with modified properties.
+
+## Examples
+
+``` r
+wb <- openxlsx2::wb_workbook()
+
+wb_set_properties_ext(wb, title = "My title", creator = "Jane Doe")
+```

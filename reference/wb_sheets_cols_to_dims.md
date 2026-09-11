@@ -50,3 +50,20 @@ A list of dims character strings, one per sheet.
 An integer vector of column positions matching `cols`.
 
 A dims character string covering `cols`.
+
+## Examples
+
+``` r
+wb <- as_wb(mtcars[1:5, ])
+
+wb_cols_to_index(wb, cols = c("mpg", "hp"), sheet = "Sheet 1")
+#> [1] 1 4
+
+wb_cols_to_dims(wb, cols = c("mpg", "hp"), sheet = "Sheet 1")
+#> [1] "A2:A6,D2:D6"
+
+wb_sheets_cols_to_dims(wb, cols = c("mpg", "hp"), sheets = "Sheet 1")
+#> [[1]]
+#> [1] "A2:A6,D2:D6"
+#> 
+```

@@ -50,3 +50,14 @@ specified `cols`.
 `set_excel_fmt_class()` applies a style to each specified column. See
 the openxlsx2 documentation for more information on this feature:
 <https://janmarvin.github.io/openxlsx2/articles/openxlsx2_style_manual.html#numfmts2>
+
+## Examples
+
+``` r
+data <- data.frame(price = c(1, 2), pct = c(0.1, 0.2))
+
+set_excel_fmt_class(data, cols = c("price", "pct"), fmt_class = c("currency", "percentage"))
+#>   price pct
+#> 1     1 0.1
+#> 2     2 0.2
+```

@@ -36,3 +36,12 @@ wb_dims_ext(
 
 A dims character string, or (if `select = "cols"`) an integer vector of
 the selected column positions.
+
+## Examples
+
+``` r
+wb <- as_wb(mtcars[1:3, ])
+
+wb_dims_ext(wb, sheet = "Sheet 1", cols = c(mpg, hp))
+#> [1] "A2:A4,D2:D4"
+```

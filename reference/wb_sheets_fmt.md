@@ -35,3 +35,16 @@ wb_sheets_fmt(
 ## Value
 
 A `wbWorkbook` object.
+
+## Examples
+
+``` r
+wb <- as_wb(mtcars[1:3, ])
+
+wb_sheets_fmt(wb, cols = c("mpg", "hp"), sheets = "Sheet 1", numfmt = "0.00")
+#> A Workbook object.
+#>  
+#> Worksheets:
+#>  Sheets: Sheet 1 
+#>  Write order: 1 
+```

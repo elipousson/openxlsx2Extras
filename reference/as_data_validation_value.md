@@ -25,3 +25,10 @@ as_data_validation_value(x, allow_blank = TRUE)
 
 A length-1 character string with `x` collapsed into a comma-separated,
 quoted list.
+
+## Examples
+
+``` r
+as_data_validation_value(c("Option A", "Option B", "Option C"))
+#> [1] "\" ,Option A,Option B,Option C\""
+```

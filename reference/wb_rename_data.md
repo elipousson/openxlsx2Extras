@@ -13,3 +13,11 @@ wb_rename_data(wb, ..., sheet = 1, start_row = 1, start_col = 1)
 ## Value
 
 A `wbWorkbook` object.
+
+## Examples
+
+``` r
+wb <- as_wb(mtcars[1:3, c("mpg", "hp")])
+
+wb_rename_data(wb, MPG = mpg, HP = hp)
+```

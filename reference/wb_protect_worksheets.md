@@ -40,3 +40,16 @@ wb_protect_worksheets(
 ## Value
 
 A `wbWorkbook` object.
+
+## Examples
+
+``` r
+wb <- as_wb(mtcars[1:3, ])
+
+wb_protect_worksheets(wb)
+#> A Workbook object.
+#>  
+#> Worksheets:
+#>  Sheets: Sheet 1 
+#>  Write order: 1 
+```

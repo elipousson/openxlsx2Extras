@@ -71,6 +71,18 @@ A character vector of sheet names.
 ## Examples
 
 ``` r
+set_sheet_list_names(list(mtcars[1:2, ], mtcars[3:4, ]), sheet_names = c("First", "Second"))
+#> $First
+#>               mpg cyl disp  hp drat    wt  qsec vs am gear carb
+#> Mazda RX4      21   6  160 110  3.9 2.620 16.46  0  1    4    4
+#> Mazda RX4 Wag  21   6  160 110  3.9 2.875 17.02  0  1    4    4
+#> 
+#> $Second
+#>                 mpg cyl disp  hp drat    wt  qsec vs am gear carb
+#> Datsun 710     22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
+#> Hornet 4 Drive 21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
+#> 
+
 
 as_sheet_names()
 #> [1] "Sheet 1"
