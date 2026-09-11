@@ -15,6 +15,11 @@
 #' @inheritParams rlang::arg_match
 #' @param strict If `TRUE`, error if any character values in cols are not
 #' included in the names of `data`. Default `FALSE`.
+#' @examples
+#' data <- data.frame(price = c(1, 2), pct = c(0.1, 0.2))
+#'
+#' set_excel_fmt_class(data, cols = c("price", "pct"), fmt_class = c("currency", "percentage"))
+#'
 #' @returns A data frame matching `data` with `fmt_class` added to the class
 #'   of the specified `cols`.
 #' @export

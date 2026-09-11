@@ -22,3 +22,11 @@ A \code{wbWorkbook} object.
 \code{\link[=wb_add_styles]{wb_add_styles()}} extends \code{\link[openxlsx2:wb_add_style]{openxlsx2::wb_add_style()}} by allowing the
 addition of multiple styles as a named list.
 }
+\examples{
+wb <- openxlsx2::wb_workbook()
+wb <- openxlsx2::wb_add_worksheet(wb)
+
+style <- openxlsx2::create_dxfs_style(font_color = openxlsx2::wb_color(hex = "FF0000"))
+wb_add_styles(wb, styles = style, style_names = "myred")
+
+}

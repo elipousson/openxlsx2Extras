@@ -8,6 +8,11 @@
 #' @param ... Must be empty.
 #' @param properties A named character vector or named list of properties used
 #'   as default values for any other parameter that is not explicitly set.
+#' @examples
+#' wb <- openxlsx2::wb_workbook()
+#'
+#' wb_set_properties_ext(wb, title = "My title", creator = "Jane Doe")
+#'
 #' @returns A workbook with modified properties.
 #' @export
 wb_set_properties_ext <- function(

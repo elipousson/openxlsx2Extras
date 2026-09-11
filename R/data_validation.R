@@ -6,6 +6,9 @@
 #'
 #' @param x A character vector of options to allow in cell validation.
 #' @param allow_blank If `TRUE`, add a blank space `" "` to the returned values.
+#' @examples
+#' as_data_validation_value(c("Option A", "Option B", "Option C"))
+#'
 #' @returns A length-1 character string with `x` collapsed into a
 #'   comma-separated, quoted list.
 #' @export

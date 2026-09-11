@@ -58,6 +58,8 @@ A character vector of sheet names.
 functionality for handling sheet names in \code{\link[openxlsx2:write_xlsx]{openxlsx2::write_xlsx()}}.
 }
 \examples{
+set_sheet_list_names(list(mtcars[1:2, ], mtcars[3:4, ]), sheet_names = c("First", "Second"))
+
 
 as_sheet_names()
 

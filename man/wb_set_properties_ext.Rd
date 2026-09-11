@@ -50,3 +50,9 @@ A workbook with modified properties.
 a properties argument that uses a named list to default default values for
 existing properties.
 }
+\examples{
+wb <- openxlsx2::wb_workbook()
+
+wb_set_properties_ext(wb, title = "My title", creator = "Jane Doe")
+
+}

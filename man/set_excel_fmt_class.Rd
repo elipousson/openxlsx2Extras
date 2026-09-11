@@ -39,3 +39,9 @@ of the specified \code{cols}.
 openxlsx2 documentation for more information on this feature:
 \url{https://janmarvin.github.io/openxlsx2/articles/openxlsx2_style_manual.html#numfmts2}
 }
+\examples{
+data <- data.frame(price = c(1, 2), pct = c(0.1, 0.2))
+
+set_excel_fmt_class(data, cols = c("price", "pct"), fmt_class = c("currency", "percentage"))
+
+}

@@ -16,6 +16,9 @@
 #'   characters. "truncate" trims to length of `max_length` and "error" errors.
 #' @source <https://github.com/JanMarvin/openxlsx2/blob/main/R/write_xlsx.R#L281-L301>
 #' @keywords internal utils
+#' @examples
+#' set_sheet_list_names(list(mtcars[1:2, ], mtcars[3:4, ]), sheet_names = c("First", "Second"))
+#'
 #' @returns `x` with names set to the resolved sheet names.
 #' @export
 set_sheet_list_names <- function(

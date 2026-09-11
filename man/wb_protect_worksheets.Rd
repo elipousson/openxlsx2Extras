@@ -29,3 +29,9 @@ A \code{wbWorkbook} object.
 \description{
 Protect one or more sheets in a workbook
 }
+\examples{
+wb <- as_wb(mtcars[1:3, ])
+
+wb_protect_worksheets(wb)
+
+}

@@ -48,4 +48,14 @@ A dims character string covering \code{cols}.
 columns. Used to get dimensions for multiple column ranges across multiple
 sheets.
 }
+\examples{
+wb <- as_wb(mtcars[1:5, ])
+
+wb_cols_to_index(wb, cols = c("mpg", "hp"), sheet = "Sheet 1")
+
+wb_cols_to_dims(wb, cols = c("mpg", "hp"), sheet = "Sheet 1")
+
+wb_sheets_cols_to_dims(wb, cols = c("mpg", "hp"), sheets = "Sheet 1")
+
+}
 \keyword{internal}

@@ -104,3 +104,10 @@ argument). \code{names_from} can also be a length > 1 character vector that can 
 recycled to match the length of file.
 }
 }
+\examples{
+xlsx <- openxlsx2::temp_xlsx()
+openxlsx2::write_xlsx(mtcars, xlsx)
+
+read_xlsx_ext(xlsx)
+
+}

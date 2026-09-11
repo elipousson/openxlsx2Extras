@@ -3,6 +3,13 @@
 #' `wb_rename_sheets()` and `wb_rename_sheets_with()` use the tidyselect package
 #'  to rename sheets.
 #'
+#' @examples
+#' wb <- as_wb(list(a = mtcars[1:2, ], b = mtcars[3:4, ]))
+#' wb_rename_sheets(wb, sales = "a", inventory = "b")
+#'
+#' wb2 <- as_wb(list(a = mtcars[1:2, ], b = mtcars[3:4, ]))
+#' wb_rename_sheets_with(wb2, \(x) paste0("sheet_", x))
+#'
 #' @returns A `wbWorkbook` object.
 #' @export
 wb_rename_sheets <- function(
@@ -71,6 +78,11 @@ wb_rename_sheets_with <- function(wb, .fn, .sheets = tidyselect::everything()) {
 #' Rename column names in workbook data
 #'
 #' Use [tidyselect::eval_rename()] to rename columns in workbook data.
+#'
+#' @examples
+#' wb <- as_wb(mtcars[1:3, c("mpg", "hp")])
+#'
+#' wb_rename_data(wb, MPG = mpg, HP = hp)
 #'
 #' @returns A `wbWorkbook` object.
 #' @export

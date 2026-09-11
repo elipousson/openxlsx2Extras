@@ -3,6 +3,11 @@
 #' @param properties Defaults to `c("insertColumns", "insertRows",
 #' "deleteColumns", "deleteRows")`
 #' @inheritParams openxlsx2::wb_protect_worksheet
+#' @examples
+#' wb <- as_wb(mtcars[1:3, ])
+#'
+#' wb_protect_worksheets(wb)
+#'
 #' @returns A `wbWorkbook` object.
 #' @export
 wb_protect_worksheets <- function(

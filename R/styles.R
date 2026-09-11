@@ -8,6 +8,13 @@
 #'   ⁠create_*()⁠ function. Passed to `style` argument of
 #'   [openxlsx2::wb_add_style()].
 #' @param style_names Optional if styles is a named list.
+#' @examples
+#' wb <- openxlsx2::wb_workbook()
+#' wb <- openxlsx2::wb_add_worksheet(wb)
+#'
+#' style <- openxlsx2::create_dxfs_style(font_color = openxlsx2::wb_color(hex = "FF0000"))
+#' wb_add_styles(wb, styles = style, style_names = "myred")
+#'
 #' @returns A `wbWorkbook` object.
 #' @export
 #' @importFrom openxlsx2 wb_add_style

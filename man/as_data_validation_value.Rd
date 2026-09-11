@@ -20,3 +20,7 @@ comma-separated, quoted list.
 for use as a validation \code{value} argument by
 \code{\link[openxlsx2:wb_add_data_validation]{openxlsx2::wb_add_data_validation()}} when \code{type = "list"}.
 }
+\examples{
+as_data_validation_value(c("Option A", "Option B", "Option C"))
+
+}

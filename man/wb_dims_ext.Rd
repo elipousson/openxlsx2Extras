@@ -32,4 +32,10 @@ vector of the selected column positions.
 \code{\link[=wb_dims_ext]{wb_dims_ext()}} extends \code{\link[openxlsx2:wb_dims]{openxlsx2::wb_dims()}} by allowing a workbook input
 used to set \code{x} and supporting tidy selection for the \code{cols} argument.
 }
+\examples{
+wb <- as_wb(mtcars[1:3, ])
+
+wb_dims_ext(wb, sheet = "Sheet 1", cols = c(mpg, hp))
+
+}
 \keyword{internal}

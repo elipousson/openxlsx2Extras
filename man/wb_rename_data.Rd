@@ -12,3 +12,9 @@ A \code{wbWorkbook} object.
 \description{
 Use \code{\link[tidyselect:eval_rename]{tidyselect::eval_rename()}} to rename columns in workbook data.
 }
+\examples{
+wb <- as_wb(mtcars[1:3, c("mpg", "hp")])
+
+wb_rename_data(wb, MPG = mpg, HP = hp)
+
+}

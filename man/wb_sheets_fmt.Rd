@@ -30,4 +30,10 @@ A \code{wbWorkbook} object.
 columns. \code{sheets} is recycled to match the length of \code{dims}. \code{dims} can be
 set based on \code{cols} and \code{sheets} or set directly.
 }
+\examples{
+wb <- as_wb(mtcars[1:3, ])
+
+wb_sheets_fmt(wb, cols = c("mpg", "hp"), sheets = "Sheet 1", numfmt = "0.00")
+
+}
 \keyword{internal}

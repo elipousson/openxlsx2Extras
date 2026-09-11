@@ -8,6 +8,11 @@
 #' @param .f Formatting function to apply to workbook.
 #' @inheritParams wb_sheets_cols_to_dims
 #' @keywords internal
+#' @examples
+#' wb <- as_wb(mtcars[1:3, ])
+#'
+#' wb_sheets_fmt(wb, cols = c("mpg", "hp"), sheets = "Sheet 1", numfmt = "0.00")
+#'
 #' @returns A `wbWorkbook` object.
 #' @export
 #' @importFrom openxlsx2 wb_add_numfmt
